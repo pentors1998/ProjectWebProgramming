@@ -1,0 +1,3 @@
+1.) Create table Database
+2.) Create column ACCOUNT should have : firstname , lastname , email , password , tell
+3.) Create column PRODUCT should habe : ProductName , ProductID , 
