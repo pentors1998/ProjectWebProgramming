@@ -7,33 +7,16 @@ package project.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.transaction.UserTransaction;
-import project.jpa.AccountJpaController;
-import project.jpa.exceptions.RollbackFailureException;
-import project.model.Account;
-import static project.servlet.LoginServlet.cryptWithMD5;
 
 /**
  *
  * @author Admin
  */
-public class RegisterServlet extends HttpServlet {
-    
-    @PersistenceUnit(unitName = "ProjectWebProVTBPU")
-    EntityManagerFactory emf;
-    
-    @Resource
-    UserTransaction utx;
+public class GetProductServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,29 +29,19 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String firstName = request.getParameter("fname");
-        String lastName = request.getParameter("lname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String tell = request.getParameter("tell");
-        HttpSession session = request.getSession(false);
-        Account account = (Account) session.getAttribute("account");
-        AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
-        if (firstName != null && lastName != null && email != null && password != null && tell != null && !account.getEmail().equalsIgnoreCase(email)) {
-            password = cryptWithMD5(password);
-            Account newAccount = new Account(email, password, firstName, lastName, tell);
-            try {
-                accountJpaCtrl.create(newAccount);
-                getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-                return;
-            } catch (RollbackFailureException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet GetProductServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet GetProductServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        session.setAttribute("message", "You can't register.");
-        getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

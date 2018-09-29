@@ -32,6 +32,22 @@
         <servlet-name>ProductListServlet</servlet-name>
         <servlet-class>project.servlet.ProductListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginPageServlet</servlet-name>
+        <servlet-class>project.servlet.LoginPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterPageServlet</servlet-name>
+        <servlet-class>project.servlet.RegisterPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartPageServlet</servlet-name>
+        <servlet-class>project.servlet.CartPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetProductServlet</servlet-name>
+        <servlet-class>project.servlet.GetProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -63,6 +79,22 @@
     <servlet-mapping>
         <servlet-name>ProductListServlet</servlet-name>
         <url-pattern>/ProductListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginPageServlet</servlet-name>
+        <url-pattern>/LoginPageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterPageServlet</servlet-name>
+        <url-pattern>/RegisterPageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartPageServlet</servlet-name>
+        <url-pattern>/CartPageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetProductServlet</servlet-name>
+        <url-pattern>/GetProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
