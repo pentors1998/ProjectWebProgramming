@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductListServlet</servlet-name>
-        <servlet-class>project.servlet.ProductListServlet</servlet-class>
+        <servlet-class>project.servlet.ProductListMenServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginPageServlet</servlet-name>
@@ -47,6 +47,10 @@
     <servlet>
         <servlet-name>GetProductServlet</servlet-name>
         <servlet-class>project.servlet.GetProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductListWomenServlet</servlet-name>
+        <servlet-class>project.servlet.ProductListWomenServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>GetProductServlet</servlet-name>
         <url-pattern>/GetProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductListWomenServlet</servlet-name>
+        <url-pattern>/ProductListWomenServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
