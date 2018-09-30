@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-import project.jpa.AccountJpaController;
-import project.model.Account;
+import project.jpa.model.controller.AccountJpaController;
+import project.jpa.model.Account;
 
 /**
  *

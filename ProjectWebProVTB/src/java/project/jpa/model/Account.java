@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.model;
+package project.jpa.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
