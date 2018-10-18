@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/UpdateServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/LoginPageServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/ProductListMenServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/RegisterPageServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/GetProductServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/jpa/model/Account.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/FindItemServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/LogoutServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/CartServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/ProductListWomenServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/AddToCartServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/RegisterServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/LoginServlet.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
