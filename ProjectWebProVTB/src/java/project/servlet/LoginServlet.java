@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
     //ujkhkj
     @Resource
     UserTransaction utx;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,16 +50,18 @@ public class LoginServlet extends HttpServlet {
         if (email != null && password != null) {
             String encyptPass = cryptWithMD5(password);
             AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
-            Account account = accountJpaCtrl.findAccount(email);
-            if (encyptPass.equals(account.getPassword())) {
-                session.setAttribute("account", account);
-                getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-                return;
+            Account accountObj = accountJpaCtrl.findAccount(email);
+            if (accountObj != null) {
+                if (encyptPass.equals(accountObj.getPassword())) {
+                    session.setAttribute("account", accountObj);
+                    getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+                    return;
+                }
             }
         }
         getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
     }
-    
+
     public static String cryptWithMD5(String pass) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
