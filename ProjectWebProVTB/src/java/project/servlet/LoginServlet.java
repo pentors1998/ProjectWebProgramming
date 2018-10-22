@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "ProjectWebProVTBPU")
     EntityManagerFactory emf;
-    
+    //ujkhkj
     @Resource
     UserTransaction utx;
     /**
