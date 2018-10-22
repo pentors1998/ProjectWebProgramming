@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.jpa.model;
+package project.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,19 +25,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Admin
  */
 @Entity
-@Table(name = "PRODUCTWOMEN")
+@Table(name = "HISTORY")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Productwomen.findAll", query = "SELECT p FROM Productwomen p")
-    , @NamedQuery(name = "Productwomen.findByProductcode", query = "SELECT p FROM Productwomen p WHERE p.productcode = :productcode")
-    , @NamedQuery(name = "Productwomen.findByProductbrandname", query = "SELECT p FROM Productwomen p WHERE p.productbrandname = :productbrandname")
-    , @NamedQuery(name = "Productwomen.findByProductline", query = "SELECT p FROM Productwomen p WHERE p.productline = :productline")
-    , @NamedQuery(name = "Productwomen.findByProducttype", query = "SELECT p FROM Productwomen p WHERE p.producttype = :producttype")
-    , @NamedQuery(name = "Productwomen.findByProductsize", query = "SELECT p FROM Productwomen p WHERE p.productsize = :productsize")
-    , @NamedQuery(name = "Productwomen.findByProductprice", query = "SELECT p FROM Productwomen p WHERE p.productprice = :productprice")
-    , @NamedQuery(name = "Productwomen.findByProductdescription", query = "SELECT p FROM Productwomen p WHERE p.productdescription = :productdescription")
-    , @NamedQuery(name = "Productwomen.findByQuantityinstock", query = "SELECT p FROM Productwomen p WHERE p.quantityinstock = :quantityinstock")})
-public class Productwomen implements Serializable {
+    @NamedQuery(name = "History.findAll", query = "SELECT h FROM History h")
+    , @NamedQuery(name = "History.findByProductcode", query = "SELECT h FROM History h WHERE h.productcode = :productcode")
+    , @NamedQuery(name = "History.findByProductbrandname", query = "SELECT h FROM History h WHERE h.productbrandname = :productbrandname")
+    , @NamedQuery(name = "History.findByProductline", query = "SELECT h FROM History h WHERE h.productline = :productline")
+    , @NamedQuery(name = "History.findByProducttype", query = "SELECT h FROM History h WHERE h.producttype = :producttype")
+    , @NamedQuery(name = "History.findByProductsize", query = "SELECT h FROM History h WHERE h.productsize = :productsize")
+    , @NamedQuery(name = "History.findByProductprice", query = "SELECT h FROM History h WHERE h.productprice = :productprice")})
+public class History implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,20 +67,21 @@ public class Productwomen implements Serializable {
     @NotNull
     @Column(name = "PRODUCTPRICE")
     private int productprice;
-    @Size(max = 120)
-    @Column(name = "PRODUCTDESCRIPTION")
-    private String productdescription;
-    @Column(name = "QUANTITYINSTOCK")
-    private Integer quantityinstock;
+    @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
+    @ManyToOne(optional = false)
+    private Account email;
+    @JoinColumn(name = "PRODUCTCODE", referencedColumnName = "PRODUCTCODE", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private Product product;
 
-    public Productwomen() {
+    public History() {
     }
 
-    public Productwomen(String productcode) {
+    public History(String productcode) {
         this.productcode = productcode;
     }
 
-    public Productwomen(String productcode, String productbrandname, String productline, String producttype, int productsize, int productprice) {
+    public History(String productcode, String productbrandname, String productline, String producttype, int productsize, int productprice) {
         this.productcode = productcode;
         this.productbrandname = productbrandname;
         this.productline = productline;
@@ -136,20 +138,20 @@ public class Productwomen implements Serializable {
         this.productprice = productprice;
     }
 
-    public String getProductdescription() {
-        return productdescription;
+    public Account getEmail() {
+        return email;
     }
 
-    public void setProductdescription(String productdescription) {
-        this.productdescription = productdescription;
+    public void setEmail(Account email) {
+        this.email = email;
     }
 
-    public Integer getQuantityinstock() {
-        return quantityinstock;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setQuantityinstock(Integer quantityinstock) {
-        this.quantityinstock = quantityinstock;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -162,10 +164,10 @@ public class Productwomen implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Productwomen)) {
+        if (!(object instanceof History)) {
             return false;
         }
-        Productwomen other = (Productwomen) object;
+        History other = (History) object;
         if ((this.productcode == null && other.productcode != null) || (this.productcode != null && !this.productcode.equals(other.productcode))) {
             return false;
         }
@@ -174,7 +176,7 @@ public class Productwomen implements Serializable {
 
     @Override
     public String toString() {
-        return "project.jpa.model.Productwomen[ productcode=" + productcode + " ]";
+        return "project.model.History[ productcode=" + productcode + " ]";
     }
     
 }

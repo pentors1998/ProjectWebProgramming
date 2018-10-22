@@ -3,15 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.jpa.model;
+package project.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,19 +26,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Admin
  */
 @Entity
-@Table(name = "PRODUCTMEN")
+@Table(name = "PRODUCT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Productmen.findAll", query = "SELECT p FROM Productmen p")
-    , @NamedQuery(name = "Productmen.findByProductcode", query = "SELECT p FROM Productmen p WHERE p.productcode = :productcode")
-    , @NamedQuery(name = "Productmen.findByProductbrandname", query = "SELECT p FROM Productmen p WHERE p.productbrandname = :productbrandname")
-    , @NamedQuery(name = "Productmen.findByProductline", query = "SELECT p FROM Productmen p WHERE p.productline = :productline")
-    , @NamedQuery(name = "Productmen.findByProducttype", query = "SELECT p FROM Productmen p WHERE p.producttype = :producttype")
-    , @NamedQuery(name = "Productmen.findByProductsize", query = "SELECT p FROM Productmen p WHERE p.productsize = :productsize")
-    , @NamedQuery(name = "Productmen.findByProductprice", query = "SELECT p FROM Productmen p WHERE p.productprice = :productprice")
-    , @NamedQuery(name = "Productmen.findByProductdescription", query = "SELECT p FROM Productmen p WHERE p.productdescription = :productdescription")
-    , @NamedQuery(name = "Productmen.findByQuantityinstock", query = "SELECT p FROM Productmen p WHERE p.quantityinstock = :quantityinstock")})
-public class Productmen implements Serializable {
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    , @NamedQuery(name = "Product.findByProductcode", query = "SELECT p FROM Product p WHERE p.productcode = :productcode")
+    , @NamedQuery(name = "Product.findByProductbrandname", query = "SELECT p FROM Product p WHERE p.productbrandname = :productbrandname")
+    , @NamedQuery(name = "Product.findByProductline", query = "SELECT p FROM Product p WHERE p.productline = :productline")
+    , @NamedQuery(name = "Product.findByProducttype", query = "SELECT p FROM Product p WHERE p.producttype = :producttype")
+    , @NamedQuery(name = "Product.findByProductsex", query = "SELECT p FROM Product p WHERE p.productsex = :productsex")
+    , @NamedQuery(name = "Product.findByProductsize", query = "SELECT p FROM Product p WHERE p.productsize = :productsize")
+    , @NamedQuery(name = "Product.findByProductprice", query = "SELECT p FROM Product p WHERE p.productprice = :productprice")
+    , @NamedQuery(name = "Product.findByProductdescription", query = "SELECT p FROM Product p WHERE p.productdescription = :productdescription")
+    , @NamedQuery(name = "Product.findByQuantityinstock", query = "SELECT p FROM Product p WHERE p.quantityinstock = :quantityinstock")})
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -60,6 +65,11 @@ public class Productmen implements Serializable {
     private String producttype;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
+    @Column(name = "PRODUCTSEX")
+    private String productsex;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "PRODUCTSIZE")
     private int productsize;
     @Basic(optional = false)
@@ -71,19 +81,25 @@ public class Productmen implements Serializable {
     private String productdescription;
     @Column(name = "QUANTITYINSTOCK")
     private Integer quantityinstock;
+    @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
+    @ManyToOne(optional = false)
+    private Account email;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    private History history;
 
-    public Productmen() {
+    public Product() {
     }
 
-    public Productmen(String productcode) {
+    public Product(String productcode) {
         this.productcode = productcode;
     }
 
-    public Productmen(String productcode, String productbrandname, String productline, String producttype, int productsize, int productprice) {
+    public Product(String productcode, String productbrandname, String productline, String producttype, String productsex, int productsize, int productprice) {
         this.productcode = productcode;
         this.productbrandname = productbrandname;
         this.productline = productline;
         this.producttype = producttype;
+        this.productsex = productsex;
         this.productsize = productsize;
         this.productprice = productprice;
     }
@@ -120,6 +136,14 @@ public class Productmen implements Serializable {
         this.producttype = producttype;
     }
 
+    public String getProductsex() {
+        return productsex;
+    }
+
+    public void setProductsex(String productsex) {
+        this.productsex = productsex;
+    }
+
     public int getProductsize() {
         return productsize;
     }
@@ -152,6 +176,22 @@ public class Productmen implements Serializable {
         this.quantityinstock = quantityinstock;
     }
 
+    public Account getEmail() {
+        return email;
+    }
+
+    public void setEmail(Account email) {
+        this.email = email;
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -162,10 +202,10 @@ public class Productmen implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Productmen)) {
+        if (!(object instanceof Product)) {
             return false;
         }
-        Productmen other = (Productmen) object;
+        Product other = (Product) object;
         if ((this.productcode == null && other.productcode != null) || (this.productcode != null && !this.productcode.equals(other.productcode))) {
             return false;
         }
@@ -174,7 +214,7 @@ public class Productmen implements Serializable {
 
     @Override
     public String toString() {
-        return "project.jpa.model.Productmen[ productcode=" + productcode + " ]";
+        return "project.model.Product[ productcode=" + productcode + " ]";
     }
     
 }

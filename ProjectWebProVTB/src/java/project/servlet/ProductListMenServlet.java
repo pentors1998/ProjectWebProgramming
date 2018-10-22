@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import project.jpa.model.Productmen;
-import project.jpa.model.controller.ProductmenJpaController;
+import project.model.Product;
+import project.model.jpa.controller.ProductJpaController;
 
 /**
  *
@@ -43,10 +43,10 @@ public class ProductListMenServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setHeader("Cache-Control", "no-cache");
-        ProductmenJpaController productMenJpaCtrl = new ProductmenJpaController(utx, emf);
-        List<Productmen> productsMen = productMenJpaCtrl.findProductmenEntities();
-        request.setAttribute("productsMen", productsMen);
-        getServletContext().getRequestDispatcher("/ProductMen.jsp").forward(request, response);
+        ProductJpaController productMenJpaCtrl = new ProductJpaController(utx, emf);
+        List<Product> products = productMenJpaCtrl.findProductEntities();
+        request.setAttribute("products", products);
+        getServletContext().getRequestDispatcher("/ProductList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

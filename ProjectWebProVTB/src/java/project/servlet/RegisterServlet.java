@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-import project.jpa.model.controller.AccountJpaController;
-import project.jpa.model.controller.exceptions.RollbackFailureException;
-import project.jpa.model.Account;
+import project.model.Account;
+import project.model.jpa.controller.AccountJpaController;
+import project.model.jpa.controller.exceptions.RollbackFailureException;
 import static project.servlet.LoginServlet.cryptWithMD5;
 
 /**
@@ -51,12 +51,14 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String tell = request.getParameter("tell");
+        String address = request.getParameter("address");
+        String debit = request.getParameter("debit");
         HttpSession session = request.getSession(false);
         Account account = (Account) session.getAttribute("account");
         AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
         if (firstName != null && lastName != null && email != null && password != null && tell != null && !account.getEmail().equalsIgnoreCase(email)) {
             password = cryptWithMD5(password);
-            Account newAccount = new Account(email, password, firstName, lastName, tell);
+            Account newAccount = new Account(email, password, firstName, lastName, tell, address, debit);
             try {
                 accountJpaCtrl.create(newAccount);
                 getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
