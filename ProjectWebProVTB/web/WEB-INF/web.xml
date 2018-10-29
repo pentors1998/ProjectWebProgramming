@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductListServlet</servlet-name>
-        <servlet-class>project.servlet.ProductListMenServlet</servlet-class>
+        <servlet-class>project.servlet.ProductListServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginPageServlet</servlet-name>

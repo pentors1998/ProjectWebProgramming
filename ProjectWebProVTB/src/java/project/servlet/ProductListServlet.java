@@ -23,7 +23,7 @@ import project.model.jpa.controller.ProductJpaController;
  *
  * @author Admin
  */
-public class ProductListMenServlet extends HttpServlet {
+public class ProductListServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "ProjectWebProVTBPU")
     EntityManagerFactory emf;
@@ -43,8 +43,8 @@ public class ProductListMenServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setHeader("Cache-Control", "no-cache");
-        ProductJpaController productMenJpaCtrl = new ProductJpaController(utx, emf);
-        List<Product> products = productMenJpaCtrl.findProductEntities();
+        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+        List<Product> products = productJpaCtrl.findProductEntities();
         request.setAttribute("products", products);
         getServletContext().getRequestDispatcher("/ProductList.jsp").forward(request, response);
     }
