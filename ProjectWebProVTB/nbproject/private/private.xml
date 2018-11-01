@@ -5,14 +5,17 @@
         <group>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/ProductListServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/UpdateServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/bank/model/LineItem.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/bank/model/ShoppingCart.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/mockup/model/ProductMockup.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/model/jpa/controller/ProductJpaController.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/LogoutServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/CartServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/model/Product.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/RegisterServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/AddToCartServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/mockup/model/Product.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/LoginServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/mockup/model/ProductMockup.java</file>
-            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/RegisterPageServlet.java</file>
         </group>
     </open-files>
 </project-private>
