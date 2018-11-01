@@ -103,7 +103,7 @@ public class Product implements Serializable {
         this.productsize = productsize;
         this.productprice = productprice;
     }
-
+    
     public String getProductcode() {
         return productcode;
     }
