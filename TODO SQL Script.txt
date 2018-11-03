@@ -1,6 +1,6 @@
 --1.) Create Database and Connect
 
---2.) Create table ACCOUNT should have : firstname , lastname , email , password , tell
+--2.) Create table ACCOUNT should have : firstname , lastname , email , password , tell , address and debitcart
 CREATE TABLE ACCOUNT(
 EMAIL VARCHAR(30) NOT NULL PRIMARY KEY,
 PASSWORD VARCHAR(20) NOT NULL,
@@ -10,7 +10,7 @@ TELL VARCHAR(10) NOT NULL,
 ADDRESS VARCHAR(350) NOT NULL,
 DEBITCARD VARCHAR(16) NOT NULL);
 
---3.) Create table ProductLine
+--3.) Create table ProductType
 CREATE TABLE ProductType(
 PRODUCTTYPE VARCHAR(50) NOT NULL PRIMARY KEY,
 TEXTDESCRIPTION VARCHAR(120));
