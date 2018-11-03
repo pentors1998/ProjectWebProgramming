@@ -3,33 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bank.model;
+package project.model;
 
 import java.io.Serializable;
-import project.model.Product;
+import project.mockup.model.Product;
 
 /**
  *
  * @author INT303
  */
-public class LineItem implements Serializable {
+public class TypeItem implements Serializable {
 
     private Product product;
     private double salePrice;
     private int quantity;
 
-    public LineItem() {
+    public TypeItem() {
         
     }
 
-    public LineItem(Product product) {
-        this(product, 1) ;
+    public TypeItem(Product p) {
+        this(p,1);
     }
 
-    public LineItem(Product product, int quantity) {
+    public TypeItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.salePrice = product.getProductprice();
+        this.salePrice = product.getProductPrice();
     }
 
     public Product getProduct() {

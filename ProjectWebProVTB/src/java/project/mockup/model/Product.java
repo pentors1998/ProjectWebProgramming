@@ -16,10 +16,10 @@ public class Product {
     private String productLine;
     private String productType;
     private String productSex;
-    private String productSize;
+    private double productSize;
     private double productPrice;
 
-    public Product(String productCode, String productBrandName, String productLine, String productType, String productSex, String productSize, double productPrice) {
+    public Product(String productCode, String productBrandName, String productLine, String productType, String productSex, double productSize, double productPrice) {
         this.productCode = productCode;
         this.productBrandName = productBrandName;
         this.productLine = productLine;
@@ -27,6 +27,10 @@ public class Product {
         this.productSex = productSex;
         this.productSize = productSize;
         this.productPrice = productPrice;
+    }
+
+    public Product() {
+        
     }
 
     public String getProductCode() {
@@ -69,11 +73,11 @@ public class Product {
         this.productSex = productSex;
     }
 
-    public String getProductSize() {
+    public double getProductSize() {
         return productSize;
     }
 
-    public void setProductSize(String productSize) {
+    public void setProductSize(double productSize) {
         this.productSize = productSize;
     }
 
@@ -84,6 +88,8 @@ public class Product {
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
+
+   
     
     
 }

@@ -5,6 +5,8 @@
  */
 package project.servlet;
 
+import project.jpa.model.Account;
+import project.model.jpa.controller.AccountJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -18,8 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-import project.model.Account;
-import project.model.jpa.controller.AccountJpaController;
 
 /**
  *

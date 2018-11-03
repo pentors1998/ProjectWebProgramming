@@ -5,7 +5,7 @@
  */
 package project.servlet;
 
-import bank.model.ShoppingCart;
+import project.model.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
@@ -17,8 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import project.mockup.model.Product;
 import project.mockup.model.ProductMockup;
-import project.model.Product;
+import project.mockup.model.ProductMockup;
 
 /**
  *

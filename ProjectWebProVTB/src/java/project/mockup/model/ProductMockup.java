@@ -6,7 +6,6 @@ package project.mockup.model;
  * and open the template in the editor.
  */
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import project.model.Product;
-
 /**
  *
  * @author Khaitong
@@ -56,7 +53,7 @@ public class ProductMockup {
             Scanner sc = new Scanner(file);
             products = new HashMap(144);
             Product p = null;
-            List<String> fields = new ArrayList(7);
+            List<String> fields = new ArrayList(8);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 StringTokenizer stknz = new StringTokenizer(line, "\t\"");
@@ -73,14 +70,14 @@ public class ProductMockup {
 //                System.out.println(fields.get(5));
 //                System.out.println("-----------");
 
-                p.setProductcode((String) fields.get(0));
-                p.setProductbrandname((String) fields.get(1));
-                p.setProductline((String) fields.get(2));
-                p.setProducttype((String) fields.get(3));
-                p.setProductsex((String) fields.get(4));
-                p.setProductsize(Integer.valueOf(fields.get(5)));
-                p.setProductprice(Integer.valueOf(fields.get(6)));
-                products.put(p.getProductcode(), p);
+                p.setProductCode((String) fields.get(0));
+                p.setProductBrandName((String) fields.get(1));
+                p.setProductLine((String) fields.get(2));
+                p.setProductType((String) fields.get(3));
+                p.setProductSex((String) fields.get(4));
+                p.setProductSize(Double.valueOf(fields.get(5)));
+                p.setProductPrice(Double.valueOf(fields.get(6)));
+                products.put(p.getProductCode(), p);
             }
             productList = new ArrayList(products.values());
         } catch (FileNotFoundException ex) {

@@ -5,7 +5,7 @@
  */
 package project.servlet;
 
-import bank.model.ShoppingCart;
+import project.model.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
@@ -49,7 +49,7 @@ public class CartServlet extends HttpServlet {
             }
         }
         
-        request.setAttribute("message", "No product...");
+        request.setAttribute("message", "No product in cart...");
         getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
     }
 

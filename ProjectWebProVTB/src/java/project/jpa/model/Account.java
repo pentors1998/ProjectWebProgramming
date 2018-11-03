@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.model;
+package project.jpa.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -78,9 +78,7 @@ public class Account implements Serializable {
     @Column(name = "DEBITCARD")
     private String debitcard;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "email")
-    private List<Product> productList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "email")
-    private List<History> historyList;
+    private List<Historyorder> historyorderList;
 
     public Account() {
     }
@@ -156,21 +154,12 @@ public class Account implements Serializable {
     }
 
     @XmlTransient
-    public List<Product> getProductList() {
-        return productList;
+    public List<Historyorder> getHistoryorderList() {
+        return historyorderList;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
-    }
-
-    @XmlTransient
-    public List<History> getHistoryList() {
-        return historyList;
-    }
-
-    public void setHistoryList(List<History> historyList) {
-        this.historyList = historyList;
+    public void setHistoryorderList(List<Historyorder> historyorderList) {
+        this.historyorderList = historyorderList;
     }
 
     @Override
@@ -195,7 +184,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "project.model.Account[ email=" + email + " ]";
+        return "bank.model.Account[ email=" + email + " ]";
     }
     
 }

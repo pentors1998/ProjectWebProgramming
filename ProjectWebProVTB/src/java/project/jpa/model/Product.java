@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.model;
+package project.jpa.model;
 
+import project.jpa.model.Historyorder;
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,17 +27,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Admin
  */
 @Entity
-@Table(name = "HISTORY")
+@Table(name = "PRODUCT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "History.findAll", query = "SELECT h FROM History h")
-    , @NamedQuery(name = "History.findByProductcode", query = "SELECT h FROM History h WHERE h.productcode = :productcode")
-    , @NamedQuery(name = "History.findByProductbrandname", query = "SELECT h FROM History h WHERE h.productbrandname = :productbrandname")
-    , @NamedQuery(name = "History.findByProductline", query = "SELECT h FROM History h WHERE h.productline = :productline")
-    , @NamedQuery(name = "History.findByProducttype", query = "SELECT h FROM History h WHERE h.producttype = :producttype")
-    , @NamedQuery(name = "History.findByProductsize", query = "SELECT h FROM History h WHERE h.productsize = :productsize")
-    , @NamedQuery(name = "History.findByProductprice", query = "SELECT h FROM History h WHERE h.productprice = :productprice")})
-public class History implements Serializable {
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+    , @NamedQuery(name = "Product.findByProductcode", query = "SELECT p FROM Product p WHERE p.productcode = :productcode")
+    , @NamedQuery(name = "Product.findByProductbrandname", query = "SELECT p FROM Product p WHERE p.productbrandname = :productbrandname")
+    , @NamedQuery(name = "Product.findByProductline", query = "SELECT p FROM Product p WHERE p.productline = :productline")
+    , @NamedQuery(name = "Product.findByProductsex", query = "SELECT p FROM Product p WHERE p.productsex = :productsex")
+    , @NamedQuery(name = "Product.findByProductsize", query = "SELECT p FROM Product p WHERE p.productsize = :productsize")
+    , @NamedQuery(name = "Product.findByProductprice", query = "SELECT p FROM Product p WHERE p.productprice = :productprice")
+    , @NamedQuery(name = "Product.findByProductdescription", query = "SELECT p FROM Product p WHERE p.productdescription = :productdescription")
+    , @NamedQuery(name = "Product.findByQuantityinstock", query = "SELECT p FROM Product p WHERE p.quantityinstock = :quantityinstock")})
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,9 +60,9 @@ public class History implements Serializable {
     private String productline;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "PRODUCTTYPE")
-    private String producttype;
+    @Size(min = 1, max = 5)
+    @Column(name = "PRODUCTSEX")
+    private String productsex;
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRODUCTSIZE")
@@ -67,25 +71,29 @@ public class History implements Serializable {
     @NotNull
     @Column(name = "PRODUCTPRICE")
     private int productprice;
-    @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
+    @Size(max = 120)
+    @Column(name = "PRODUCTDESCRIPTION")
+    private String productdescription;
+    @Column(name = "QUANTITYINSTOCK")
+    private Integer quantityinstock;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    private Historyorder historyorder;
+    @JoinColumn(name = "PRODUCTTYPE", referencedColumnName = "PRODUCTTYPE")
     @ManyToOne(optional = false)
-    private Account email;
-    @JoinColumn(name = "PRODUCTCODE", referencedColumnName = "PRODUCTCODE", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Product product;
+    private Producttype producttype;
 
-    public History() {
+    public Product() {
     }
 
-    public History(String productcode) {
+    public Product(String productcode) {
         this.productcode = productcode;
     }
 
-    public History(String productcode, String productbrandname, String productline, String producttype, int productsize, int productprice) {
+    public Product(String productcode, String productbrandname, String productline, String productsex, int productsize, int productprice) {
         this.productcode = productcode;
         this.productbrandname = productbrandname;
         this.productline = productline;
-        this.producttype = producttype;
+        this.productsex = productsex;
         this.productsize = productsize;
         this.productprice = productprice;
     }
@@ -114,12 +122,12 @@ public class History implements Serializable {
         this.productline = productline;
     }
 
-    public String getProducttype() {
-        return producttype;
+    public String getProductsex() {
+        return productsex;
     }
 
-    public void setProducttype(String producttype) {
-        this.producttype = producttype;
+    public void setProductsex(String productsex) {
+        this.productsex = productsex;
     }
 
     public int getProductsize() {
@@ -138,20 +146,36 @@ public class History implements Serializable {
         this.productprice = productprice;
     }
 
-    public Account getEmail() {
-        return email;
+    public String getProductdescription() {
+        return productdescription;
     }
 
-    public void setEmail(Account email) {
-        this.email = email;
+    public void setProductdescription(String productdescription) {
+        this.productdescription = productdescription;
     }
 
-    public Product getProduct() {
-        return product;
+    public Integer getQuantityinstock() {
+        return quantityinstock;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setQuantityinstock(Integer quantityinstock) {
+        this.quantityinstock = quantityinstock;
+    }
+
+    public Historyorder getHistoryorder() {
+        return historyorder;
+    }
+
+    public void setHistoryorder(Historyorder historyorder) {
+        this.historyorder = historyorder;
+    }
+
+    public Producttype getProducttype() {
+        return producttype;
+    }
+
+    public void setProducttype(Producttype producttype) {
+        this.producttype = producttype;
     }
 
     @Override
@@ -164,10 +188,10 @@ public class History implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof History)) {
+        if (!(object instanceof Product)) {
             return false;
         }
-        History other = (History) object;
+        Product other = (Product) object;
         if ((this.productcode == null && other.productcode != null) || (this.productcode != null && !this.productcode.equals(other.productcode))) {
             return false;
         }
@@ -176,7 +200,7 @@ public class History implements Serializable {
 
     @Override
     public String toString() {
-        return "project.model.History[ productcode=" + productcode + " ]";
+        return "bank.model.Product[ productcode=" + productcode + " ]";
     }
     
 }
