@@ -1,0 +1,12 @@
+{
+    "elements": {
+        "c:choose": {},
+        "c:otherwise": {},
+        "c:when": {
+            "attributes": {
+                "test": {}
+            }
+        }
+    },
+    "attributes": {}
+}

@@ -6,7 +6,6 @@
 package project.servlet;
 
 import project.jpa.model.Product;
-import project.model.jpa.controller.ProductJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
+import project.jpa.model.controller.ProductJpaController;
 
 /**
  *

@@ -101,7 +101,7 @@ public class Producttype implements Serializable {
 
     @Override
     public String toString() {
-        return "bank.model.Producttype[ producttype=" + producttype + " ]";
+        return "project.jpa.model.Producttype[ producttype=" + producttype + " ]";
     }
     
 }

@@ -6,10 +6,9 @@
 package project.servlet;
 
 import project.jpa.model.Account;
-import project.model.jpa.controller.AccountJpaController;
-import project.model.jpa.controller.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import project.jpa.model.controller.AccountJpaController;
+import project.jpa.model.controller.exceptions.RollbackFailureException;
 import static project.servlet.LoginServlet.cryptWithMD5;
 
 /**
@@ -54,29 +55,40 @@ public class RegisterServlet extends HttpServlet {
         String tell = request.getParameter("tell");
         String address = request.getParameter("address");
         String debit = request.getParameter("debit");
+        String pincode = request.getParameter("pincode");
         HttpSession session = request.getSession(false);
         AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
-        Account accountInDb = accountJpaCtrl.findAccount(email);
+
+        List<Account> accountInDb = accountJpaCtrl.findAccountEntities();
+        List<Account> account1 = new ArrayList<>();
+
         if (firstName != null && firstName.trim().length() > 0 && lastName != null && lastName.trim().length() > 0
                 && email != null && email.trim().length() > 0 && password != null && password.trim().length() > 0
                 && tell != null && tell.trim().length() > 0 && debit != null && debit.trim().length() > 0
-                && address != null && address.trim().length() > 0 && !accountInDb.getEmail().equalsIgnoreCase(email)) {
-            password = cryptWithMD5(password);
-            Account newAccount = new Account(email, password, firstName, lastName, tell, address, debit);
-            try {
-                accountJpaCtrl.create(newAccount);
-                request.setAttribute("message", "Register Complete.");
-                getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-                return;
-            } catch (RollbackFailureException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                && address != null && address.trim().length() > 0 && pincode != null && pincode.trim().length() > 0) {
+            for (Account account : accountInDb) {
+                if (account.getEmail().equalsIgnoreCase(email)) {
+                    request.setAttribute("warn", "Already email.");
+                    getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
+                }
+                Account newAccount = new Account(email, password, firstName, lastName, tell, address, debit, pincode);
+                try {
+                    accountJpaCtrl.create(newAccount);
+                    request.setAttribute("message", "Register Complete.");
+                    getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                    return;
+                } catch (RollbackFailureException ex) {
+                    Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+
         } else {
             request.setAttribute("message", "Invalid data.");
-            getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByLastname", query = "SELECT a FROM Account a WHERE a.lastname = :lastname")
     , @NamedQuery(name = "Account.findByTell", query = "SELECT a FROM Account a WHERE a.tell = :tell")
     , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.address = :address")
-    , @NamedQuery(name = "Account.findByDebitcard", query = "SELECT a FROM Account a WHERE a.debitcard = :debitcard")})
+    , @NamedQuery(name = "Account.findByDebitcard", query = "SELECT a FROM Account a WHERE a.debitcard = :debitcard")
+    , @NamedQuery(name = "Account.findByPincode", query = "SELECT a FROM Account a WHERE a.pincode = :pincode")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,6 +78,9 @@ public class Account implements Serializable {
     @Size(min = 1, max = 16)
     @Column(name = "DEBITCARD")
     private String debitcard;
+    @Size(max = 5)
+    @Column(name = "PINCODE")
+    private String pincode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "email")
     private List<Historyorder> historyorderList;
 
@@ -87,7 +91,7 @@ public class Account implements Serializable {
         this.email = email;
     }
 
-    public Account(String email, String password, String firstname, String lastname, String tell, String address, String debitcard) {
+    public Account(String email, String password, String firstname, String lastname, String tell, String address, String debitcard , String pincode) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
@@ -95,6 +99,7 @@ public class Account implements Serializable {
         this.tell = tell;
         this.address = address;
         this.debitcard = debitcard;
+        this.pincode = pincode;
     }
 
     public String getEmail() {
@@ -153,6 +158,14 @@ public class Account implements Serializable {
         this.debitcard = debitcard;
     }
 
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
     @XmlTransient
     public List<Historyorder> getHistoryorderList() {
         return historyorderList;
@@ -184,7 +197,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "bank.model.Account[ email=" + email + " ]";
+        return "project.jpa.model.Account[ email=" + email + " ]";
     }
     
 }

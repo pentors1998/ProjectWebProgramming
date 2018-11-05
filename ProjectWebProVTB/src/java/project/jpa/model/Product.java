@@ -5,7 +5,6 @@
  */
 package project.jpa.model;
 
-import project.jpa.model.Historyorder;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -32,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
     , @NamedQuery(name = "Product.findByProductcode", query = "SELECT p FROM Product p WHERE p.productcode = :productcode")
-    , @NamedQuery(name = "Product.findByProductbrandname", query = "SELECT p FROM Product p WHERE p.productbrandname = :productbrandname")
+    , @NamedQuery(name = "Product.findByProductbrandname", query = "SELECT p FROM Product p WHERE lower(p.productbrandname) like :productbrandname")
     , @NamedQuery(name = "Product.findByProductline", query = "SELECT p FROM Product p WHERE p.productline = :productline")
     , @NamedQuery(name = "Product.findByProductsex", query = "SELECT p FROM Product p WHERE p.productsex = :productsex")
     , @NamedQuery(name = "Product.findByProductsize", query = "SELECT p FROM Product p WHERE p.productsize = :productsize")
@@ -200,7 +199,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "bank.model.Product[ productcode=" + productcode + " ]";
+        return "project.jpa.model.Product[ productcode=" + productcode + " ]";
     }
     
 }

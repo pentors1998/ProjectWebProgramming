@@ -6,7 +6,6 @@
 package project.servlet;
 
 import project.jpa.model.Account;
-import project.model.jpa.controller.AccountJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import project.jpa.model.controller.AccountJpaController;
 
 /**
  *
@@ -48,18 +48,18 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         HttpSession session = request.getSession(true);
         if (email != null && email.trim().length() > 0 && password != null && password.trim().length() > 0) {
-            String encyptPass = cryptWithMD5(password);
             AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
             Account accountObj = accountJpaCtrl.findAccount(email);
             if (accountObj != null) {
-                if (encyptPass.equals(accountObj.getPassword())) {
+                if (password.equalsIgnoreCase(accountObj.getPassword())) {
                     session.setAttribute("account", accountObj);
-                    getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+                    getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                     return;
                 }
             }
         }
-        getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+        request.setAttribute("message", "Invalid email or password.");
+        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     public static String cryptWithMD5(String pass) {

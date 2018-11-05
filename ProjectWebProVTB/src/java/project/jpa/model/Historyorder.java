@@ -176,7 +176,7 @@ public class Historyorder implements Serializable {
 
     @Override
     public String toString() {
-        return "bank.model.Historyorder[ productcode=" + productcode + " ]";
+        return "project.jpa.model.Historyorder[ productcode=" + productcode + " ]";
     }
     
 }
