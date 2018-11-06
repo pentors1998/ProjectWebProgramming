@@ -1,6 +1,7 @@
 --1.) Create Database and Connect
 
 --2.) Create table ACCOUNT should have : firstname , lastname , email , password , tell , address and debitcart
+
 CREATE TABLE ACCOUNT(
 EMAIL VARCHAR(30) NOT NULL PRIMARY KEY,
 PASSWORD VARCHAR(20) NOT NULL,
@@ -12,11 +13,18 @@ DEBITCARD VARCHAR(16) NOT NULL,
 PINCODE VARCHAR(5) NOT NULL);
 
 --3.) Create table ProductType
+
 CREATE TABLE ProductType(
 PRODUCTTYPE VARCHAR(50) NOT NULL PRIMARY KEY,
-TEXTDESCRIPTION VARCHAR(120));
+TEXTDESCRIPTION VARCHAR(300));
+
+INSERT INTO PRODUCTTYPE VALUES('Eau de Toilette' , null);
+INSERT INTO PRODUCTTYPE VALUES('Eau de Cologne' , null);
+INSERT INTO PRODUCTTYPE VALUES('Eau de Parfum' , null);
+INSERT INTO PRODUCTTYPE VALUES('Parfum' , null);
 
 --4.) Create table PRODUCT
+
 CREATE TABLE PRODUCT(
 PRODUCTCODE VARCHAR(10) NOT NULL PRIMARY KEY,
 PRODUCTBRANDNAME VARCHAR(40) NOT NULL,
@@ -25,11 +33,410 @@ PRODUCTTYPE VARCHAR(50) NOT NULL,
 PRODUCTSEX VARCHAR(5) NOT NULL,
 PRODUCTSIZE DECIMAL NOT NULL,
 PRODUCTPRICE DECIMAL NOT NULL,
-PRODUCTDESCRIPTION VARCHAR(120),
 QUANTITYINSTOCK INT,
-CONSTRAINT Fk_productLine FOREIGN KEY (ProductType) REFERENCES ProductType (ProductType) ON DELETE NO ACTION ON UPDATE NO ACTION);
+PRODUCTDESCRIPTION VARCHAR(400));
+
+**Insert ....
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1002484', 'CHANEL', 'CHANCE', 'Parfum', 'F', 7, 98, 50, 'CHANEL CHANCE PARFUM BOTTLE
+A floral fragrance in a round bottle. Unpredictable, in perpetual movement, CHANCE sweeps you into its whirlwind of happiness and fantasy.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1058874', 'CHANEL', 'CHANCE EAU FRAÎCHE', 'Eau de Toilette', 'F', 50, 65, 50, 'CHANEL CHANCE EAU FRAÎCHE EAU DE TOILETTE SPRAY
+
+A floral-sparkling fragrance in a round bottle. A surge of energy that sweeps you into a whirlwind of happiness and fantasy.
+
+The eau de toilette comes in a spray format for a more generous use, with an effortless application on skin or clothing.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1097286', 'CHANEL', 'CHANCE EAU TENDRE', 'Eau de Toilette', 'F', 50, 65, 50, 'CHANEL CHANCE EAU TENDRE EAU DE TOILETTE SPRAY
+
+A floral-fruity fragrance in a round bottle. Soft and tender top notes sweep you into a whirlwind of happiness and fantasy.
+
+The eau de toilette comes in a spray format for more a generous use, with an effortless application on skin or clothing.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1002666', 'CHANEL', 'COCO', 'Eau de Parfum', 'F', 50, 77, 50, 'CHANEL COCO EAU DE PARFUM SPRAY
+
+COCO expresses the intensity of Gabrielle Chanel is personality and her love of all things baroque. A luxuriant oriental symphony that gradually reveals its contrasting notes.
+
+The eau de parfum comes in a spray format for effortless application on skin or clothing.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1002179', 'CHANEL', 'ALLURE', 'Eau de Parfum', 'F', 50, 69, 50, 'CHANEL ALLURE EAU DE PARFUM SPRAY
+The very definition of elegance according to Mademoiselle Chanel. Charismatic and natural. 
+A floral-fresh-oriental fragrance in six facets that finds an expression unique to each woman.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1002203', 'CHANEL', 'ALLURE', 'Parfum', 'F', 7, 75, 50, 'CHANEL ALLURE PARFUM BOTTLE
+The very definition of elegance according to Mademoiselle Chanel. 
+Charismatic and natural. A floral-fresh-oriental fragrance in six facets, housed in a bottle hand-sealed with a baudruche film.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1047331', 'CHANEL', 'ALLURE SENSUELLE', 'Eau de Parfum', 'F', 50, 74, 50, 'CHANEL ALLURE SENSUELLE EAU DE PARFUM SPRAY
+
+ALLURE SENSUELLE is another olfactory interpretation of the ALLURE fragrance. A voluptuous variation with an intriguing and magnetic sensuality. A floral-soft-oriental fragrance.
+
+The eau de parfum comes in a spray format for effortless application on skin or clothing.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1003292', 'CHANEL', 'N°19', 'Eau de Parfum', 'F', 50, 77, 50, 'CHANEL N°19 EAU DE PARFUM SPRAY
+
+A daring, distinctive fragrance. The vibrant, green notes of Galbanum blend with the powdery notes of Iris to strike a perfect balance. 
+The last fragrance launched and worn by Gabrielle Chanel.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1003193', 'CHANEL', 'N°19', 'Eau de Toilette', 'F', 50, 65, 50, 'CHANEL N°19 EAU DE TOILETTE SPRAY
+
+A daring, distinctive fragrance. A floral-woody-green fragrance with perfect balance. The last fragrance launched and worn by Gabrielle Chanel. 
+An uncompromising composition, in the image of Mademoiselle.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1003102', 'CHANEL', 'CRISTALLE', 'Eau de Parfum', 'F', 50, 62, 50, 'CHANEL CRISTALLE EAU DE PARFUM SPRAY
+
+A floral-fresh fragrance with a balance of character and transparency. Strong and light. Natural yet sophisticated.
+
+The eau de parfum comes in a spray format for an effortless application on skin or clothing.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1181460', 'CHANEL', 'N°5', 'Eau de Toilette', 'F', 50, 77, 50, 'CHANEL N°5 PARFUM BOTTLE
+N°5, the very essence of femininity. A timeless, legendary, powdery floral bouquet. Composed using raw materials of the finest quality, the parfum is the most precious version of the fragrance.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1003573', 'CHANEL', 'N°5', 'Eau de Toilette', 'F', 50, 69, 50, 'CHANEL N°5 PARFUM BOTTLE
+N°5, the very essence of femininity. A timeless, legendary, powdery floral bouquet. Composed using raw materials of the finest quality, the parfum is the most precious version of the fragrance.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1003607', 'CHANEL', 'N°5', 'Parfum', 'F', 7, 98, 50, 'CHANEL N°5 PARFUM BOTTLE
+N°5, the very essence of femininity. A timeless, legendary, powdery floral bouquet. Composed using raw materials of the finest quality, the parfum is the most precious version of the fragrance.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1003466', 'CHANEL', 'N°5', 'Eau de Toilette', 'F', 50, 65, 50, 'CHANEL N°5 EAU DE TOILETTE SPRAY
+
+N°5, the very essence of femininity. The eau de toilette  is a vibrant echo of the floral bouquet launched by Gabrielle Chanel in 1921. A warm and bright version of the original fragrance.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1217468', 'CHANEL', 'COCO MADEMOISELLE', 'Eau de Parfum', 'F', 50, 82, 50, 'CHANEL presents COCO MADEMOISELLE, the new Eau de Parfum Intense. A unique composition emphasised by an extreme dose of patchouli and warmed by an amber accord of Vanilla absolute and Tonka Bean. Sensual, deep, addictive.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1002898', 'CHANEL', 'COCO MADEMOISELLE', 'Eau de Parfum', 'F', 50, 77, 50, 'CHANEL COCO MADEMOISELLE EAU DE PARFUM SPRAY
+CHANEL SAYS:
+The essence of a bold, free woman. An oriental fragrance with a strong personality, yet surprisingly fresh.
+The eau de parfum comes in a spray format for an effortless application on skin or clothing. A complete perfuming ritual for the bath and body is also available to enhance the fragrance trail.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1036730', 'CHANEL', 'COCO MADEMOISELLE', 'Parfum', 'F', 7, 98, 50, 'CHANEL COCO MADEMOISELLE PARFUM BOTTLE 
+
+The essence of a bold, free woman. A feminine oriental fragrance with a voluptuous yet surprisingly fresh composition. 
+A daring fragrance housed in an iconic bottle hand-sealed with a baudruche film.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1075159', 'CHANEL', 'COCO MADEMOISELLE', 'Eau de Parfum', 'F', 60, 88, 50, 'CHANEL COCO MADEMOISELLE EAU DE PARFUM REFILLABLE SPRAY 
+
+The essence of a bold, free woman. An airy, oriental-fresh fragrance, housed in a refillable spray. An iconic bottle, perfect for travel.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1087600', 'CHANEL', 'COCO MADEMOISELLE', 'Parfum', 'F', 7, 98, 50, 'CHANEL COCO MADEMOISELLE PARFUM PURSE SPRAY 7.5ML
+
+The essence of a bold, free woman. A feminine oriental fragrance with a voluptuous yet surprisingly fresh composition.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1199108', 'CHANEL', 'GABRIELLE', 'Eau de Parfum', 'F', 50, 74, 50, '"I decided who I wanted to be, and that is who I am." - Gabrielle Chanel
+
+Before she was the designer Coco Chanel, she was Gabrielle. A rebel at heart, passionate and free.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1042043', 'CHANEL', 'CHANCE', 'Eau de Parfum', 'F', 50, 69, 50, 'CHANEL CHANCE EAU DE PARFUM SPRAY
+CHANEL SAYS:
+A floral fragrance in a round bottle. Unpredictable, in perpetual movement, CHANCE sweeps you into its whirlwind of happiness and fantasy.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1151281', 'CHANEL', 'BLEU DE CHANEL', 'Eau de Parfum', 'M', 50, 66, 50, 'Parfum
+A composition that opens with an aromatic freshness and lingers on the warm, addictive fullness of cedar and sandalwood from New Caledonia. 
+A powerful and refined composition. The essence of determination.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1034511', 'CHANEL', 'ALLURE HOMME SPORT', 'Eau de Toilette', 'M', 100, 76, 50, 'CHANEL ALLURE HOMME SPORT EAU DE TOILETTE SPRAY
+
+Allure in motion. A fresh-sensual fragrance that evokes escape and serenity. Allure exudes from both the body and mind, in perfect harmony.
+
+The eau de toilette is sprayed directly onto clothes and skin for lavish perfuming.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1177278', 'CHANEL', 'ALLURE HOMME SPORT', 'Eau de Cologne', 'M', 100, 76, 50, 'Allure in motion. More than a fragrance, a boost of well-being. A fresh-invigorating composition like a breath of energy.
+
+A composition with vivifying notes carried by the generous freshness of citrus and subtly heightened by the lovage-elemi accord, set against a backdrop of cedar and white musk notes."
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1197805', 'ARMANI', 'BECAUSE IT IS YOU', 'Eau de Parfum', 'F', 30, 48, 50, 'The new perfume by Emporio Armani, Because It’s You is a happy, delicious and sparkling perfume for women. Inspired by a personal love story brought to life through by Paul and Laura through a cinematic series of films.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1219288', 'CHANEL', 'BLEU DE CHANEL', 'Parfum', 'M', 50, 76, 50, 'Parfum
+A composition that opens with an aromatic freshness and lingers on the warm, addictive fullness of cedar and sandalwood from New Caledonia. A powerful and refined composition. The essence of determination.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1137801', 'ARMANI', 'SI', 'Eau de Parfum', 'F', 30, 52, 50, 'Sì eau de parfum by Giorgio Armani is a chypre scent reinvented, lingering on the skin and captivating the senses. Opening with notes of Sicilian bergamot, mandarin oil and liquer de cassis, it has a heart which bursts with rose de mai absolute, neroli absolute and Egyptian jasmine absolute. 
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1216593', 'ARMANI', 'SI', 'Eau de Parfum', 'F', 30, 49, 50, 'A bright and sensual perfume that emits confidence, seduction, and strength. Best described as the red lip effect in a bottle, Sì Passione mirrors the same emotions and self-assurance that a swipe of red lipstick can instantly give the wearer.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1159409', 'ARMANI', 'SI', 'Eau de Toilette', 'F', 30, 45, 50, 'Giorgio Armani presents Sì eau de toilette, a Fruity Chypre to complete the Sì perfume collection. 
+
+Si eau de toilette is a delicate interpretation of the unique Si eau de parfum; a softer, lighter olfactory experience, reminiscent of a veil of chiffon against the skin. ');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1226729', 'ARMANI', 'SI', 'Eau de Parfum', 'F', 50, 73, 50, 'Sì Nacre Sparkling Limited Edition – The Perfume For Women
+Sophisticated and unique, Armani Sì Nacre Sparkling Limited Edition is the classic Armani Sì eau de parfum in a pearlescent format, that leaves a sparkling effect on the skin. Limited quantities for a limited time, this sparkling perfume not only looks beautiful on the skin, but would make a unique addition to any dressing table. ');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1152719', 'ARMANI', 'SI', 'Eau de Parfum', 'F', 50, 81, 50, 'Giorgio Armani introduces the extreme passion of Sì Eau de Parfum Intense: an exhilarating tribute to a bold and risk-taking woman.
+
+Sì Eau de Parfum Intense accentuates the sensual and elegant facets of the Armani woman. More textured, it takes the uniquely modern chypre accord of Sì to unexpected depths.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1050608', 'ARMANI', 'CODE', 'Eau de Parfum', 'F', 30, 50, 50, 'Armani Code is the signature fragrance for women by Giorgio Armani. 
+Orange Blossom is the Muse of this creation: a miracle of the nature, the quintessence of femininity. 
+A unique creation reveals this flower is full magic and operates its metamorphosis by the incredibly soft embrace of Madagascar vanilla and a touch of honey.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1066794', 'ARMANI', 'DIAMONDS', 'Eau de Parfum', 'F', 30, 42, 50, 'Completed by a multi-faceted diamond bottle and originally backed by an advertising campaign with Queen Bey herself, it’s sure to become the sparkling jewel in your fragrance collection.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1159375', 'ARMANI', 'DIAMONDS VIOLET', 'Eau de Parfum', 'F', 30, 33, 50, 'A fruity floral version of Emporio Armani Diamonds original.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1135979', 'ARMANI', 'DIAMONDS ROSE', 'Eau de Toilette', 'F', 30, 33, 50, 'A fresher version of Diamonds original.
+A magnetic, sensual rose.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1011642', 'ARMANI', 'SHE', 'Eau de Parfum', 'F', 30, 40, 50, 'A fresh blend of delicate florals, heliotrope, almond accents and a caressing wake of vanilla and cedar wood that melt together in perfect harmony.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1097559', 'ARMANI', 'ACQUA DI GIOIA', 'Eau de Parfum', 'F', 30, 50, 50, 'THE ESSENCE OF JOY. There is a charming sensation of freshness from the very first notes which are carried along in a deliciously heady current of crushed Mint, with a zest of Italian “Limone Primo Fiore Femminello", harvested from the first spring blossoms in Calabria.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1197672', 'ARMANI', 'STRONGER WITH YOU', 'Eau de Toilette', 'M', 30, 44, 50, 'Stronger With You is a masculine scent featuring spicy accords in the top notes of - a mix of cardamom, pink peppercorn, and violet leaves. 
+Stronger With You has inherited a confident elegance, with the easy nonchalance of youth, conveyed by the sage at its aromatic heart.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1039981', 'ARMANI', 'CODE', 'Eau de Toilette', 'M', 30, 46, 50, 'Armani Code gives you the key to enter the Giorgio Armani universe. A world made of sophistication and elegance, where seduction is a lifestyle.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1175561', 'ARMANI', 'ARMANI CODE PROFUMO', 'Eau de Parfum', 'M', 30, 50, 50, 'Giorgio Armani introduces Code Profumo, a new intensity. 
+
+Profumo; meaning Perfume in Italian is an intense, long lasting Parfum for Men. 
+
+The iconic scent of seduction now reaches an intense heat with Amber, Benzoin and Tonka Bean in the base notes. A mysterious, seductive & burning intensity. Fusions of radiant woods and amber with melting woody smoky tones.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1194752', 'ARMANI', 'ARMANI CODE COLONIA', 'Eau de Toilette', 'M', 50, 54, 50, 'Fresh and bright, Armani Code Colonia, the fragrance for men who has an audacious and cool presence.
+
+The modern Armani Code man flawlessly masters all codes of life and the mystery of seduction.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1217146', 'ARMANI', 'CODE A-LIST', 'Eau de Toilette', 'M', 75, 59, 50, 'Discover the new limited edition Armani Code A-list, a seductive contemporary men is aftershave perfect for special occasions. 
+Code A-list is a woody oriental - a fresher, more spicy and sophisticated interpretation of the iconic Armani Code classic fragrance.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1024165', 'ARMANI', 'ACQUA DI GIO', 'Eau de Toilette', 'M', 30, 46, 50, 'A LIGHT, DISTINGUISHED EAU DE TOILETTE INSPIRED BY THE FRESH SEA, WARM SUN AND THE RICHNESS OF THE EARTH. 
+This aquatic, aromatic fragrance opens with a splash of fresh calabrian bergamot, neroli and green tangerine. Light, aquatic nuances mix with jasmine petal, crisp rock rose, it is the perfect fragrance for gifting.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1219330', 'ARMANI', 'ACQUA DI GIO ABSOLU', 'Eau de Parfum', 'M', 75, 74, 50, 'Introducing ACQUA DI GIÒ ABSOLU fragrance for men, celebrating the union between fresh water and warm wood. 
+Seen through the eyes of Giorgio Armani, the alliance of water and wood takes us on a journey into timeless masculinity, embracing a deeper overall consciousness.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1159292', 'ARMANI', 'ACQUA DI GIO PROFUMO', 'Eau de Parfum', 'M', 40, 57, 50, 'Giorgio Armani introduces Acqua Di Gio Profumo, the new intensity. 
+
+Profumo; meaning Perfume in Italian is an intense, long lasting Parfum for Men. 
+Inspired by the fresh scent of the Mediterranean island of Pantelleria. 
+The Acqua fragrances consist of invigorating marine notes which mean you not only smell good but you feel good too.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1077023', 'ARMANI', 'DIAMONDS FOR MEN', 'Eau de Toilette', 'M', 30, 42, 50, 'A refined fragrance for young, urban men. In the initial aromas, the icy opening contrasts with lingering sensual, burning accents. 
+The emblematic notes of mens fragrance are subverted with original surprising and addictive ingredients.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1111715', 'ARMANI', 'DIAMONDS BLACK CARAT', 'Eau de Toilette', 'M', 50, 29, 50, 'The Black Carat Edition. The quintessence of a Diamond, brilliant contrasts, luminous reflection, the revealer side of your soul.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1149228', 'ARMANI', 'DIAMONDS ROCKS FOR MEN', 'Eau de Toilette', 'M', 50, 29, 50, 'A woody citrus fragrance with top notes of bergamot essence, pepper essence, apple accord. 
+Followed by heart notes of geranium essence, violet leaves accord, marine notes and base notes of gaiac wood essence, vetiver essence and cedar wood essence.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1024306', 'ARMANI', 'HE', 'Eau de Toilette', 'M', 30, 39, 50, 'A natural, sparkling blend of Japanese yuzu, sage and cardamom that harmonize with precious woods and warm musks.
+
+Natural, refined and dynamic.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1143460', 'ARMANI', 'EAU D AROMES', 'Eau de Toilette', 'M', 100, 78, 50, 'Spicy and spontaneous, Eau d’Arômes is a play of contrasts, 
+powerful and light, with freshness and warm depth. 
+The masterful combination of the spicy-woody and citrus accords creates a deeply textured fragrance: dynamic, masculine and sensual. 
+From the first notes, sparks of bergamot and mandarin join the bright snap of ginger to create the vibrant feel of freshness.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1227569', 'DIOR', 'J ADORE ABSOLU', 'Eau de Parfum', 'F', 50, 81, 50, 'A delightfully lush new composition sees Absolutes dance alongside an unprecedented freshness. 
+The flowers here are as sweet as a delectable syrup, or a sublime, natural and sensual nectar.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1195841', 'DIOR', 'J ADORE IN JOY', 'Eau de Toilette', 'F', 50, 62, 50, 'The iconic floral bouquet is a beauty with multiple faces, a feat of balance where the most beautiful flowers express themselves with sensuality and freshness.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1166339', 'DIOR', 'J ADORE', 'Parfum', 'F', 20, 75, 50, 'J’adore Touche de Parfum is a new olfactory and sensory experience created by François Demachy.
+It is more than a fragrance—it is an unexpected invitation, a new creative and sensual approach that leaves each woman free to tailor her J’adore fragrance to the moment and her desires.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1224468', 'DIOR', 'JOY BY DIOR', 'Eau de Parfum', 'F', 30, 54, 50, 'The new JOY by Dior fragrance is immediate, clear and generous. 
+The feeling of joy is finally captured in a scent, marked by both enveloping softness and energy. An ode to pleasure and life.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1210104', 'DIOR', 'MISS DIOR', 'Eau de Parfum', 'F', 50, 64, 50, 'Discover the floral declaration by Dior. 
+Composed as a hymn to love, the new Miss Dior Eau de Parfum is reinvented through a fresh and sensual rose woven with rosewood.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1132299', 'DIOR', 'MISS DIOR', 'Eau de Toilette', 'F', 50, 62, 50, 'Miss Dior Eau de Toilette was designed by Dior Perfumer-Creator François Demachy like a stroll through a blossoming garden. 
+The same Couture style and the same theme are prolonged from the original Miss Dior to this new opus: a chypre accord, which is enlivened with a springtime spirit.
+A fragrance with floral accents that dazzles with joie de vivre.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1128842', 'DIOR', 'MISS DIOR', 'Parfum', 'F', 40, 75, 50, 'Highly concentrated, Miss Dior Le Parfum intensifies its floral notes to the extreme. 
+Leather notes emerge from this floral accord, through a combination of Amber swirled together with a noble, enhanced Patchouli.
+
+Sweet and smooth Vanilla adds a sensual dimension to this new, oriental accord.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1144161', 'DIOR', 'MISS DIOR BLOOMING BOUQUET', 'Parfum', 'F', 50, 62, 50, 'Delicate and light, Miss Dior Blooming Bouquet is a tender floral bouquet.
+
+""Like a springtime bouquet with a hint of elegant and light woody notes, Miss Dior keeps its promise of love."" François Demachy
+
+As a finishing touch, white musk notes delicately wrap around this springtime fragrance.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1217391', 'DIOR', 'POISON GIRL UNEXPECTED', 'Eau de Toilette', 'F', 50, 62, 50, 'A fresh and unexpected floral heightened by an excessive dose of ginger.
+
+With Poison Girl Unexpected, François Demachy, Dior Perfumer-Creator, shakes up noble ingredients with sassy, spirited accords to create a new, fresh and sparkling floral that is totally... Unexpected!');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1217405', 'DIOR', 'POISON GIRL UNEXPECTED', 'Eau de Toilette', 'F', 20, 33, 50, 'A fresh and unexpected floral heightened by an excessive dose of ginger.
+
+With Poison Girl Unexpected, François Demachy, Dior Perfumer-Creator, shakes up noble ingredients with sassy, spirited accords to create a new, fresh and sparkling floral that is totally... Unexpected!');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1172766', 'DIOR', 'POISON GIRL', 'Eau de Parfum', 'F', 30, 49, 50, 'Poison Girl is the fragrance of a modern-day girl, delicious and toxic. 
+A sensual trap that instantly poisons and draws out the pleasure to the point of addiction.
+
+A bitter-sweet floral with mouthwatering Orange that is delightfully swathed in Venezuelan Tonka Bean and blossoms in the biting sensuality of Grasse Rose.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1005289', 'DIOR', 'POISON', 'Eau de Toilette', 'F', 30, 48, 50, 'Some perfumes are born a myth. Heady, mysterious and revolutionary since its creation, Poison is Dior is ultimate weapon of seduction. 
+Its exceptional, exotic alchemy is created by a rich blend of spicy, fruity and amber notes warmed by honey and musk - an unsettling, charismatic and unforgettable oriental.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1149335', 'DIOR', 'ADDICT EAU FRAICHE', 'Eau de Toilette', 'F', 50, 62, 50, 'The Dior Addict Eau Fraîche composition opens with the sparkling citrus notes of sweet-and-sour Grapefruit heightened with the smoothness of Calabrian Bergamot. 
+Its diverse heart, at once tangy and floral, reveals a subtle bouquet of Freesia and Lily-of-the-Valley.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1149327', 'DIOR', 'ADDICT', 'Eau de Parfum', 'F', 100, 110, 50, 'A sophisticated oriental fragrance with a floral heart, for the passionate, intuitive woman who ignores dictates and follows her own rules. 
+The Dior Addict attitude is best incarnated by its compelling heart note of the Jamaican Queen of the Night a rare and elusive flower that blooms only for a few hours and is considered the soul of enchantment. Intensely seductive.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1004670', 'DIOR', 'DUNE', 'Eau de Toilette', 'F', 50, 62, 50, 'An oceanic fragrance, created in harmony with nature, this radiant, fresh and subtle accord captures the landscape where the sky meets the sea in a warm, oceanic floral bouquet. Enveloping, serene and sensual.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1092915', 'DIOR', 'DIORELLA', 'Eau de Toilette', 'F', 100, 90, 50, 'An eternally modern fruity floral with spicy freshness and spontaneous charm. 
+A blend of Sicilian lemon, honeysuckle and vetiver make for a natural, free-spirited fragrance.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1215662', 'DIOR', 'SAUVAGE', 'Eau de Parfum', 'M', 60, 64, 50, 'Composed by François Demachy, Dior Perfumer-Creator, and inspired by the magical hour of twilight, Sauvage Eau de Parfum adds a new depth to the face of Sauvage.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1166180', 'DIOR', 'SAUVAGE', 'Eau de Toilette', 'M', 60, 54, 50, 'Designed with the mysteriously handsome types in mind, Dior’s Sauvage will make a welcome addition to any man’s fragrance collection.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1195874', 'DIOR', 'SAUVAGE VERY COOL SPRAY', 'Eau de Toilette', 'M', 100, 59, 50, 'A new masculine, uninhibited way to wear fragrance. 
+A fragrance in an unbreakable bottle you can take anywhere to apply your fragrance at any time of day.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1094036', 'DIOR', 'DIOR HOMME INTENSE', 'Eau de Parfum', 'M', 50, 59, 50, 'The final chapter in the Dior Homme fragrance trilogy is also the most audacious: 
+Dior Homme Intense is an intense, sophisticated and sensual Eau de Parfum for the evening, created in a limited edition.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1041839', 'DIOR', 'DIOR HOMME', 'Eau de Toilette', 'M', 50, 54, 50, 'This fragrance blends tradition and modernity, in the spirit of the house of Dior. 
+Its fragrance take on the iris - a rare note in men is perfumery - in a precise, pared-down formula. The result is a powdery woody floral, luxurious and resolutely masculine : a new generation classic.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1135409', 'DIOR', 'DIOR HOMME COLOGNE', 'Eau de Cologne', 'M', 75, 59, 50, 'François Demachy breathes new life into Cologne, the legendary perfume accord, with the contemporary spirit of Dior Homme. 
+The simple and immediate pleasure of citrusy freshness wrapped in a subtly enveloping trail. Crisp and white with a casual elegance, like an "olfactory cottonade".');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1020031', 'DIOR', 'FAHRENHEIT', 'Eau de Toilette', 'M', 100, 73, 50, 'The original Fahrenheit is a revolutionary modern fragrance with top notes of mandarin, a highly original violet accord and a warm cedar, patchouli and leather drydown. A virile, delicate and rounded fragrance.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1161330', 'DIOR', 'EAU SAUVAGE', 'Eau de Cologne', 'M', 50, 54, 50, 'Eternally masculine, timelessly elegant, a great classic in men is fragrances.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1019850', 'DIOR', 'DUNE POUR HOMME', 'Eau de Toilette', 'M', 100, 73, 50, 'Original and harmonious, Dune pour Homme takes its inspiration from breezy seaside escapes. Its composition associates fresh, woody and oceanic notes in a fragrance that is serene and in harmony with nature.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1196567', 'GUCCI', 'GUCCI BLOOM', 'Eau de Parfum', 'F', 30, 52, 50, 'Gucci Bloom is a rich white floral scent that transports to a colourful and diverse garden verdant with flowers and plants. 
+Blended by master perfumer Alberto Morillas with direction from Alessandro Michele, the fragrance is created to unfold like its name.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1222200', 'GUCCI', 'GUCCI BLOOM NETTARE DI FIORI', 'Eau de Parfum', 'F', 50, 81, 50, 'Intensely sensual and feminine, Gucci Bloom Nettare di Fiori celebrates the intimate and authentic character of a woman.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1217048', 'GUCCI', 'GUCCI BLOOM ACQUA DI FIORI', 'Eau de Toilette', 'F', 50, 62, 50, 'Intensely green and fresh, a new watery accord of green Galbanum and dainty Cassis buds opens the top notes. 
+The heart features Gucci Bloom’s Jasmine buds, Rangoon Creeper and Tuberose, and the sensual base of musk and sandalwood conveys warmth and depth.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1176395', 'GUCCI', 'BAMBOO', 'Eau de Toilette', 'F', 50, 58, 50, 'Gucci revisits one of its most recognizable icons: the Bamboo—reinterpreted in a modern way. 
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1161975', 'GUCCI', 'BAMBOO', 'Eau de Parfum', 'F', 50, 74, 50, 'Gucci Bamboo Eau de Parfum is a multi-faceted woody floral fragrance.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1176338', 'GUCCI', 'GUILTY EAU', 'Eau de Toilette', 'F', 50, 34, 50, 'Gucci Guilty Eau is an evolution of the Gucci Guilty fragrance universe, a smooth and light interpretation of the classic Guilty women is and men is fragrances.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1215690', 'GUCCI', 'GUILTY ABSOLUTE POUR FEMME', 'Eau de Parfum', 'F', 30, 49, 50, 'The GuiltyNotGuilty revolution continues with the launch of Gucci Guilty Absolute Pour Femme, the ultimate partner for Gucci Guilty Absolute Pour Homme.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1158716', 'GUCCI', 'GUCCI OUD', 'Eau de Parfum', 'F', 50, 115, 50, 'Inspired by exotic voyages from a time past, Gucci Oud is an opulent, new scent. 
+Crafted from a reimagined blend of traditional Eastern ingredients, the modern unisex fragrance is rich, sensual—and unmistakably Gucci
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1094176', 'GUCCI', 'FLORA BY GUCCI', 'Eau de Parfum', 'F', 30, 49, 50, 'Taking inspiration from the iconic Flora print first seen on a silk scarf designed for Princess Grace in 1966, Gucci is Flora perfume embodies the same defiantly feminine style of the legendary print. 
+The Flora print is seen for the first time in its long history in monochrome form in the printed interior of the Flora box – proving to be as much as a work of art as the sensual perfume it houses.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1150093', 'GUCCI', 'PREMIERE', 'Eau de Toilette', 'F', 50, 37, 50, 'The Gucci Première Eau de Toilette is a lighter, delicate incarnation of the House’s memorable signature scent.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1124080', 'GUCCI', 'PREMIERE', 'Eau de Parfum', 'F', 30, 49, 50, 'Gucci has long distinguished itself as the label of success for the world’s most stylish individuals. 
+Inspired by the Gucci Premiere Couture collection that debuted at the 2010 Cannes Film Festival, Creative Director Frida Giannini conceived a new fragrance legend in the iconic and sophisticated form of Gucci Première.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1007590', 'GUCCI', 'RUSH', 'Eau de Toilette', 'F', 30, 45, 50, 'Gucci Rush is a modern chypre fruity fragrance that feels like the start of a frenetic experience, making the unimaginable possible.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1176429', 'GUCCI', 'GUILTY EAU POUR HOMME', 'Eau de Toilette', 'M', 50, 32, 50, 'Gucci Guilty Eau is an evolution of the Gucci Guilty fragrance universe. 
+A smooth and light interpretation of the classic Guilty women and men fragrances, it breaks with the tradition of sparkling, cool eau de toilettes, conveying a more delicate, romantic attitude.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1110154', 'GUCCI', 'GUILTY POUR HOMME', 'Eau de Toilette', 'M', 50, 42, 50, 'At the heart of Gucci Guilty for Him aftershave fragrance for men, the floral, sensual Orange Blossom doesn’t conform to a classic male fragrance’s notes, heightening the scent’s allure. Gucci Guilty for Him opens with invigorating Lemon, and is intensified with seductive notes of Lavender and Patchouli.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1131788', 'GUCCI', 'GUILTY BLACK POUR HOMME', 'Eau de Toilette', 'M', 50, 52, 50, 'The Guilty Black lovers bring out the most scandalous sides of each other: alone they are magnificent, together irrepressible. 
+Fearless in their passion, they are brazen, shameless, unpredictable – ready for each and every explosive encounter. 
+Their attraction is instinctive: they go where they scent danger and each other.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1179217', 'GUCCI', 'OUD INTENSE', 'Eau de Parfum', 'M', 90, 135, 50, 'Incense, woods and leather are woven around pivotal notes of an Ambery Oud accord and Olibanum oil. 
+Pure and natural Olibanum oil conjures an alluring effect on the top note. 
+A prized and historic perfume-making ingredient from the Middle East, Olibanum oil’s use can be traced back to ancient Egypt.');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1137264', 'GUCCI', 'MADE TO MEASURE', 'Eau de Toilette', 'M', 90, 70, 50, 'The Gucci Made to Measure fragrance is intensely masculine, created for the man who demands the very best – a man whom others aspire to be. 
+It is inspired by the Gucci Made to Measure suit, specially crafted with the Gucci philosophy of attention to detail.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1081280', 'GUCCI', 'GUCCI BY GUCCI POUR HOMME', 'Eau de Toilette', 'M', 90, 65, 50, 'A synthesis of the House’s heritage and commitment to luxury, Gucci by Gucci Pour Homme is the signature fragrance for the modern male icon — sensual, elegant and masculine.
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1200112', 'GUCCI', 'GUILTY POUR HOMME', 'Eau de Toilette', 'M', 50, 52, 50, 'This Gift Set Contains:
+- Eau de Toilette Spray (50ml)
+- Deodorant Stick (75g)');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1222718', 'GUCCI', 'GUILTY POUR HOMME', 'Eau de Toilette', 'M', 50, 52, 50, 'This Gift Set includes:
+- Gucci Guilty Pour Homme Eau de Toilette Spray (50ml)
+- Complimentary Deodorant Stick (75g)
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1224006', 'GUCCI', 'GUILTY POUR HOMME', 'Eau de Toilette', 'M', 90, 65, 50, 'This Gift Set includes:
+- Eau de Toilette Spray (90ml)
+- Complimentary Aftershave Balm (75ml)
+- Complimentary Shower Gel (50ml)
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1224097', 'GUCCI', 'GUCCI BLOOM NETTARE DI FIORI', 'Eau de Parfum', 'F', 50, 81, 50, 'This Gift Set includes:
+- Gucci Bloom Nettare di Fiori Eau de Parfum Spray (50ml)
+- Complimentary Eau de Parfum Rollerball (7.4ml)
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1224125', 'GUCCI', 'GUCCI BLOOM NETTARE DI FIORI', 'Eau de Parfum', 'F', 50, 74, 50, 'This Gift Set includes:
+- Gucci Bloom Acqua di Fiori Eau de Toilette Spray (50ml)
+- Complimentary Eau de Toilette Rollerball (7.4ml)
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1224118', 'GUCCI', 'GUCCI BLOOM', 'Eau de Parfum', 'F', 50, 74, 50, 'This Gift Set includes:
+- Gucci Bloom Eau de Parfum Spray (30ml)
+- Complimentary Eau de Parfum Rollerball (7.4ml)
+');
+INSERT INTO PJ.PRODUCT (PRODUCTCODE, PRODUCTBRANDNAME, PRODUCTLINE, PRODUCTTYPE, PRODUCTSEX, PRODUCTSIZE, PRODUCTPRICE, QUANTITYINSTOCK, PRODUCTDESCRIPTION) 
+	VALUES ('1200153', 'GUCCI', 'GUCCI BLOOM - GIFT BOX', 'Eau de Parfum', 'F', 50, 54, 50, 'Gucci Bloom is a rich white floral scent that transports to a colourful and diverse garden verdant with flowers and plants. 
+Blended by master perfumer Alberto Morillas with direction from Alessandro Michele, the fragrance is created to unfold like its name.
+');
+
+
+alter table product add
+CONSTRAINT Fk_productType FOREIGN KEY (ProductType) REFERENCES ProductType (ProductType) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --5.) Create table HISTORYORDER
+
 CREATE TABLE HISTORYORDER(
 PRODUCTCODE VARCHAR(10) NOT NULL PRIMARY KEY,
 EMAIL VARCHAR(30) NOT NULL,
@@ -40,3 +447,4 @@ PRODUCTSIZE DECIMAL NOT NULL,
 PRODUCTPRICE DECIMAL NOT NULL,
 CONSTRAINT historyOrderProduct FOREIGN KEY (ProductCode) REFERENCES Product (ProductCode) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT accountEmail_historyOrder FOREIGN KEY (EMAIL) REFERENCES account (EMAIL) ON DELETE NO ACTION ON UPDATE NO ACTION);
+
