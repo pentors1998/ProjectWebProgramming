@@ -32,11 +32,8 @@
                         <span style="color: red">${message}</span>
 
                         <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input">
-                                <small>Remember Me</small>
-                            </label>
-                            <button type="submit" class="btn btn-login float-right">Login</button>
+                            
+                            <button type="submit" class="btn btn-login float-right">Login</button> <button type="submit" class="btn btn-login float-left"> <a href="index.jsp">Back</a></button>
                         </div>
 
                     </form>

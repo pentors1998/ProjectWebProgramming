@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="search-content">
-                            <form action="#" method="get">
+                            <form action="FindItemServlet" method="POST">
                                 <input type="search" name="search" id="search" placeholder="Type your keyword...">
                                 <button type="submit"><img src="img/core-img/search.png" alt=""></button>
                             </form>
@@ -56,7 +56,7 @@
             <div class="mobile-nav">
                 <!-- Navbar Brand -->
                 <div class="amado-navbar-brand">
-                    <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
                 </div>
                 <!-- Navbar Toggler -->
                 <div class="amado-navbar-toggler">
@@ -72,14 +72,14 @@
                 </div>
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
                 </div>
                 <!-- Amado Nav -->
                 <nav class="amado-nav">
                     <ul>
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="shop.jsp">Shop</a></li>
-                        <li><a href="checkout.jsp">Checkout</a></li>
+                        <li class="active"><a href="index.jsp">Home</a></li>
+                        <li><a href="ProductListServlet?catagories=shop">Shop</a></li>
+                        <li><a href="CheckoutServlet">Checkout</a></li>
                     </ul>
                 </nav>
                 <!-- Button Group -->
@@ -99,7 +99,7 @@
                 </div>
                 <!-- Cart Menu -->
                 <div class="cart-fav-search mb-100">
-                    <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                    <a href="cart.jsp" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
                     <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
                 </div>
                 <!-- Social Button -->
@@ -118,7 +118,7 @@
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
+                        <a href="product-details.jsp">
                             <img src="img/bg-img/1.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">

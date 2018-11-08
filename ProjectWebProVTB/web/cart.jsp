@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="search-content">
-                        <form action="#" method="get">
+                        <form action="FindItemServlet" method="POST">
                             <input type="search" name="search" id="search" placeholder="Type your keyword...">
                             <button type="submit"><img src="img/core-img/search.png" alt=""></button>
                         </form>
@@ -55,7 +56,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -65,43 +66,50 @@
 
         <!-- Header Area Start -->
         <header class="header-area clearfix">
-            <!-- Close Icon -->
-            <div class="nav-close">
-                <i class="fa fa-close" aria-hidden="true"></i>
-            </div>
-            <!-- Logo -->
-            <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-            </div>
-            <!-- Amado Nav -->
-            <nav class="amado-nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li class="active"><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                </ul>
-            </nav>
-            <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
-            </div>
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
-            </div>
-            <!-- Social Button -->
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
-        </header>
+                <!-- Close Icon -->
+                <div class="nav-close">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </div>
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
+                </div>
+                <!-- Amado Nav -->
+                <nav class="amado-nav">
+                    <ul>
+                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="shop.jsp">Shop</a></li>
+                        <li><a href="checkout.jsp">Checkout</a></li>
+                    </ul>
+                </nav>
+                <!-- Button Group -->
+                <div class="amado-btn-group mt-30 mb-100">
+                    <c:choose>
+                        <c:when test="${sessionScope.account != null}">
+                            <a href="MyAccount.jsp" class="btn amado-btn mb-15">My Account</a>
+                            <a href="MyOrder.jsp" class="btn amado-btn mb-15">My Order</a>
+                            <a href="LogoutServlet" class="btn amado-btn active">Logout</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="login.jsp" class="btn amado-btn mb-15">Login</a>
+                            <a href="register.jsp" class="btn amado-btn active">Register</a>
+                        </c:otherwise>
+                    </c:choose>
+                            <span style="color: #fbb710">${message}</span>
+                </div>
+                <!-- Cart Menu -->
+                <div class="cart-fav-search mb-100">
+                    <a href="cart.jsp" class="cart-nav"s><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                    <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
+                </div>
+                <!-- Social Button -->
+                <div class="social-info d-flex justify-content-between">
+                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </div>
+            </header>
         <!-- Header Area End -->
 
         <div class="cart-table-area section-padding-100">
@@ -199,7 +207,7 @@
                                 <li><span>total:</span> <span>$140.00</span></li>
                             </ul>
                             <div class="cart-btn mt-100">
-                                <a href="cart.html" class="btn amado-btn w-100">Checkout</a>
+                                <a href="checkout.jsp" class="btn amado-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>

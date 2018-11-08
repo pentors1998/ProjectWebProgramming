@@ -8,6 +8,7 @@ package project.servlet;
 import project.jpa.model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import project.jpa.model.controller.ProductJpaController;
 
@@ -42,12 +44,31 @@ public class ProductListServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setHeader("Cache-Control", "no-cache");
+        HttpSession session = request.getSession(false);
+        String catagorie = request.getParameter("catagories");
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-        List<Product> products = productJpaCtrl.findProductEntities();
-        request.setAttribute("products", products);
-        getServletContext().getRequestDispatcher("/ProductList.jsp").forward(request, response);
-    }
+        
+        if (catagorie.equalsIgnoreCase("shop")) {
+            List<Product> products = productJpaCtrl.findProductEntities();
+            request.setAttribute("topic", "All");
+            session.setAttribute("products", products);
+            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+            return;
+        } else {
+            List<Product> products = productJpaCtrl.findProductEntities();
+            List<Product> productAdd = new ArrayList<>();
+            
+            for (Product productSet : products) {
+                if (productSet.getProducttype().getProducttype().equals(catagorie)) {
+                    productAdd.add(productSet);
+                }
+            }
+            
+            request.setAttribute("topic", catagorie);
+            session.setAttribute("products", productAdd);
+            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+        }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
