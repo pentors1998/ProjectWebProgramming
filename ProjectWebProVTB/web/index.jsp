@@ -293,16 +293,13 @@
                                                 <a class="nav-link" href="index.html">Home</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="shop.html">Shop</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="product-details.html">Product</a>
+                                                <a class="nav-link" href="ProductListServlet?catagories=shop">Shop</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="cart.html">Cart</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="checkout.html">Checkout</a>
+                                                <a class="nav-link" href="CheckoutServlet">Checkout</a>
                                             </li>
                                         </ul>
                                     </div>

@@ -247,20 +247,17 @@
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
                                     <div class="collapse navbar-collapse" id="footerNavContent">
                                         <ul class="navbar-nav ml-auto">
-                                            <li class="nav-item active">
+                                            <li class="nav-item">
                                                 <a class="nav-link" href="index.html">Home</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="shop.html">Shop</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="product-details.html">Product</a>
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="ProductListServlet?catagories=shop">Shop</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="cart.html">Cart</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="checkout.html">Checkout</a>
+                                                <a class="nav-link" href="CheckoutServlet">Checkout</a>
                                             </li>
                                         </ul>
                                     </div>

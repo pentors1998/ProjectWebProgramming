@@ -7,6 +7,7 @@ package project.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -14,7 +15,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import project.jpa.model.Product;
+import project.jpa.model.controller.ProductJpaController;
 
 /**
  *
@@ -38,7 +42,15 @@ public class FindItemServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        String search = request.getParameter("search");
+        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
         
+        List<Product> product = productJpaCtrl.findByProductBrandName(search);
+        request.setAttribute("topic", search);
+        session.setAttribute("products", product);
+        
+        getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

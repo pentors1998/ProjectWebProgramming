@@ -126,37 +126,45 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <input type="text" class="form-control" id="first_name" value="${account.firstname}" readonly>
+                                            <label class="label--desc">First name</label>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <input type="text" class="form-control" id="last_name" value="${account.lastname}" readonly>
+                                            <label class="label--desc">Last name</label>
                                         </div>
                                         <div class="col-12 mb-3">
                                             <input type="email" class="form-control" id="email" value="${account.email}" readonly>
+                                            <label class="label--desc">Email</label>
                                         </div>
                                         <div class="col-12 mb-3">
                                             <select class="w-100" id="country">
+                                                <option value="th">Thailand</option>
                                                 <option value="aus">Australia</option>
                                                 <option value="bra">Brazil</option>
                                                 <option value="cana">Canada</option>
                                                 <option value="fra">France</option>
                                                 <option value="ger">Germany</option>
                                                 <option value="ind">India</option>
-                                                <option value="th">Thailand</option>
                                                 <option value="uk">United Kingdom</option>
                                                 <option value="usa">United States</option>
                                             </select>
+                                            <label class="label--desc">Country</label>
                                         </div>
                                         <div class="col-12 mb-3">
                                             <input type="text" class="form-control mb-3" id="street_address" value="${account.address}">
+                                            <label class="label--desc">Address</label>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <input type="text" class="form-control" id="zipCode" value="${account.pincode}">
+                                            <label class="label--desc">Zip Code</label>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <input type="text" class="form-control" id="phone_number" value="${account.tell}">
+                                            <label class="label--desc">Phone Number</label>
                                         </div>
                                         <div class="col-12 mb-3">
                                             <input type="text" class="form-control" id="debit_card" value="${account.debitcard}">
+                                            <label class="label--desc">Debit card</label>
                                         </div>
                                         <div class="col-12 mb-3">
                                             <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
