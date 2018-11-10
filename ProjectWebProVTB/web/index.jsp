@@ -75,18 +75,24 @@
                     <a href="index.jsp"><img src="img/core-img/logo.png" alt=""></a>
                 </div>
                 <!-- Amado Nav -->
+                
+                <c:choose>
+                    <c:when test="${sessionScope.account != null}">
+                        <h6 style="color: #b2b2b2">Hello , ${account.firstname}</h6>
+                    </c:when>
+                </c:choose>
                 <nav class="amado-nav">
                     <ul>
                         <li class="active"><a href="index.jsp">Home</a></li>
                         <li><a href="ProductListServlet?catagories=shop">Shop</a></li>
-                        <li><a href="CheckoutServlet">Checkout</a></li>
+                        <li><a href="CheckoutPageServlet">Checkout</a></li>
                     </ul>
                 </nav>
                 <!-- Button Group -->
                 <div class="amado-btn-group mt-30 mb-100">
                     <c:choose>
                         <c:when test="${sessionScope.account != null}">
-                            <a href="MyAccount.jsp" class="btn amado-btn mb-15">My Account</a>
+                            <a href="MyAccountPageServlet" class="btn amado-btn mb-15">My Account</a>
                             <a href="MyOrder.jsp" class="btn amado-btn mb-15">My Order</a>
                             <a href="LogoutServlet" class="btn amado-btn active">Logout</a>
                         </c:when>

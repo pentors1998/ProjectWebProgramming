@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="name">Pin Code</div>
+                                <div class="name">Zip Code</div>
                                 <div class="value">
                                     <div class="input-group">
                                         <div class="rs-select2 js-select-simple select--no-search">

@@ -79,14 +79,14 @@
                     <ul>
                         <li><a href="index.jsp">Home</a></li>
                         <li><a href="ProductListServlet?catagories=shop">Shop</a></li>
-                        <li class="active"><a href="CheckoutServlet">Checkout</a></li>
+                        <li class="active"><a href="CheckoutPageServlet">Checkout</a></li>
                     </ul>
                 </nav>
                 <!-- Button Group -->
                 <div class="amado-btn-group mt-30 mb-100">
                     <c:choose>
                         <c:when test="${sessionScope.account != null}">
-                            <a href="MyAccount.jsp" class="btn amado-btn mb-15">My Account</a>
+                            <a href="MyAccountPageServlet" class="btn amado-btn mb-15">My Account</a>
                             <a href="MyOrder.jsp" class="btn amado-btn mb-15">My Order</a>
                             <a href="LogoutServlet" class="btn amado-btn active">Logout</a>
                         </c:when>
@@ -125,15 +125,15 @@
                                 <form action="#" method="post">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" id="first_name" value="${account.firstname}" readonly>
+                                            <input type="text" class="form-control" id="first_name" value="${account.firstname}" disabled>
                                             <label class="label--desc">First name</label>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" id="last_name" value="${account.lastname}" readonly>
+                                            <input type="text" class="form-control" id="last_name" value="${account.lastname}" disabled>
                                             <label class="label--desc">Last name</label>
                                         </div>
                                         <div class="col-12 mb-3">
-                                            <input type="email" class="form-control" id="email" value="${account.email}" readonly>
+                                            <input type="email" class="form-control" id="email" value="${account.email}" disabled>
                                             <label class="label--desc">Email</label>
                                         </div>
                                         <div class="col-12 mb-3">

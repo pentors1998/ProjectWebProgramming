@@ -86,7 +86,7 @@
                 <div class="amado-btn-group mt-30 mb-100">
                     <c:choose>
                         <c:when test="${sessionScope.account != null}">
-                            <a href="MyAccount.jsp" class="btn amado-btn mb-15">My Account</a>
+                            <a href="MyAccountPageServlet" class="btn amado-btn mb-15">My Account</a>
                             <a href="MyOrder.jsp" class="btn amado-btn mb-15">My Order</a>
                             <a href="LogoutServlet" class="btn amado-btn active">Logout</a>
                         </c:when>
@@ -192,7 +192,7 @@
                             </div>
 
                             <div class="short_overview my-5">
-                                <label class="label--desc">For ${product.productsex} ,</label>
+                                <label class="label--desc">For ${product.productsex.productsex} ,</label>
                                 <label class="label--desc"> Size : ${product.productsize} ML.</label>
                                 <p>${product.productdescription}</p>
                             </div>

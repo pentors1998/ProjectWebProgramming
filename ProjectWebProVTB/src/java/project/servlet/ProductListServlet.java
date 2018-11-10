@@ -47,7 +47,7 @@ public class ProductListServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         String catagorie = request.getParameter("catagories");
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-        
+
         if (catagorie.equalsIgnoreCase("shop")) {
             List<Product> products = productJpaCtrl.findProductEntities();
             request.setAttribute("topic", "All");
@@ -57,18 +57,18 @@ public class ProductListServlet extends HttpServlet {
         } else {
             List<Product> products = productJpaCtrl.findProductEntities();
             List<Product> productAdd = new ArrayList<>();
-            
+
             for (Product productSet : products) {
                 if (productSet.getProducttype().getProducttype().equals(catagorie)) {
                     productAdd.add(productSet);
                 }
             }
-            
+
             request.setAttribute("topic", catagorie);
             session.setAttribute("products", productAdd);
             getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

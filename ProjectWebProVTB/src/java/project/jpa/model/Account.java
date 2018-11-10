@@ -91,7 +91,7 @@ public class Account implements Serializable {
         this.email = email;
     }
 
-    public Account(String email, String password, String firstname, String lastname, String tell, String address, String debitcard , String pincode) {
+    public Account(String email, String password, String firstname, String lastname, String tell, String address, String debitcard, String pincode) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
@@ -100,6 +100,18 @@ public class Account implements Serializable {
         this.address = address;
         this.debitcard = debitcard;
         this.pincode = pincode;
+    }
+    
+    
+
+    public Account(String email, String password, String firstname, String lastname, String tell, String address, String debitcard) {
+        this.email = email;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.tell = tell;
+        this.address = address;
+        this.debitcard = debitcard;
     }
 
     public String getEmail() {

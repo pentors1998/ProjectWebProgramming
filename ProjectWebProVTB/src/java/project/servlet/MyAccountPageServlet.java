@@ -18,7 +18,7 @@ import project.jpa.model.Account;
  *
  * @author Admin
  */
-public class CheckoutServlet extends HttpServlet {
+public class MyAccountPageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,15 +33,15 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         Account accountObj = (Account) session.getAttribute("account");
-        //Cart ด้วยย
+
         if (accountObj == null) {
             request.setAttribute("message", "Please Login.");
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
             return;
-
         }
-        getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response);
         
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -7,7 +7,8 @@ package project.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -17,14 +18,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-import project.jpa.model.Product;
-import project.jpa.model.controller.ProductJpaController;
+import project.jpa.model.Account;
+import project.jpa.model.controller.AccountJpaController;
+import project.jpa.model.controller.exceptions.NonexistentEntityException;
+import project.jpa.model.controller.exceptions.RollbackFailureException;
 
 /**
  *
  * @author Admin
  */
-public class FindItemServlet extends HttpServlet {
+public class EditMyAccountServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "ProjectWebProVTBPU")
     EntityManagerFactory emf;
@@ -42,15 +45,37 @@ public class FindItemServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String tell = request.getParameter("tell");
+        String address = request.getParameter("address");
+        String debit = request.getParameter("debit");
+        String pincode = request.getParameter("pincode");
+        
         HttpSession session = request.getSession(false);
-        String search = request.getParameter("search");
-        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+        Account accountObj = (Account) session.getAttribute("account");
+        AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
         
-        List<Product> product = productJpaCtrl.findByProductBrandname(search);
-        request.setAttribute("topic", search);
-        session.setAttribute("products", product);
+        accountObj.setFirstname(firstName);
+        accountObj.setLastname(lastName);
+        accountObj.setTell(tell);
+        accountObj.setAddress(address);
+        accountObj.setDebitcard(debit);
+        accountObj.setPincode(pincode);
         
-        getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+        try {
+        accountJpaCtrl.edit(accountObj);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(EditMyAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(EditMyAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(EditMyAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.setAttribute("notice", "Updated profile.");
+        getServletContext().getRequestDispatcher("/MyAccountPageServlet").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

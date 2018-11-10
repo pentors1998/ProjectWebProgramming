@@ -11,6 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import project.jpa.model.Historyorder;
+import project.jpa.model.Productsex;
 import project.jpa.model.Producttype;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,11 @@ public class ProductJpaController implements Serializable {
                 historyorder = em.getReference(historyorder.getClass(), historyorder.getProductcode());
                 product.setHistoryorder(historyorder);
             }
+            Productsex productsex = product.getProductsex();
+            if (productsex != null) {
+                productsex = em.getReference(productsex.getClass(), productsex.getProductsex());
+                product.setProductsex(productsex);
+            }
             Producttype producttype = product.getProducttype();
             if (producttype != null) {
                 producttype = em.getReference(producttype.getClass(), producttype.getProducttype());
@@ -64,6 +70,10 @@ public class ProductJpaController implements Serializable {
                 }
                 historyorder.setProduct(product);
                 historyorder = em.merge(historyorder);
+            }
+            if (productsex != null) {
+                productsex.getProductList().add(product);
+                productsex = em.merge(productsex);
             }
             if (producttype != null) {
                 producttype.getProductList().add(product);
@@ -95,6 +105,8 @@ public class ProductJpaController implements Serializable {
             Product persistentProduct = em.find(Product.class, product.getProductcode());
             Historyorder historyorderOld = persistentProduct.getHistoryorder();
             Historyorder historyorderNew = product.getHistoryorder();
+            Productsex productsexOld = persistentProduct.getProductsex();
+            Productsex productsexNew = product.getProductsex();
             Producttype producttypeOld = persistentProduct.getProducttype();
             Producttype producttypeNew = product.getProducttype();
             List<String> illegalOrphanMessages = null;
@@ -111,6 +123,10 @@ public class ProductJpaController implements Serializable {
                 historyorderNew = em.getReference(historyorderNew.getClass(), historyorderNew.getProductcode());
                 product.setHistoryorder(historyorderNew);
             }
+            if (productsexNew != null) {
+                productsexNew = em.getReference(productsexNew.getClass(), productsexNew.getProductsex());
+                product.setProductsex(productsexNew);
+            }
             if (producttypeNew != null) {
                 producttypeNew = em.getReference(producttypeNew.getClass(), producttypeNew.getProducttype());
                 product.setProducttype(producttypeNew);
@@ -124,6 +140,14 @@ public class ProductJpaController implements Serializable {
                 }
                 historyorderNew.setProduct(product);
                 historyorderNew = em.merge(historyorderNew);
+            }
+            if (productsexOld != null && !productsexOld.equals(productsexNew)) {
+                productsexOld.getProductList().remove(product);
+                productsexOld = em.merge(productsexOld);
+            }
+            if (productsexNew != null && !productsexNew.equals(productsexOld)) {
+                productsexNew.getProductList().add(product);
+                productsexNew = em.merge(productsexNew);
             }
             if (producttypeOld != null && !producttypeOld.equals(producttypeNew)) {
                 producttypeOld.getProductList().remove(product);
@@ -178,6 +202,11 @@ public class ProductJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            Productsex productsex = product.getProductsex();
+            if (productsex != null) {
+                productsex.getProductList().remove(product);
+                productsex = em.merge(productsex);
+            }
             Producttype producttype = product.getProducttype();
             if (producttype != null) {
                 producttype.getProductList().remove(product);
@@ -222,6 +251,17 @@ public class ProductJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Product> findByProductBrandname (String productBrandname) {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Product.findByProductbrandname");
+            query.setParameter("productbrandname", "%" + productBrandname.toLowerCase() + "%");
+            return  query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 
     public Product findProduct(String id) {
         EntityManager em = getEntityManager();
@@ -232,17 +272,6 @@ public class ProductJpaController implements Serializable {
         }
     }
 
-    public List<Product> findByProductBrandName(String Productbrandname) {
-        EntityManager em = getEntityManager();
-        try {
-            Query query = em.createNamedQuery("Product.findByProductbrandname");
-            query.setParameter("productbrandname", "%" + Productbrandname.toLowerCase() + "%");
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
-    }
-    
     public int getProductCount() {
         EntityManager em = getEntityManager();
         try {

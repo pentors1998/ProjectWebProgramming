@@ -7,6 +7,7 @@ package project.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -24,13 +25,14 @@ import project.jpa.model.controller.ProductJpaController;
  *
  * @author Admin
  */
-public class FindItemServlet extends HttpServlet {
+public class ProductListPriceServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "ProjectWebProVTBPU")
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,15 +44,55 @@ public class FindItemServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String priceS = request.getParameter("price");
         HttpSession session = request.getSession(false);
-        String search = request.getParameter("search");
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+
+        double price = Double.parseDouble(priceS);
         
-        List<Product> product = productJpaCtrl.findByProductBrandname(search);
-        request.setAttribute("topic", search);
-        session.setAttribute("products", product);
-        
-        getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+        if (29 <= price && price <= 59) {
+            List<Product> products = productJpaCtrl.findProductEntities();
+            List<Product> productAdd = new ArrayList<>();
+
+            for (Product productSet : products) {
+                if (29 <= productSet.getProductprice() && productSet.getProductprice() <= 59) {
+                    productAdd.add(productSet);
+                }
+            }
+
+            request.setAttribute("topic", "$29.0 - $"+price);
+            session.setAttribute("products", productAdd);
+            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+            return;
+        } else if (60 <= price && price <= 99) {
+            List<Product> products = productJpaCtrl.findProductEntities();
+            List<Product> productAdd = new ArrayList<>();
+
+            for (Product productSet : products) {
+                if (60 <= productSet.getProductprice() && productSet.getProductprice() <= 99) {
+                    productAdd.add(productSet);
+                }
+            }
+
+            request.setAttribute("topic", "$60.0 - $"+price);
+            session.setAttribute("products", productAdd);
+            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+            return;
+        } else if (100 <= price && price <= 139) {
+            List<Product> products = productJpaCtrl.findProductEntities();
+            List<Product> productAdd = new ArrayList<>();
+
+            for (Product productSet : products) {
+                if (100 <= productSet.getProductprice() && productSet.getProductprice() <= 139) {
+                    productAdd.add(productSet);
+                }
+            }
+
+            request.setAttribute("topic", "$100.0 - $"+price);
+            session.setAttribute("products", productAdd);
+            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+            return;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

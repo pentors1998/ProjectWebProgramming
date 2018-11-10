@@ -7,6 +7,7 @@ package project.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -24,13 +25,14 @@ import project.jpa.model.controller.ProductJpaController;
  *
  * @author Admin
  */
-public class FindItemServlet extends HttpServlet {
+public class ProductListSexServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "ProjectWebProVTBPU")
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,13 +45,20 @@ public class FindItemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        String search = request.getParameter("search");
+        String sex = request.getParameter("sex");
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-        
-        List<Product> product = productJpaCtrl.findByProductBrandname(search);
-        request.setAttribute("topic", search);
-        session.setAttribute("products", product);
-        
+
+        List<Product> products = productJpaCtrl.findProductEntities();
+        List<Product> productAdd = new ArrayList<>();
+
+        for (Product productSet : products) {
+            if (productSet.getProductsex().getProductsex().equals(sex)) {
+                productAdd.add(productSet);
+            }
+        }
+
+        request.setAttribute("topic", sex);
+        session.setAttribute("products", productAdd);
         getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
     }
 

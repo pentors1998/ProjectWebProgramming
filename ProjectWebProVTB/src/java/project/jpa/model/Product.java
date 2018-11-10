@@ -32,14 +32,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
     , @NamedQuery(name = "Product.findByProductcode", query = "SELECT p FROM Product p WHERE p.productcode = :productcode")
     , @NamedQuery(name = "Product.findByProductbrandname", query = "SELECT p FROM Product p WHERE lower(p.productbrandname) like :productbrandname " + 
-            "OR lower(p.producttype.producttype) like :productbrandname " + "OR lower(p.productsex) like :productbrandname " + 
+            "OR lower(p.producttype.producttype) like :productbrandname " + "OR lower(p.productsex.productsex) like :productbrandname " + 
             "OR lower(p.productline) like :productbrandname")
     , @NamedQuery(name = "Product.findByProductline", query = "SELECT p FROM Product p WHERE p.productline = :productline")
-    , @NamedQuery(name = "Product.findByProductsex", query = "SELECT p FROM Product p WHERE p.productsex = :productsex")
     , @NamedQuery(name = "Product.findByProductsize", query = "SELECT p FROM Product p WHERE p.productsize = :productsize")
     , @NamedQuery(name = "Product.findByProductprice", query = "SELECT p FROM Product p WHERE p.productprice = :productprice")
-    , @NamedQuery(name = "Product.findByProductdescription", query = "SELECT p FROM Product p WHERE p.productdescription = :productdescription")
-    , @NamedQuery(name = "Product.findByQuantityinstock", query = "SELECT p FROM Product p WHERE p.quantityinstock = :quantityinstock")})
+    , @NamedQuery(name = "Product.findByQuantityinstock", query = "SELECT p FROM Product p WHERE p.quantityinstock = :quantityinstock")
+    , @NamedQuery(name = "Product.findByProductdescription", query = "SELECT p FROM Product p WHERE p.productdescription = :productdescription")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,24 +60,22 @@ public class Product implements Serializable {
     private String productline;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "PRODUCTSEX")
-    private String productsex;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PRODUCTSIZE")
     private int productsize;
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRODUCTPRICE")
     private int productprice;
-    @Size(max = 120)
-    @Column(name = "PRODUCTDESCRIPTION")
-    private String productdescription;
     @Column(name = "QUANTITYINSTOCK")
     private Integer quantityinstock;
+    @Size(max = 400)
+    @Column(name = "PRODUCTDESCRIPTION")
+    private String productdescription;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
     private Historyorder historyorder;
+    @JoinColumn(name = "PRODUCTSEX", referencedColumnName = "PRODUCTSEX")
+    @ManyToOne(optional = false)
+    private Productsex productsex;
     @JoinColumn(name = "PRODUCTTYPE", referencedColumnName = "PRODUCTTYPE")
     @ManyToOne(optional = false)
     private Producttype producttype;
@@ -90,11 +87,10 @@ public class Product implements Serializable {
         this.productcode = productcode;
     }
 
-    public Product(String productcode, String productbrandname, String productline, String productsex, int productsize, int productprice) {
+    public Product(String productcode, String productbrandname, String productline, int productsize, int productprice) {
         this.productcode = productcode;
         this.productbrandname = productbrandname;
         this.productline = productline;
-        this.productsex = productsex;
         this.productsize = productsize;
         this.productprice = productprice;
     }
@@ -123,14 +119,6 @@ public class Product implements Serializable {
         this.productline = productline;
     }
 
-    public String getProductsex() {
-        return productsex;
-    }
-
-    public void setProductsex(String productsex) {
-        this.productsex = productsex;
-    }
-
     public int getProductsize() {
         return productsize;
     }
@@ -147,14 +135,6 @@ public class Product implements Serializable {
         this.productprice = productprice;
     }
 
-    public String getProductdescription() {
-        return productdescription;
-    }
-
-    public void setProductdescription(String productdescription) {
-        this.productdescription = productdescription;
-    }
-
     public Integer getQuantityinstock() {
         return quantityinstock;
     }
@@ -163,12 +143,28 @@ public class Product implements Serializable {
         this.quantityinstock = quantityinstock;
     }
 
+    public String getProductdescription() {
+        return productdescription;
+    }
+
+    public void setProductdescription(String productdescription) {
+        this.productdescription = productdescription;
+    }
+
     public Historyorder getHistoryorder() {
         return historyorder;
     }
 
     public void setHistoryorder(Historyorder historyorder) {
         this.historyorder = historyorder;
+    }
+
+    public Productsex getProductsex() {
+        return productsex;
+    }
+
+    public void setProductsex(Productsex productsex) {
+        this.productsex = productsex;
     }
 
     public Producttype getProducttype() {
