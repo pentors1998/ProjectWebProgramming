@@ -435,6 +435,10 @@ Blended by master perfumer Alberto Morillas with direction from Alessandro Miche
 alter table product add
 CONSTRAINT Fk_productType FOREIGN KEY (ProductType) REFERENCES ProductType (ProductType) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+
+alter table product add
+CONSTRAINT Fk_productSex FOREIGN KEY (ProductSex) REFERENCES ProductSex (ProductSex) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 --5.) Create table HISTORYORDER
 
 CREATE TABLE HISTORYORDER(
@@ -447,4 +451,5 @@ PRODUCTSIZE DECIMAL NOT NULL,
 PRODUCTPRICE DECIMAL NOT NULL,
 CONSTRAINT historyOrderProduct FOREIGN KEY (ProductCode) REFERENCES Product (ProductCode) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT accountEmail_historyOrder FOREIGN KEY (EMAIL) REFERENCES account (EMAIL) ON DELETE NO ACTION ON UPDATE NO ACTION);
+
 
