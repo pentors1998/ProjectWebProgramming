@@ -46,18 +46,18 @@ public class AddToCartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (session == null) {
+        
             if (cart == null) {
                 cart = new ShoppingCart();
                 session.setAttribute("cart", cart);
             }
-        }
         
-        String productCode = request.getParameter("productCode");
+        
+        String productCode = request.getParameter("productcode");
         Product pd = ProductMockup.getProduct(productCode);
         cart.add(pd);
         
-        getServletContext().getRequestDispatcher("/ProductListServlet").forward(request, response);
+        getServletContext().getRequestDispatcher("/ProductListServlet?catagories=shop").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

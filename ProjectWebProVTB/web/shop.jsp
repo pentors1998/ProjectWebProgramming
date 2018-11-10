@@ -99,7 +99,7 @@
                 </div>
                 <!-- Cart Menu -->
                 <div class="cart-fav-search mb-100">
-                    <a href="cart.jsp" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                    <a href="cart.jsp" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(${cart.totalQuantity})</span></a>
                     <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
                 </div>
                 <!-- Social Button -->
@@ -210,7 +210,7 @@
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                             </div>
                                             <div class="cart">
-                                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                                <a href="AddToCartServlet?productcode=${p.productcode}" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
                                             </div>
                                         </div>
                                     </div>

@@ -124,117 +124,117 @@
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="product-details.jsp">
-                            <img src="img/bg-img/1.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1179217">
+                            <img src="PicProject/1179217.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $180</p>
-                                <h4>Modern Chair</h4>
+                                <p>From $155</p>
+                                <h4>OUD INTENSE</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/2.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1149327">
+                            <img src="PicProject/1149327.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $180</p>
-                                <h4>Minimalistic Plant Pot</h4>
+                                <p>From $150</p>
+                                <h4>ADDICT</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/3.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1152719">
+                            <img src="PicProject/1152719.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $180</p>
-                                <h4>Modern Chair</h4>
+                                <p>From $100</p>
+                                <h4>Sì</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/4.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1034511">
+                            <img src="PicProject/1034511.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $180</p>
-                                <h4>Night Stand</h4>
+                                <p>From $99</p>
+                                <h4>ALLURE HOMME SPORT</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/5.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1097286">
+                            <img src="PicProject/1097286.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $18</p>
-                                <h4>Plant Pot</h4>
+                                <p>From $80</p>
+                                <h4>CHANCE EAU TENDRE</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/6.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1159375">
+                            <img src="PicProject/1159375.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $320</p>
-                                <h4>Small Table</h4>
+                                <p>From $73</p>
+                                <h4>DIAMONDS VIOLET</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/7.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1158716">
+                            <img src="PicProject/1158716.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $318</p>
-                                <h4>Metallic Chair</h4>
+                                <p>From $215</p>
+                                <h4>GUCCI OUD</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/8.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1166339">
+                            <img src="PicProject/1166339.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $318</p>
-                                <h4>Modern Rocking Chair</h4>
+                                <p>From $105</p>
+                                <h4>J ADORE</h4>
                             </div>
                         </a>
                     </div>
 
                     <!-- Single Catagory -->
                     <div class="single-products-catagory clearfix">
-                        <a href="shop.html">
-                            <img src="img/bg-img/9.jpg" alt="">
+                        <a href="GetProductServlet?productcode=1217391">
+                            <img src="PicProject/1217391.jpg" alt="">
                             <!-- Hover Content -->
                             <div class="hover-content">
                                 <div class="line"></div>
-                                <p>From $318</p>
-                                <h4>Home Deco</h4>
+                                <p>From $90</p>
+                                <h4>POISON GIRL UNEXPECTED</h4>
                             </div>
                         </a>
                     </div>

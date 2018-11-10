@@ -60,7 +60,7 @@ public void add(Product p) {
         return sum;
     }
 
-    public List<TypeItem> getLineItems() {
+    public List<TypeItem> getTypeItems() {
         return new ArrayList(cart.values());
     }
 

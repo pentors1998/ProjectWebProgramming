@@ -86,7 +86,7 @@ public class Product implements Serializable {
     public Product(String productcode) {
         this.productcode = productcode;
     }
-
+    
     public Product(String productcode, String productbrandname, String productline, int productsize, int productprice) {
         this.productcode = productcode;
         this.productbrandname = productbrandname;

@@ -53,7 +53,7 @@ public class ProductMockup {
             Scanner sc = new Scanner(file);
             products = new HashMap(144);
             Product p = null;
-            List<String> fields = new ArrayList(8);
+            List<String> fields = new ArrayList(7);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 StringTokenizer stknz = new StringTokenizer(line, "\t\"");
