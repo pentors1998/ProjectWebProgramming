@@ -32,10 +32,13 @@
                         <span style="color: red">${message}</span>
 
                         <div class="form-check">
-                            
-                            <button type="submit" class="btn btn-login float-right">Login</button> <button type="submit" class="btn btn-login float-left"> <a href="index.jsp">Back</a></button>
+
+                            <button type="submit" class="btn btn-login float-right">Login</button>
                         </div>
 
+                    </form>
+                    <form action="index.jsp" method="POST">
+                        <button type="submit" class="btn btn-login float-left" style="background-color: black">Back</button>
                     </form>
                 </div>
                 <div class="col-md-8 banner-sec">

@@ -17,9 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-import project.mockup.model.Product;
-import project.mockup.model.ProductMockup;
-import project.mockup.model.ProductMockup;
+import project.jpa.model.Product;
+import project.jpa.model.controller.ProductJpaController;
 
 /**
  *
@@ -46,17 +45,17 @@ public class AddToCartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        
-            if (cart == null) {
-                cart = new ShoppingCart();
-                session.setAttribute("cart", cart);
-            }
-        
-        
+
+        if (cart == null) {
+            cart = new ShoppingCart();
+            session.setAttribute("cart", cart);
+        }
+
+        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
         String productCode = request.getParameter("productcode");
-        Product pd = ProductMockup.getProduct(productCode);
+        Product pd = productJpaCtrl.findProduct(productCode);
         cart.add(pd);
-        
+
         getServletContext().getRequestDispatcher("/ProductListServlet?catagories=shop").forward(request, response);
     }
 

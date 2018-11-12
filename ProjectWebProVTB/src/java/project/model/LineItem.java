@@ -6,30 +6,29 @@
 package project.model;
 
 import java.io.Serializable;
-import project.mockup.model.Product;
+import project.jpa.model.Product;
 
 /**
  *
  * @author INT303
  */
-public class TypeItem implements Serializable {
+public class LineItem implements Serializable {
 
     private Product product;
     private double salePrice;
     private int quantity;
 
-    public TypeItem() {
+    public LineItem() {
         
     }
 
-    public TypeItem(Product p) {
-        this(p,1);
+    public LineItem(Product product) {
+        this(product, 1) ;
     }
 
-    public TypeItem(Product product, int quantity) {
+    public LineItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.salePrice = product.getProductPrice();
     }
 
     public Product getProduct() {

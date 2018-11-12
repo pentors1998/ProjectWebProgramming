@@ -5,13 +5,13 @@
  */
 package project.model;
 
-import project.mockup.model.Product;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import project.jpa.model.Product;
 
 /**
  *
@@ -19,23 +19,23 @@ import java.util.Map;
  */
 public class ShoppingCart implements Serializable {
 
-    private Map<String, TypeItem> cart;
+    private Map<String, LineItem> cart;
 
     public ShoppingCart() {
         cart = new HashMap();
     }
 
 public void add(Product p) {
-        TypeItem type = cart.get(p.getProductCode());
+        LineItem type = cart.get(p.getProductcode());
         if (type == null) {
-            cart.put(p.getProductCode(), new TypeItem(p));
+            cart.put(p.getProductcode(), new LineItem(p));
         } else {
             type.setQuantity(type.getQuantity() + 1);
         }
     }
 
     public void remove(Product p) {
-        this.remove(p.getProductCode());
+        this.remove(p.getProductcode());
     }
 
     public void remove(String productCode) {
@@ -44,8 +44,8 @@ public void add(Product p) {
 
     public double getTotalPrice() {
         double sum = 0;
-        Collection<TypeItem> typeItems = cart.values();
-        for (TypeItem typeItem : typeItems) {
+        Collection<LineItem> typeItems = cart.values();
+        for (LineItem typeItem : typeItems) {
             sum += typeItem.getTotalPrice();
         }
         return sum;
@@ -53,14 +53,14 @@ public void add(Product p) {
 
     public int getTotalQuantity() {
         int sum = 0;
-        Collection<TypeItem> lineItems = cart.values();
-        for (TypeItem lineItem : lineItems) {
+        Collection<LineItem> lineItems = cart.values();
+        for (LineItem lineItem : lineItems) {
             sum += lineItem.getQuantity();
         }
         return sum;
     }
 
-    public List<TypeItem> getTypeItems() {
+    public List<LineItem> getTypeItems() {
         return new ArrayList(cart.values());
     }
 

@@ -17,7 +17,7 @@
         <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
         <!-- Title  -->
-        <title>Amado - Furniture Ecommerce Template | Home</title>
+        <title>LONGDOMDOSIER - Perfume E-commerce | Home</title>
 
         <!-- Favicon  -->
         <link rel="icon" href="img/core-img/favicon.ico">
@@ -105,7 +105,7 @@
                 </div>
                 <!-- Cart Menu -->
                 <div class="cart-fav-search mb-100">
-                    <a href="cart.jsp" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
+                    <a href="cart.jsp" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(${cart.totalQuantity})</span></a>
                     <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
                 </div>
                 <!-- Social Button -->
