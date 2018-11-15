@@ -110,10 +110,10 @@
                 </div>
                 <!-- Social Button -->
                 <div class="social-info d-flex justify-content-between">
-                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="https://in.pinterest.com/"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/vnrwt/?fbclid=IwAR0_8yZE7GUD2sknUlwfUNb76iZjeaNEkHogd2xyt2vD9iethVjFX3ycI3I"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://www.facebook.com/groups/1813788722072822/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="https://twitter.com/login?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                 </div>
             </header>
             <!-- Header Area End -->
@@ -273,13 +273,13 @@
                                     <div class="collapse navbar-collapse" id="footerNavContent">
                                         <ul class="navbar-nav ml-auto">
                                             <li class="nav-item active">
-                                                <a class="nav-link" href="index.html">Home</a>
+                                                <a class="nav-link" href="index.jsp">Home</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="ProductListServlet?catagories=shop">Shop</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="cart.html">Cart</a>
+                                                <a class="nav-link" href="CartServlet">Cart</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="CheckoutServlet">Checkout</a>

@@ -46,7 +46,7 @@ public class AddToCartServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
 //        String quantityS = request.getParameter("quantity");
 //        int quantity = Integer.parseInt(quantityS);
-//        
+        
         String url = request.getParameter("url");
         
         if (url != null) {
@@ -58,13 +58,13 @@ public class AddToCartServlet extends HttpServlet {
             }
             String productCode = request.getParameter("productcode");
             ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-            Product p = productJpaCtrl.findProduct(productCode);
+            Product pd = productJpaCtrl.findProduct(productCode);
 
-            if (p.getQuantityinstock() <= cart.getTotalQuantity()) {
+            if (pd.getQuantityinstock() <= cart.getTotalQuantity()) {
                 response.sendRedirect("cart.jsp");
                 return;
             }
-            cart.add(p);
+            cart.add(pd);
 
             response.sendRedirect(url);
 
@@ -80,8 +80,9 @@ public class AddToCartServlet extends HttpServlet {
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
         String productCode = request.getParameter("productcode");
         Product pd = productJpaCtrl.findProduct(productCode);
+        
         cart.add(pd);
-
+        
         getServletContext().getRequestDispatcher("/CartServlet").forward(request, response);
         
     }

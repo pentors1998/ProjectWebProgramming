@@ -75,7 +75,7 @@
                     <a href="index.jsp"><img src="PicProject/logo.png" alt=""></a>
                 </div>
                 <!-- Amado Nav -->
-                
+
                 <c:choose>
                     <c:when test="${sessionScope.account != null}">
                         <h6 style="color: #b2b2b2">Hello , ${account.firstname}</h6>
@@ -110,10 +110,10 @@
                 </div>
                 <!-- Social Button -->
                 <div class="social-info d-flex justify-content-between">
-                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="https://in.pinterest.com/"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/vnrwt/?fbclid=IwAR0_8yZE7GUD2sknUlwfUNb76iZjeaNEkHogd2xyt2vD9iethVjFX3ycI3I"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://www.facebook.com/groups/1813788722072822/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="https://twitter.com/login?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                 </div>
             </header>
             <!-- Header Area End -->
@@ -229,52 +229,51 @@
             <!-- ##### Main Content Wrapper End ##### -->
 
             <!-- ##### Newsletter Area Start ##### -->
-            
+
 
             <!-- ##### Footer Area Start ##### -->
             <footer class="footer_area clearfix" style="width: 100%">
-                
-                    <div class="row align-items-center">
-                        <!-- Single Widget Area -->
-                        <div class="col-12 col-lg-4">
-                            <div class="single_widget_area">
-                                <!-- Logo -->
-                                <div class="footer-logo mr-50" style="margin-left: 20%">
-                                    <a href="index.html"><img src="PicProject/logo.png" style="height: 120px;" alt=""></a>
-                                </div>
-                                <!-- Copywrite Text -->
-                                <p class="copywrite" style="margin-left: 20%"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+                <div class="row align-items-center">
+                    <!-- Single Widget Area -->
+                    <div class="col-12 col-lg-4">
+                        <div class="single_widget_area">
+                            <!-- Logo -->
+                            <div class="footer-logo mr-50" style="margin-left: 20%">
+                                <a href="index.html"><img src="PicProject/logo.png" style="height: 120px;" alt=""></a>
                             </div>
+                            <!-- Copywrite Text -->
+                            <p class="copywrite" style="margin-left: 20%"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
-                        <!-- Single Widget Area -->
-                        <div class="col-12 col-lg-8" style="margin-left: -15%">
-                            <div class="single_widget_area">
-                                <!-- Footer Menu -->
-                                <div class="footer_menu">
-                                    <nav class="navbar navbar-expand-lg justify-content-end">
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
-                                        <div class="collapse navbar-collapse" id="footerNavContent">
-                                            <ul class="navbar-nav ml-auto">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="index.html">Home</a>
-                                                </li>
-                                                <li class="nav-item active">
-                                                    <a class="nav-link" href="ProductListServlet?catagories=shop">Shop</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="cart.html">Cart</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="CheckoutServlet">Checkout</a>
-                                                </li>
-                                                
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </div>
-                            
+                    </div>
+                    <!-- Single Widget Area -->
+                    <div class="col-12 col-lg-8" style="margin-left: -15%">
+                        <div class="single_widget_area">
+                            <!-- Footer Menu -->
+                            <div class="footer_menu">
+                                <nav class="navbar navbar-expand-lg justify-content-end">
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+                                    <div class="collapse navbar-collapse" id="footerNavContent">
+                                        <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="index.jsp">Home</a>
+                                            </li>
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="ProductListServlet?catagories=shop">Shop</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="CartServlet">Cart</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="CheckoutServlet">Checkout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -47,6 +47,28 @@ public class RemoveFromCart extends HttpServlet {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         String quantity = request.getParameter("quantity");
 
+        String url = request.getParameter("url");
+        if (url != null) {
+            if (cart == null) {
+
+                cart = new ShoppingCart();
+                session.setAttribute("cart", cart);
+            }
+            String productCode = request.getParameter("productcode");
+            ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+            Product pd = productJpaCtrl.findProduct(productCode);
+
+            if (pd.getQuantityinstock() <= cart.getTotalQuantity()) {
+                response.sendRedirect("cart.jsp");
+                return;
+            }
+            cart.remove(pd);
+
+            response.sendRedirect(url);
+
+            return;
+        }
+        
         if (cart == null) {
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
