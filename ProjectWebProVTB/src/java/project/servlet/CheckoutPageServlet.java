@@ -32,6 +32,8 @@ public class CheckoutPageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession(false);
         Account accountObj = (Account) session.getAttribute("account");
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
@@ -41,7 +43,7 @@ public class CheckoutPageServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
-        if (cart == null) {
+        if (cart == null || cart.getTotalQuantity() == 0) {
             getServletContext().getRequestDispatcher("/ProductListServlet?catagories=shop").forward(request, response);
             return;
         }

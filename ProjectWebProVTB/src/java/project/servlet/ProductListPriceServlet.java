@@ -44,6 +44,8 @@ public class ProductListPriceServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
         String priceS = request.getParameter("price");
         HttpSession session = request.getSession(false);
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);

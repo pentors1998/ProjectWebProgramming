@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import project.jpa.model.Account;
 
 /**
  *
@@ -40,7 +41,16 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession(false);
+        Account accountObj = (Account) session.getAttribute("account");
+
+        if (accountObj == null) {
+            request.setAttribute("message", "Please Login.");
+            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+            return;
+        }
         if (session != null) {
             session.invalidate();
         }

@@ -75,6 +75,11 @@
                     <a href="index.jsp"><img src="PicProject/logo.png" alt=""></a>
                 </div>
                 <!-- Amado Nav -->
+                <c:choose>
+                    <c:when test="${sessionScope.account != null}">
+                        <h6 style="color: #b2b2b2">Hello , ${account.firstname}</h6>
+                    </c:when>
+                </c:choose>
                 <nav class="amado-nav">
                     <ul>
                         <li><a href="index.jsp">Home</a></li>

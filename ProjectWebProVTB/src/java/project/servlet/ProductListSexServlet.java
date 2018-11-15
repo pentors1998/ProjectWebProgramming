@@ -44,6 +44,8 @@ public class ProductListSexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession(false);
         String sex = request.getParameter("sex");
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);

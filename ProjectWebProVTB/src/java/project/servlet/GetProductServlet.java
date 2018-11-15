@@ -41,6 +41,8 @@ public class GetProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
         String productCode = request.getParameter("productcode");
         if(productCode == null){
            response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
