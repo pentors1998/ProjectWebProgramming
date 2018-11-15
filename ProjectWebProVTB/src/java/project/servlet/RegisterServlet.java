@@ -8,6 +8,8 @@ package project.servlet;
 import project.jpa.model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,7 +53,11 @@ public class RegisterServlet extends HttpServlet {
         String firstName = request.getParameter("fname");
         String lastName = request.getParameter("lname");
         String email = request.getParameter("email");
+
         String password = request.getParameter("password");
+        password = cryptWithMD5(password);
+        password = password.substring(0, 19);
+        
         String tell = request.getParameter("tell");
         String address = request.getParameter("address");
         String debit = request.getParameter("debit");
@@ -88,7 +94,23 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("message", "Invalid data.");
             getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
         }
+    }
 
+    public static String cryptWithMD5(String pass) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] passBytes = pass.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < digested.length; i++) {
+                sb.append(Integer.toHexString(0xff & digested[i]));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

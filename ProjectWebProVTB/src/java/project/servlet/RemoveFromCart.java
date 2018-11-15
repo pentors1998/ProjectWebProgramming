@@ -5,11 +5,8 @@
  */
 package project.servlet;
 
-import project.jpa.model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -19,17 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-import project.jpa.model.controller.AccountJpaController;
+import project.jpa.model.Product;
+import project.jpa.model.controller.ProductJpaController;
+import project.model.ShoppingCart;
 
 /**
  *
  * @author Admin
  */
-public class LoginServlet extends HttpServlet {
+public class RemoveFromCart extends HttpServlet {
 
     @PersistenceUnit(unitName = "ProjectWebProVTBPU")
     EntityManagerFactory emf;
-    //ujkhkj
+
     @Resource
     UserTransaction utx;
 
@@ -44,43 +43,21 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        
-        String password = request.getParameter("password");
-        password = cryptWithMD5(password);
-        password = password.substring(0, 19);
-        
         HttpSession session = request.getSession(true);
-        if (email != null && email.trim().length() > 0 && password != null && password.trim().length() > 0) {
-            AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
-            Account accountObj = accountJpaCtrl.findAccount(email);
-            if (accountObj != null) {
-                if (password.equalsIgnoreCase(accountObj.getPassword())) {
-                    session.setAttribute("account", accountObj);
-                    getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-                    return;
-                }
-            }
-        }
-        request.setAttribute("message", "Invalid email or password.");
-        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-    }
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        String quantity = request.getParameter("quantity");
 
-    public static String cryptWithMD5(String pass) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] passBytes = pass.getBytes();
-            md.reset();
-            byte[] digested = md.digest(passBytes);
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < digested.length; i++) {
-                sb.append(Integer.toHexString(0xff & digested[i]));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException ex) {
-            System.out.println(ex);
+        if (cart == null) {
+            cart = new ShoppingCart();
+            session.setAttribute("cart", cart);
         }
-        return null;
+
+        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+        String productCode = request.getParameter("productcode");
+        Product pd = productJpaCtrl.findProduct(productCode);
+        cart.remove(pd);
+
+        getServletContext().getRequestDispatcher("/ProductListServlet?catagories=shop").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

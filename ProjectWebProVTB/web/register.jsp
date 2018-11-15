@@ -84,7 +84,7 @@
                                     <div class="row row-refine">
                                         <div class="col-9">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="text" name="tell">
+                                                <input class="input--style-5" type="number" name="tell">
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                 <div class="value">
                                     <div class="input-group">
                                         <div class="rs-select2 js-select-simple select--no-search">
-                                            <input class="input--style-5" type="text" name="pincode" style="width: 104px;">
+                                            <input class="input--style-5" type="number" name="pincode" style="width: 104px;">
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@
                                     <div class="row row-space">
                                         <div class="col-2">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="text" name="debit">
+                                                <input class="input--style-5" type="number" name="debit">
                                                 <label class="label--desc">Debit card 16 number</label>
                                             </div>
                                         </div>

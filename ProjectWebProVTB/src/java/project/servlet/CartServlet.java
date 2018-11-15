@@ -44,13 +44,13 @@ public class CartServlet extends HttpServlet {
         if (session != null) {
             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
             if (cart != null) {
-                getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/cart.jsp").forward(request, response);
                 return;
             }
         }
         
-        request.setAttribute("message", "No product in cart...");
-        getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
+        request.setAttribute("noproduct", "No product in cart...");
+        getServletContext().getRequestDispatcher("/cart.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

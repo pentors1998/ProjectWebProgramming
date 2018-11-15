@@ -25,12 +25,25 @@ public class ShoppingCart implements Serializable {
         cart = new HashMap();
     }
 
-public void add(Product p) {
+    public void add(Product p) {
         LineItem type = cart.get(p.getProductcode());
         if (type == null) {
             cart.put(p.getProductcode(), new LineItem(p));
         } else {
             type.setQuantity(type.getQuantity() + 1);
+        }
+    }
+
+    public void drop(Product p) {
+        LineItem type = cart.get(p.getProductcode());
+        if (type == null) {
+            cart.put(p.getProductcode(), new LineItem(p));
+        } else {
+            if (type.getQuantity() > 1) {
+                type.setQuantity(type.getQuantity() - 1);
+                return;
+            } else
+                return;
         }
     }
 
@@ -60,7 +73,7 @@ public void add(Product p) {
         return sum;
     }
 
-    public List<LineItem> getTypeItems() {
+    public List<LineItem> getLineItems() {
         return new ArrayList(cart.values());
     }
 

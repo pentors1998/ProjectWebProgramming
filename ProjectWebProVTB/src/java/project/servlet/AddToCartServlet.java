@@ -44,8 +44,34 @@ public class AddToCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+//        String quantityS = request.getParameter("quantity");
+//        int quantity = Integer.parseInt(quantityS);
+//        
+        String url = request.getParameter("url");
+        
+        if (url != null) {
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+            if (cart == null) {
 
+                cart = new ShoppingCart();
+                session.setAttribute("cart", cart);
+            }
+            String productCode = request.getParameter("productcode");
+            ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+            Product p = productJpaCtrl.findProduct(productCode);
+
+            if (p.getQuantityinstock() <= cart.getTotalQuantity()) {
+                response.sendRedirect("cart.jsp");
+                return;
+            }
+            cart.add(p);
+
+            response.sendRedirect(url);
+
+            return;
+        }
+
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart == null) {
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
@@ -56,7 +82,8 @@ public class AddToCartServlet extends HttpServlet {
         Product pd = productJpaCtrl.findProduct(productCode);
         cart.add(pd);
 
-        getServletContext().getRequestDispatcher("/ProductListServlet?catagories=shop").forward(request, response);
+        getServletContext().getRequestDispatcher("/CartServlet").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

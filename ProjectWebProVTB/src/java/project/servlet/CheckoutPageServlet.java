@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import project.jpa.model.Account;
+import project.model.ShoppingCart;
 
 /**
  *
@@ -33,15 +34,19 @@ public class CheckoutPageServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         Account accountObj = (Account) session.getAttribute("account");
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         //Cart ด้วยย
         if (accountObj == null) {
             request.setAttribute("message", "Please Login.");
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
             return;
-
+        }
+        if (cart == null) {
+            getServletContext().getRequestDispatcher("/ProductListServlet?catagories=shop").forward(request, response);
+            return;
         }
         getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

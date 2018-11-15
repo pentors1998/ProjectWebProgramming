@@ -19,16 +19,17 @@ public class LineItem implements Serializable {
     private int quantity;
 
     public LineItem() {
-        
+
     }
 
     public LineItem(Product product) {
-        this(product, 1) ;
+        this(product, 1);
     }
 
     public LineItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
+        this.salePrice = product.getProductprice();
     }
 
     public Product getProduct() {
@@ -54,8 +55,8 @@ public class LineItem implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
     public double getTotalPrice() {
-        return quantity * salePrice ;
+        return quantity * salePrice;
     }
 }
