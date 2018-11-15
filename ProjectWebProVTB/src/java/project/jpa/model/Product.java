@@ -6,6 +6,7 @@
 package project.jpa.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,11 +16,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -71,8 +73,8 @@ public class Product implements Serializable {
     @Size(max = 400)
     @Column(name = "PRODUCTDESCRIPTION")
     private String productdescription;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
-    private Historyorder historyorder;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productcode")
+    private List<Historyorder> historyorderList;
     @JoinColumn(name = "PRODUCTSEX", referencedColumnName = "PRODUCTSEX")
     @ManyToOne(optional = false)
     private Productsex productsex;
@@ -86,7 +88,7 @@ public class Product implements Serializable {
     public Product(String productcode) {
         this.productcode = productcode;
     }
-    
+
     public Product(String productcode, String productbrandname, String productline, int productsize, int productprice) {
         this.productcode = productcode;
         this.productbrandname = productbrandname;
@@ -151,12 +153,13 @@ public class Product implements Serializable {
         this.productdescription = productdescription;
     }
 
-    public Historyorder getHistoryorder() {
-        return historyorder;
+    @XmlTransient
+    public List<Historyorder> getHistoryorderList() {
+        return historyorderList;
     }
 
-    public void setHistoryorder(Historyorder historyorder) {
-        this.historyorder = historyorder;
+    public void setHistoryorderList(List<Historyorder> historyorderList) {
+        this.historyorderList = historyorderList;
     }
 
     public Productsex getProductsex() {

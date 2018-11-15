@@ -36,7 +36,7 @@
     <div class="container bootstrap snippet">
         <div class="row">
             <div class="col-sm-10"><h1>My Account</h1></div>
-            <div class="col-sm-2"><a href="index.jsp" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="PicProject/logo.png"></a></div>
+            <div class="col-sm-2"><a href="index.jsp" class="pull-right"><img title="Back to index" class="img-circle img-responsive" src="PicProject/logo.png"></a></div>
         </div>
         <div class="row">
             <div class="col-sm-3"><!--left col-->

@@ -49,7 +49,7 @@ public class AccountJpaController implements Serializable {
             em = getEntityManager();
             List<Historyorder> attachedHistoryorderList = new ArrayList<Historyorder>();
             for (Historyorder historyorderListHistoryorderToAttach : account.getHistoryorderList()) {
-                historyorderListHistoryorderToAttach = em.getReference(historyorderListHistoryorderToAttach.getClass(), historyorderListHistoryorderToAttach.getProductcode());
+                historyorderListHistoryorderToAttach = em.getReference(historyorderListHistoryorderToAttach.getClass(), historyorderListHistoryorderToAttach.getOrderid());
                 attachedHistoryorderList.add(historyorderListHistoryorderToAttach);
             }
             account.setHistoryorderList(attachedHistoryorderList);
@@ -103,7 +103,7 @@ public class AccountJpaController implements Serializable {
             }
             List<Historyorder> attachedHistoryorderListNew = new ArrayList<Historyorder>();
             for (Historyorder historyorderListNewHistoryorderToAttach : historyorderListNew) {
-                historyorderListNewHistoryorderToAttach = em.getReference(historyorderListNewHistoryorderToAttach.getClass(), historyorderListNewHistoryorderToAttach.getProductcode());
+                historyorderListNewHistoryorderToAttach = em.getReference(historyorderListNewHistoryorderToAttach.getClass(), historyorderListNewHistoryorderToAttach.getOrderid());
                 attachedHistoryorderListNew.add(historyorderListNewHistoryorderToAttach);
             }
             historyorderListNew = attachedHistoryorderListNew;

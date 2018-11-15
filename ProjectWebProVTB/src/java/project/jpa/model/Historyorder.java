@@ -6,6 +6,7 @@
 package project.jpa.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,113 +31,97 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Historyorder.findAll", query = "SELECT h FROM Historyorder h")
-    , @NamedQuery(name = "Historyorder.findByProductcode", query = "SELECT h FROM Historyorder h WHERE h.productcode = :productcode")
-    , @NamedQuery(name = "Historyorder.findByProductbrandname", query = "SELECT h FROM Historyorder h WHERE h.productbrandname = :productbrandname")
-    , @NamedQuery(name = "Historyorder.findByProductline", query = "SELECT h FROM Historyorder h WHERE h.productline = :productline")
-    , @NamedQuery(name = "Historyorder.findByProducttype", query = "SELECT h FROM Historyorder h WHERE h.producttype = :producttype")
-    , @NamedQuery(name = "Historyorder.findByProductsize", query = "SELECT h FROM Historyorder h WHERE h.productsize = :productsize")
-    , @NamedQuery(name = "Historyorder.findByProductprice", query = "SELECT h FROM Historyorder h WHERE h.productprice = :productprice")})
+    , @NamedQuery(name = "Historyorder.findByOrderid", query = "SELECT h FROM Historyorder h WHERE h.orderid = :orderid")
+    , @NamedQuery(name = "Historyorder.findByTimedate", query = "SELECT h FROM Historyorder h WHERE h.timedate = :timedate")
+    , @NamedQuery(name = "Historyorder.findByMethod", query = "SELECT h FROM Historyorder h WHERE h.method = :method")
+    , @NamedQuery(name = "Historyorder.findByAmount", query = "SELECT h FROM Historyorder h WHERE h.amount = :amount")
+    , @NamedQuery(name = "Historyorder.findByPrice", query = "SELECT h FROM Historyorder h WHERE h.price = :price")})
 public class Historyorder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "PRODUCTCODE")
-    private String productcode;
+    @Column(name = "ORDERID")
+    private Integer orderid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
-    @Column(name = "PRODUCTBRANDNAME")
-    private String productbrandname;
+    @Column(name = "TIMEDATE")
+    @Temporal(TemporalType.DATE)
+    private Date timedate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "PRODUCTLINE")
-    private String productline;
+    @Size(min = 1, max = 20)
+    @Column(name = "METHOD")
+    private String method;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "PRODUCTTYPE")
-    private String producttype;
+    @Column(name = "AMOUNT")
+    private int amount;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "PRODUCTSIZE")
-    private int productsize;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PRODUCTPRICE")
-    private int productprice;
+    @Column(name = "PRICE")
+    private int price;
     @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
     @ManyToOne(optional = false)
     private Account email;
-    @JoinColumn(name = "PRODUCTCODE", referencedColumnName = "PRODUCTCODE", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Product product;
+    @JoinColumn(name = "PRODUCTCODE", referencedColumnName = "PRODUCTCODE")
+    @ManyToOne(optional = false)
+    private Product productcode;
 
     public Historyorder() {
     }
 
-    public Historyorder(String productcode) {
-        this.productcode = productcode;
+    public Historyorder(Integer orderid) {
+        this.orderid = orderid;
     }
 
-    public Historyorder(String productcode, String productbrandname, String productline, String producttype, int productsize, int productprice) {
-        this.productcode = productcode;
-        this.productbrandname = productbrandname;
-        this.productline = productline;
-        this.producttype = producttype;
-        this.productsize = productsize;
-        this.productprice = productprice;
+    public Historyorder(Integer orderid, Date timedate, String method, int amount, int price) {
+        this.orderid = orderid;
+        this.timedate = timedate;
+        this.method = method;
+        this.amount = amount;
+        this.price = price;
     }
 
-    public String getProductcode() {
-        return productcode;
+    public Integer getOrderid() {
+        return orderid;
     }
 
-    public void setProductcode(String productcode) {
-        this.productcode = productcode;
+    public void setOrderid(Integer orderid) {
+        this.orderid = orderid;
     }
 
-    public String getProductbrandname() {
-        return productbrandname;
+    public Date getTimedate() {
+        return timedate;
     }
 
-    public void setProductbrandname(String productbrandname) {
-        this.productbrandname = productbrandname;
+    public void setTimedate(Date timedate) {
+        this.timedate = timedate;
     }
 
-    public String getProductline() {
-        return productline;
+    public String getMethod() {
+        return method;
     }
 
-    public void setProductline(String productline) {
-        this.productline = productline;
+    public void setMethod(String method) {
+        this.method = method;
     }
 
-    public String getProducttype() {
-        return producttype;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setProducttype(String producttype) {
-        this.producttype = producttype;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public int getProductsize() {
-        return productsize;
+    public int getPrice() {
+        return price;
     }
 
-    public void setProductsize(int productsize) {
-        this.productsize = productsize;
-    }
-
-    public int getProductprice() {
-        return productprice;
-    }
-
-    public void setProductprice(int productprice) {
-        this.productprice = productprice;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Account getEmail() {
@@ -146,18 +132,18 @@ public class Historyorder implements Serializable {
         this.email = email;
     }
 
-    public Product getProduct() {
-        return product;
+    public Product getProductcode() {
+        return productcode;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductcode(Product productcode) {
+        this.productcode = productcode;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (productcode != null ? productcode.hashCode() : 0);
+        hash += (orderid != null ? orderid.hashCode() : 0);
         return hash;
     }
 
@@ -168,7 +154,7 @@ public class Historyorder implements Serializable {
             return false;
         }
         Historyorder other = (Historyorder) object;
-        if ((this.productcode == null && other.productcode != null) || (this.productcode != null && !this.productcode.equals(other.productcode))) {
+        if ((this.orderid == null && other.orderid != null) || (this.orderid != null && !this.orderid.equals(other.orderid))) {
             return false;
         }
         return true;
@@ -176,7 +162,7 @@ public class Historyorder implements Serializable {
 
     @Override
     public String toString() {
-        return "project.jpa.model.Historyorder[ productcode=" + productcode + " ]";
+        return "project.jpa.model.Historyorder[ orderid=" + orderid + " ]";
     }
     
 }

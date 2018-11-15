@@ -44,8 +44,6 @@ public class ProductListPriceServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        
         String priceS = request.getParameter("price");
         HttpSession session = request.getSession(false);
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
@@ -95,6 +93,30 @@ public class ProductListPriceServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
             return;
         }
+        
+        //Between Price
+//        String minPriceS = request.getParameter("minPrice");
+//        String maxPriceS = request.getParameter("maxPrice");
+//
+//        HttpSession session = request.getSession(false);
+//        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+//
+//        double minPrice = Double.parseDouble(minPriceS);
+//        double maxPrice = Double.parseDouble(maxPriceS);
+//
+//        List<Product> products = productJpaCtrl.findProductEntities();
+//        List<Product> productAdd = new ArrayList<>();
+//
+//        for (Product productSet : products) {
+//            if (minPrice <= productSet.getProductprice() && productSet.getProductprice() <= maxPrice) {
+//                productAdd.add(productSet);
+//            }
+//
+//            request.setAttribute("topic", "$" + minPrice + " - " + "$" + maxPrice);
+//            session.setAttribute("products", productAdd);
+//            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+//            return;
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

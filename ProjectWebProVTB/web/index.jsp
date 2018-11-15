@@ -110,7 +110,7 @@
                 </div>
                 <!-- Social Button -->
                 <div class="social-info d-flex justify-content-between">
-                    <a href="https://in.pinterest.com/"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="https://www.sit.kmutt.ac.th/"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
                     <a href="https://www.instagram.com/vnrwt/?fbclid=IwAR0_8yZE7GUD2sknUlwfUNb76iZjeaNEkHogd2xyt2vD9iethVjFX3ycI3I"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     <a href="https://www.facebook.com/groups/1813788722072822/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     <a href="https://twitter.com/login?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a>

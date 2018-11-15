@@ -110,7 +110,7 @@
                 </div>
                 <!-- Social Button -->
                 <div class="social-info d-flex justify-content-between">
-                    <a href="https://in.pinterest.com/"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="https://www.sit.kmutt.ac.th/"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
                     <a href="https://www.instagram.com/vnrwt/?fbclid=IwAR0_8yZE7GUD2sknUlwfUNb76iZjeaNEkHogd2xyt2vD9iethVjFX3ycI3I"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     <a href="https://www.facebook.com/groups/1813788722072822/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     <a href="https://twitter.com/login?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a>
@@ -156,13 +156,21 @@
                     <h6 class="widget-title mb-30">Price</h6>
 
                     <!--  Price  -->
+                    
                     <div class="catagories-menu">
                         <ul>
                             <li><a href="ProductListPriceServlet?price=59">$29 - $59</a></li>
                             <li><a href="ProductListPriceServlet?price=99">$60 - $99</a></li>
                             <li><a href="ProductListPriceServlet?price=139">$100 - $139</a></li>
+                            <!--<li><a href="#">Minimum</a></li>
+                                <li><input type="number" name="minPrice" placeholder="Min" min="0" max="150" style="width: 149px;"></li>
+                                <li><a href="#" >Maximum</a></li>
+                                <li><input type="number" name="maxPrice" placeholder="Max" min="0" max="150" style="width: 149px;"></li><br>
+                                <li><input type="submit" value="Serach price" style="color: #6d6d6d ; border-radius: 8px" ></li> 
+                            -->
                         </ul>
                     </div>
+                    
                 </div>
             </div>
 
