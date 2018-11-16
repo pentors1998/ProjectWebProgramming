@@ -74,7 +74,10 @@
                                 <div class="name">Password</div>
                                 <div class="value">
                                     <div class="input-group">
-                                        <input class="input--style-5" type="password" name="password">
+                                        <input class="input--style-5" id="pwd" type="password" name="password" style="width: 444px;">
+                                        <button type="button" id="eye">
+                                            <img src="https://cdn0.iconfinder.com/data/icons/feather/96/eye-16.png" alt="eye" />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +87,7 @@
                                     <div class="row row-refine">
                                         <div class="col-9">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="number" name="tell">
+                                                <input class="input--style-5" type="number" name="tell" pattern=".{10}" title="Must contain 10 Numbers">
                                             </div>
                                         </div>
                                     </div>
@@ -144,6 +147,29 @@
         <!-- Main JS-->
         <script src="js/global.js"></script>
 
+        <script>
+            function show() {
+                var p = document.getElementById('pwd');
+                p.setAttribute('type', 'text');
+            }
+
+            function hide() {
+                var p = document.getElementById('pwd');
+                p.setAttribute('type', 'password');
+            }
+
+            var pwShown = 0;
+
+            document.getElementById("eye").addEventListener("click", function () {
+                if (pwShown == 0) {
+                    pwShown = 1;
+                    show();
+                } else {
+                    pwShown = 0;
+                    hide();
+                }
+            }, false);
+        </script>
     </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>

@@ -9,11 +9,14 @@
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/checkout.jsp</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/CheckOutServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/register.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/FindItemServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/DropFromCartServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/jpa/model/controller/ProductJpaController.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/mockup/model/Product.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/product-details.jsp</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/CheckoutPageServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/LoginServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/ProductListSexServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/model/ShoppingCart.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/cart.jsp</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/model/LineItem.java</file>
@@ -22,13 +25,19 @@
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/RemoveFromCart.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/EditMyAccountServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/mockup/model/ProductMockup.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/ProductListPriceServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/GetProductServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/shop.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/jpa/model/Account.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/scss/_theme_color.scss</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/CartServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/LogoutServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/MyOrder.jsp</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/scss/style.scss</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/AddToCartServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/web/MyAccount.jsp</file>
             <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/RegisterServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/WebProgramming/ProjectWebprogramming/ProjectWebProVTB/src/java/project/servlet/MyAccountPageServlet.java</file>
         </group>
     </open-files>
 </project-private>

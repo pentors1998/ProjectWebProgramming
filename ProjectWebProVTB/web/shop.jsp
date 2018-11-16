@@ -156,21 +156,23 @@
                     <h6 class="widget-title mb-30">Price</h6>
 
                     <!--  Price  -->
-                    
+
                     <div class="catagories-menu">
                         <ul>
-                            <li><a href="ProductListPriceServlet?price=59">$29 - $59</a></li>
-                            <li><a href="ProductListPriceServlet?price=99">$60 - $99</a></li>
-                            <li><a href="ProductListPriceServlet?price=139">$100 - $139</a></li>
-                            <!--<li><a href="#">Minimum</a></li>
-                                <li><input type="number" name="minPrice" placeholder="Min" min="0" max="150" style="width: 149px;"></li>
+                            <form action="ProductListPriceServlet" method="POST">
+                                <!--<li><a href="ProductListPriceServlet?price=59">$29 - $59</a></li>
+                                <li><a href="ProductListPriceServlet?price=99">$60 - $99</a></li>
+                                <li><a href="ProductListPriceServlet?price=139">$100 - $139</a></li>-->
+                                <li><a href="#">Minimum</a></li>
+                                <li><input type="number" name="minPrice" placeholder="Min" min="0" max="150" style="width: 149px;" required></li>
                                 <li><a href="#" >Maximum</a></li>
-                                <li><input type="number" name="maxPrice" placeholder="Max" min="0" max="150" style="width: 149px;"></li><br>
+                                <li><input type="number" name="maxPrice" placeholder="Max" min="0" max="150" style="width: 149px;" required></li><br>
+                                
                                 <li><input type="submit" value="Serach price" style="color: #6d6d6d ; border-radius: 8px" ></li> 
-                            -->
+                            </form>
                         </ul>
                     </div>
-                    
+
                 </div>
             </div>
 
