@@ -457,4 +457,12 @@ AMOUNT INT NOT NULL,
 PRICE DECIMAL NOT NULL,
 CONSTRAINT FK_accountEmail_historyOrder FOREIGN KEY (EMAIL) REFERENCES account (EMAIL) ON DELETE NO ACTION ON UPDATE NO ACTION);
 
+--6.) Create table HISTORYORDERDETAIL
 
+CREATE TABLE HISTORYORDERDetail (
+OrderID INT NOT NULL primary key,
+productCode VARCHAR(10) NOT NULL,
+productQuantity int not null,
+productPrice decimal not null,
+CONSTRAINT FK_productCode_historyOrderDetail FOREIGN KEY (productCode) REFERENCES Product (ProductCode) ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT FK_orderId_historyOrderDetail FOREIGN KEY (orderId) REFERENCES historyOrder (orderId) ON DELETE NO ACTION ON UPDATE NO ACTION);
