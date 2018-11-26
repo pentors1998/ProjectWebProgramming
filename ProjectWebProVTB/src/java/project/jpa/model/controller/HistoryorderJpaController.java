@@ -16,7 +16,6 @@ import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 import project.jpa.model.Account;
 import project.jpa.model.Historyorder;
-import project.jpa.model.Product;
 import project.jpa.model.controller.exceptions.NonexistentEntityException;
 import project.jpa.model.controller.exceptions.PreexistingEntityException;
 import project.jpa.model.controller.exceptions.RollbackFailureException;
@@ -48,19 +47,10 @@ public class HistoryorderJpaController implements Serializable {
                 email = em.getReference(email.getClass(), email.getEmail());
                 historyorder.setEmail(email);
             }
-            Product productcode = historyorder.getProductcode();
-            if (productcode != null) {
-                productcode = em.getReference(productcode.getClass(), productcode.getProductcode());
-                historyorder.setProductcode(productcode);
-            }
             em.persist(historyorder);
             if (email != null) {
                 email.getHistoryorderList().add(historyorder);
                 email = em.merge(email);
-            }
-            if (productcode != null) {
-                productcode.getHistoryorderList().add(historyorder);
-                productcode = em.merge(productcode);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -88,15 +78,9 @@ public class HistoryorderJpaController implements Serializable {
             Historyorder persistentHistoryorder = em.find(Historyorder.class, historyorder.getOrderid());
             Account emailOld = persistentHistoryorder.getEmail();
             Account emailNew = historyorder.getEmail();
-            Product productcodeOld = persistentHistoryorder.getProductcode();
-            Product productcodeNew = historyorder.getProductcode();
             if (emailNew != null) {
                 emailNew = em.getReference(emailNew.getClass(), emailNew.getEmail());
                 historyorder.setEmail(emailNew);
-            }
-            if (productcodeNew != null) {
-                productcodeNew = em.getReference(productcodeNew.getClass(), productcodeNew.getProductcode());
-                historyorder.setProductcode(productcodeNew);
             }
             historyorder = em.merge(historyorder);
             if (emailOld != null && !emailOld.equals(emailNew)) {
@@ -106,14 +90,6 @@ public class HistoryorderJpaController implements Serializable {
             if (emailNew != null && !emailNew.equals(emailOld)) {
                 emailNew.getHistoryorderList().add(historyorder);
                 emailNew = em.merge(emailNew);
-            }
-            if (productcodeOld != null && !productcodeOld.equals(productcodeNew)) {
-                productcodeOld.getHistoryorderList().remove(historyorder);
-                productcodeOld = em.merge(productcodeOld);
-            }
-            if (productcodeNew != null && !productcodeNew.equals(productcodeOld)) {
-                productcodeNew.getHistoryorderList().add(historyorder);
-                productcodeNew = em.merge(productcodeNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -153,11 +129,6 @@ public class HistoryorderJpaController implements Serializable {
             if (email != null) {
                 email.getHistoryorderList().remove(historyorder);
                 email = em.merge(email);
-            }
-            Product productcode = historyorder.getProductcode();
-            if (productcode != null) {
-                productcode.getHistoryorderList().remove(historyorder);
-                productcode = em.merge(productcode);
             }
             em.remove(historyorder);
             utx.commit();

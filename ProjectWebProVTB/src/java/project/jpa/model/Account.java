@@ -101,8 +101,6 @@ public class Account implements Serializable {
         this.debitcard = debitcard;
         this.pincode = pincode;
     }
-
-    
     
     public Account(String email, String password, String firstname, String lastname, String tell, String address, String debitcard) {
         this.email = email;

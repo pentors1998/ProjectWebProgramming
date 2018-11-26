@@ -65,9 +65,6 @@ public class Historyorder implements Serializable {
     @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
     @ManyToOne(optional = false)
     private Account email;
-    @JoinColumn(name = "PRODUCTCODE", referencedColumnName = "PRODUCTCODE")
-    @ManyToOne(optional = false)
-    private Product productcode;
 
     public Historyorder() {
     }
@@ -130,14 +127,6 @@ public class Historyorder implements Serializable {
 
     public void setEmail(Account email) {
         this.email = email;
-    }
-
-    public Product getProductcode() {
-        return productcode;
-    }
-
-    public void setProductcode(Product productcode) {
-        this.productcode = productcode;
     }
 
     @Override

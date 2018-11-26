@@ -87,7 +87,7 @@
                                     <div class="row row-refine">
                                         <div class="col-9">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="number" name="tell" pattern=".{10}" title="Must contain 10 Numbers">
+                                                <input class="input--style-5" type="text" name="tell" pattern="[0-9]{10}" maxlength="10"  title="Must contain 10 Numbers">
                                             </div>
                                         </div>
                                     </div>

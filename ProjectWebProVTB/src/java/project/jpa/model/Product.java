@@ -6,9 +6,7 @@
 package project.jpa.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,12 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -73,8 +69,6 @@ public class Product implements Serializable {
     @Size(max = 400)
     @Column(name = "PRODUCTDESCRIPTION")
     private String productdescription;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productcode")
-    private List<Historyorder> historyorderList;
     @JoinColumn(name = "PRODUCTSEX", referencedColumnName = "PRODUCTSEX")
     @ManyToOne(optional = false)
     private Productsex productsex;
@@ -151,15 +145,6 @@ public class Product implements Serializable {
 
     public void setProductdescription(String productdescription) {
         this.productdescription = productdescription;
-    }
-
-    @XmlTransient
-    public List<Historyorder> getHistoryorderList() {
-        return historyorderList;
-    }
-
-    public void setHistoryorderList(List<Historyorder> historyorderList) {
-        this.historyorderList = historyorderList;
     }
 
     public Productsex getProductsex() {

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>LONGDOMDOSIER - Furniture Ecommerce | My Order</title>
+        <title>LONGDOMDOSIER - Furniture E-commerce | My Order</title>
     </head>
     <body>
         <h1>Hello World!</h1>
