@@ -8,6 +8,7 @@ package project.jpa.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -65,6 +67,8 @@ public class Historyorder implements Serializable {
     @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
     @ManyToOne(optional = false)
     private Account email;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "historyorder")
+    private Historyorderdetail historyorderdetail;
 
     public Historyorder() {
     }
@@ -127,6 +131,14 @@ public class Historyorder implements Serializable {
 
     public void setEmail(Account email) {
         this.email = email;
+    }
+
+    public Historyorderdetail getHistoryorderdetail() {
+        return historyorderdetail;
+    }
+
+    public void setHistoryorderdetail(Historyorderdetail historyorderdetail) {
+        this.historyorderdetail = historyorderdetail;
     }
 
     @Override

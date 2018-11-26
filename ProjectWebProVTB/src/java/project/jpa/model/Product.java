@@ -6,7 +6,9 @@
 package project.jpa.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,10 +16,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -75,6 +79,8 @@ public class Product implements Serializable {
     @JoinColumn(name = "PRODUCTTYPE", referencedColumnName = "PRODUCTTYPE")
     @ManyToOne(optional = false)
     private Producttype producttype;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productcode")
+    private List<Historyorderdetail> historyorderdetailList;
 
     public Product() {
     }
@@ -161,6 +167,15 @@ public class Product implements Serializable {
 
     public void setProducttype(Producttype producttype) {
         this.producttype = producttype;
+    }
+
+    @XmlTransient
+    public List<Historyorderdetail> getHistoryorderdetailList() {
+        return historyorderdetailList;
+    }
+
+    public void setHistoryorderdetailList(List<Historyorderdetail> historyorderdetailList) {
+        this.historyorderdetailList = historyorderdetailList;
     }
 
     @Override

@@ -6,16 +6,19 @@
 package project.jpa.model.controller;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.UserTransaction;
 import project.jpa.model.Account;
+import project.jpa.model.Historyorderdetail;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.UserTransaction;
 import project.jpa.model.Historyorder;
+import project.jpa.model.controller.exceptions.IllegalOrphanException;
 import project.jpa.model.controller.exceptions.NonexistentEntityException;
 import project.jpa.model.controller.exceptions.PreexistingEntityException;
 import project.jpa.model.controller.exceptions.RollbackFailureException;
@@ -47,10 +50,24 @@ public class HistoryorderJpaController implements Serializable {
                 email = em.getReference(email.getClass(), email.getEmail());
                 historyorder.setEmail(email);
             }
+            Historyorderdetail historyorderdetail = historyorder.getHistoryorderdetail();
+            if (historyorderdetail != null) {
+                historyorderdetail = em.getReference(historyorderdetail.getClass(), historyorderdetail.getOrderid());
+                historyorder.setHistoryorderdetail(historyorderdetail);
+            }
             em.persist(historyorder);
             if (email != null) {
                 email.getHistoryorderList().add(historyorder);
                 email = em.merge(email);
+            }
+            if (historyorderdetail != null) {
+                Historyorder oldHistoryorderOfHistoryorderdetail = historyorderdetail.getHistoryorder();
+                if (oldHistoryorderOfHistoryorderdetail != null) {
+                    oldHistoryorderOfHistoryorderdetail.setHistoryorderdetail(null);
+                    oldHistoryorderOfHistoryorderdetail = em.merge(oldHistoryorderOfHistoryorderdetail);
+                }
+                historyorderdetail.setHistoryorder(historyorder);
+                historyorderdetail = em.merge(historyorderdetail);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -70,7 +87,7 @@ public class HistoryorderJpaController implements Serializable {
         }
     }
 
-    public void edit(Historyorder historyorder) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Historyorder historyorder) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
@@ -78,9 +95,25 @@ public class HistoryorderJpaController implements Serializable {
             Historyorder persistentHistoryorder = em.find(Historyorder.class, historyorder.getOrderid());
             Account emailOld = persistentHistoryorder.getEmail();
             Account emailNew = historyorder.getEmail();
+            Historyorderdetail historyorderdetailOld = persistentHistoryorder.getHistoryorderdetail();
+            Historyorderdetail historyorderdetailNew = historyorder.getHistoryorderdetail();
+            List<String> illegalOrphanMessages = null;
+            if (historyorderdetailOld != null && !historyorderdetailOld.equals(historyorderdetailNew)) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("You must retain Historyorderdetail " + historyorderdetailOld + " since its historyorder field is not nullable.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (emailNew != null) {
                 emailNew = em.getReference(emailNew.getClass(), emailNew.getEmail());
                 historyorder.setEmail(emailNew);
+            }
+            if (historyorderdetailNew != null) {
+                historyorderdetailNew = em.getReference(historyorderdetailNew.getClass(), historyorderdetailNew.getOrderid());
+                historyorder.setHistoryorderdetail(historyorderdetailNew);
             }
             historyorder = em.merge(historyorder);
             if (emailOld != null && !emailOld.equals(emailNew)) {
@@ -90,6 +123,15 @@ public class HistoryorderJpaController implements Serializable {
             if (emailNew != null && !emailNew.equals(emailOld)) {
                 emailNew.getHistoryorderList().add(historyorder);
                 emailNew = em.merge(emailNew);
+            }
+            if (historyorderdetailNew != null && !historyorderdetailNew.equals(historyorderdetailOld)) {
+                Historyorder oldHistoryorderOfHistoryorderdetail = historyorderdetailNew.getHistoryorder();
+                if (oldHistoryorderOfHistoryorderdetail != null) {
+                    oldHistoryorderOfHistoryorderdetail.setHistoryorderdetail(null);
+                    oldHistoryorderOfHistoryorderdetail = em.merge(oldHistoryorderOfHistoryorderdetail);
+                }
+                historyorderdetailNew.setHistoryorder(historyorder);
+                historyorderdetailNew = em.merge(historyorderdetailNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -113,7 +155,7 @@ public class HistoryorderJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
@@ -124,6 +166,17 @@ public class HistoryorderJpaController implements Serializable {
                 historyorder.getOrderid();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The historyorder with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            Historyorderdetail historyorderdetailOrphanCheck = historyorder.getHistoryorderdetail();
+            if (historyorderdetailOrphanCheck != null) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Historyorder (" + historyorder + ") cannot be destroyed since the Historyorderdetail " + historyorderdetailOrphanCheck + " in its historyorderdetail field has a non-nullable historyorder field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Account email = historyorder.getEmail();
             if (email != null) {

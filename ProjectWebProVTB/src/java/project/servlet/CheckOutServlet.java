@@ -23,9 +23,12 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import project.jpa.model.Account;
 import project.jpa.model.Historyorder;
+import project.jpa.model.Historyorderdetail;
 import project.jpa.model.Product;
 import project.jpa.model.controller.AccountJpaController;
 import project.jpa.model.controller.HistoryorderJpaController;
+import project.jpa.model.controller.HistoryorderdetailJpaController;
+import project.jpa.model.controller.exceptions.PreexistingEntityException;
 import project.jpa.model.controller.exceptions.RollbackFailureException;
 import project.model.LineItem;
 import project.model.ShoppingCart;
@@ -58,10 +61,11 @@ public class CheckOutServlet extends HttpServlet {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 
         AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
-        HistoryorderJpaController historyJpaCtrl = new HistoryorderJpaController(utx, emf);
+        HistoryorderJpaController historyOrderJpaCtrl = new HistoryorderJpaController(utx, emf);
+        HistoryorderdetailJpaController historyOrderDetailJpaCtrl = new HistoryorderdetailJpaController(utx, emf);
 
         //*--- Start of order ---*
-        int orderId = historyJpaCtrl.getHistoryorderCount() + 1;
+        int orderId = historyOrderJpaCtrl.getHistoryorderCount() + 1;
         Historyorder historyOrder = new Historyorder();
 
         historyOrder.setEmail(accountObj);
@@ -71,14 +75,27 @@ public class CheckOutServlet extends HttpServlet {
         historyOrder.setAmount(cart.getTotalQuantity());
         historyOrder.setTimedate(new Date());
 
-        List<Historyorder> orderList = historyJpaCtrl.findHistoryorderEntities();
+        List<Historyorder> orderList = historyOrderJpaCtrl.findHistoryorderEntities();
         List<Historyorder> orderAccount = new ArrayList<>();
 
-        for (Historyorder order : orderList) {
-            if (order.getEmail().getEmail() == accountObj.getEmail()) {
-                orderAccount.add(order);
-            }
+        List<Historyorderdetail> orderProductDetail = new ArrayList<>();
 
+        int orderDetailId = historyOrderDetailJpaCtrl.getHistoryorderdetailCount() + 1;
+        Historyorderdetail orderDetail = new Historyorderdetail();
+        
+        for (LineItem productLineItems : cart.getLineItems()) {
+            
+            orderDetail.setHistoryorder(historyOrder);
+            orderDetail.setOrderid(orderDetailId);
+            orderDetail.setProductcode(productLineItems.getProduct());
+            orderDetail.setProductprice((int) productLineItems.getSalePrice());
+            orderDetail.setProductquantity(productLineItems.getQuantity());
+            
+            
+        }
+
+        for (Historyorder order : orderList) {
+            orderAccount.add(order);
         }
 
         accountObj.setHistoryorderList(orderAccount);
@@ -86,13 +103,18 @@ public class CheckOutServlet extends HttpServlet {
 
         try {
             accountJpaCtrl.edit(accountObj);
-            historyJpaCtrl.create(historyOrder);
+            historyOrderJpaCtrl.create(historyOrder);
+            historyOrderDetailJpaCtrl.create(orderDetail);
         } catch (RollbackFailureException ex) {
             Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         accountObj.setHistoryorderList(orderAccount);
+
+        for (LineItem productLineItems : cart.getLineItems()) {
+            cart.remove(productLineItems.getProduct());
+        }
 
         getServletContext().getRequestDispatcher("/Thanks.jsp").forward(request, response);
     }
