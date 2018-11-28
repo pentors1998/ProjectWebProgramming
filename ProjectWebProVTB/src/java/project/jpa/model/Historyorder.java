@@ -79,6 +79,17 @@ public class Historyorder implements Serializable {
         this.orderid = orderid;
     }
 
+    public Historyorder(Integer orderid, Date timedate, String method, int amount, int price, Account email) {
+        this.orderid = orderid;
+        this.timedate = timedate;
+        this.method = method;
+        this.amount = amount;
+        this.price = price;
+        this.email = email;
+    }
+
+    
+    
     public Historyorder(Integer orderid, Date timedate, String method, int amount, int price) {
         this.orderid = orderid;
         this.timedate = timedate;

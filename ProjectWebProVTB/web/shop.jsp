@@ -93,7 +93,7 @@
                     <c:choose>
                         <c:when test="${sessionScope.account != null}">
                             <a href="MyAccountPageServlet" class="btn amado-btn mb-15">My Account</a>
-                            <a href="MyOrder.jsp" class="btn amado-btn mb-15">My Order</a>
+                            <a href="OrderServlet" class="btn amado-btn mb-15">My Order</a>
                             <a href="LogoutServlet" class="btn amado-btn active">Logout</a>
                         </c:when>
                         <c:otherwise>

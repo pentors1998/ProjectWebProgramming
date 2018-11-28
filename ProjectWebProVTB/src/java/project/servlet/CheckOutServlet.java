@@ -28,6 +28,7 @@ import project.jpa.model.Product;
 import project.jpa.model.controller.AccountJpaController;
 import project.jpa.model.controller.HistoryorderJpaController;
 import project.jpa.model.controller.HistoryorderdetailJpaController;
+import project.jpa.model.controller.ProductJpaController;
 import project.jpa.model.controller.exceptions.PreexistingEntityException;
 import project.jpa.model.controller.exceptions.RollbackFailureException;
 import project.model.LineItem;
@@ -61,25 +62,23 @@ public class CheckOutServlet extends HttpServlet {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 
         AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
+        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
         HistoryorderJpaController historyOrderJpaCtrl = new HistoryorderJpaController(utx, emf);
         HistoryorderdetailJpaController historyOrderDetailJpaCtrl = new HistoryorderdetailJpaController(utx, emf);
 
         //*--- Start of order ---*
         int orderId = historyOrderJpaCtrl.getHistoryorderCount() + 1;
-        Historyorder historyOrder = new Historyorder();
 
-        historyOrder.setEmail(accountObj);
-        historyOrder.setMethod("Debit Card");
-        historyOrder.setOrderid(orderId);
-        historyOrder.setPrice((int) cart.getTotalPrice());
-        historyOrder.setAmount(cart.getTotalQuantity());
-        historyOrder.setTimedate(new Date());
+        Historyorder historyOrder = new Historyorder(orderId, new Date(), "Debit Card", cart.getTotalQuantity(),
+                (int) cart.getTotalPrice(), accountObj);
 
         List<Historyorder> orderList = historyOrderJpaCtrl.findHistoryorderEntities();
         List<Historyorder> orderAccount = new ArrayList<>();
 
         for (Historyorder order : orderList) {
-            orderAccount.add(order);
+            if (order.getEmail().getEmail() == accountObj.getEmail()) {
+                orderAccount.add(order);
+            }
         }
 
         accountObj.setHistoryorderList(orderAccount);
@@ -95,11 +94,11 @@ public class CheckOutServlet extends HttpServlet {
         //*--- End of Order ---*
 
         //*--- Start of OrderDetail ---*
-        List<Historyorderdetail> orderProductDetail = new ArrayList<>();
 
         for (LineItem productLineItems : cart.getLineItems()) {
             int orderDetailId = historyOrderDetailJpaCtrl.getHistoryorderdetailCount() + 1;
             Historyorderdetail orderDetail = new Historyorderdetail();
+            List<Historyorderdetail> orderProductDetail = new ArrayList<>();
 
             orderDetail.setOrderdetailid(orderDetailId);
             orderDetail.setOrderid(historyOrder);
@@ -110,10 +109,13 @@ public class CheckOutServlet extends HttpServlet {
             orderDetail.setProductprice(price);
             orderDetail.setProductquantity(productLineItems.getQuantity());
 
+            productLineItems.getProduct().setQuantityinstock(productLineItems.getProduct().getQuantityinstock() - productLineItems.getQuantity());
+
             orderProductDetail.add(orderDetail);
             historyOrder.setHistoryorderdetailList(orderProductDetail);
 
             try {
+                productJpaCtrl.edit(productLineItems.getProduct());
                 historyOrderDetailJpaCtrl.create(orderDetail);
             } catch (RollbackFailureException ex) {
                 Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,6 +130,7 @@ public class CheckOutServlet extends HttpServlet {
         }
 
         getServletContext().getRequestDispatcher("/Thanks.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
