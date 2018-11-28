@@ -60,6 +60,16 @@ public class Historyorderdetail implements Serializable {
         this.orderdetailid = orderdetailid;
     }
 
+    public Historyorderdetail(Integer orderdetailid, int productquantity, int productprice, Historyorder orderid, Product productcode) {
+        this.orderdetailid = orderdetailid;
+        this.productquantity = productquantity;
+        this.productprice = productprice;
+        this.orderid = orderid;
+        this.productcode = productcode;
+    }
+
+    
+    
     public Historyorderdetail(Integer orderdetailid, int productquantity, int productprice) {
         this.orderdetailid = orderdetailid;
         this.productquantity = productquantity;

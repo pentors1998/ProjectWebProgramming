@@ -94,7 +94,6 @@ public class CheckOutServlet extends HttpServlet {
         //*--- End of Order ---*
 
         //*--- Start of OrderDetail ---*
-
         for (LineItem productLineItems : cart.getLineItems()) {
             int orderDetailId = historyOrderDetailJpaCtrl.getHistoryorderdetailCount() + 1;
             Historyorderdetail orderDetail = new Historyorderdetail();
@@ -130,7 +129,6 @@ public class CheckOutServlet extends HttpServlet {
         }
 
         getServletContext().getRequestDispatcher("/Thanks.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
