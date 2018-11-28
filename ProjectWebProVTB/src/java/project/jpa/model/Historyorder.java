@@ -7,6 +7,7 @@ package project.jpa.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,13 +17,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -67,8 +69,8 @@ public class Historyorder implements Serializable {
     @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
     @ManyToOne(optional = false)
     private Account email;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "historyorder")
-    private Historyorderdetail historyorderdetail;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderid")
+    private List<Historyorderdetail> historyorderdetailList;
 
     public Historyorder() {
     }
@@ -133,12 +135,13 @@ public class Historyorder implements Serializable {
         this.email = email;
     }
 
-    public Historyorderdetail getHistoryorderdetail() {
-        return historyorderdetail;
+    @XmlTransient
+    public List<Historyorderdetail> getHistoryorderdetailList() {
+        return historyorderdetailList;
     }
 
-    public void setHistoryorderdetail(Historyorderdetail historyorderdetail) {
-        this.historyorderdetail = historyorderdetail;
+    public void setHistoryorderdetailList(List<Historyorderdetail> historyorderdetailList) {
+        this.historyorderdetailList = historyorderdetailList;
     }
 
     @Override

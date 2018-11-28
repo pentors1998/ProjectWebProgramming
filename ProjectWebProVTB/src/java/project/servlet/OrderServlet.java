@@ -5,32 +5,18 @@
  */
 package project.servlet;
 
-import project.model.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.transaction.UserTransaction;
-import project.jpa.model.Product;
-import project.jpa.model.controller.ProductJpaController;
 
 /**
  *
  * @author Admin
  */
-public class AddToCartServlet extends HttpServlet {
-
-    @PersistenceUnit(unitName = "ProjectWebProVTBPU")
-    EntityManagerFactory emf;
-
-    @Resource
-    UserTransaction utx;
+public class OrderServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,51 +29,19 @@ public class AddToCartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        
-        HttpSession session = request.getSession(true);
-//        String quantityS = request.getParameter("quantity");
-//        int quantity = Integer.parseInt(quantityS);
-        
-        String url = request.getParameter("url");
-        
-        if (url != null) {
-            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-            if (cart == null) {
-
-                cart = new ShoppingCart();
-                session.setAttribute("cart", cart);
-            }
-            
-            String productCode = request.getParameter("productcode");
-            ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-            Product pd = productJpaCtrl.findProduct(productCode);
-
-            if (pd.getQuantityinstock() <= cart.getTotalQuantity()) {
-                response.sendRedirect("cart.jsp");
-                return;
-            }
-            cart.add(pd);
-
-            response.sendRedirect(url);
-
-            return;
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet OrderServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet OrderServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
-        }
-
-        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-        String productCode = request.getParameter("productcode");
-        Product pd = productJpaCtrl.findProduct(productCode);
-        
-        cart.add(pd);
-        
-        getServletContext().getRequestDispatcher("/CartServlet").forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

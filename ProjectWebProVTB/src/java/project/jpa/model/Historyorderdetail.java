@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Historyorderdetail.findAll", query = "SELECT h FROM Historyorderdetail h")
-    , @NamedQuery(name = "Historyorderdetail.findByOrderid", query = "SELECT h FROM Historyorderdetail h WHERE h.orderid = :orderid")
+    , @NamedQuery(name = "Historyorderdetail.findByOrderdetailid", query = "SELECT h FROM Historyorderdetail h WHERE h.orderdetailid = :orderdetailid")
     , @NamedQuery(name = "Historyorderdetail.findByProductquantity", query = "SELECT h FROM Historyorderdetail h WHERE h.productquantity = :productquantity")
     , @NamedQuery(name = "Historyorderdetail.findByProductprice", query = "SELECT h FROM Historyorderdetail h WHERE h.productprice = :productprice")})
 public class Historyorderdetail implements Serializable {
@@ -37,8 +36,8 @@ public class Historyorderdetail implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ORDERID")
-    private Integer orderid;
+    @Column(name = "ORDERDETAILID")
+    private Integer orderdetailid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRODUCTQUANTITY")
@@ -47,9 +46,9 @@ public class Historyorderdetail implements Serializable {
     @NotNull
     @Column(name = "PRODUCTPRICE")
     private int productprice;
-    @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Historyorder historyorder;
+    @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID")
+    @ManyToOne(optional = false)
+    private Historyorder orderid;
     @JoinColumn(name = "PRODUCTCODE", referencedColumnName = "PRODUCTCODE")
     @ManyToOne(optional = false)
     private Product productcode;
@@ -57,22 +56,22 @@ public class Historyorderdetail implements Serializable {
     public Historyorderdetail() {
     }
 
-    public Historyorderdetail(Integer orderid) {
-        this.orderid = orderid;
+    public Historyorderdetail(Integer orderdetailid) {
+        this.orderdetailid = orderdetailid;
     }
 
-    public Historyorderdetail(Integer orderid, int productquantity, int productprice) {
-        this.orderid = orderid;
+    public Historyorderdetail(Integer orderdetailid, int productquantity, int productprice) {
+        this.orderdetailid = orderdetailid;
         this.productquantity = productquantity;
         this.productprice = productprice;
     }
 
-    public Integer getOrderid() {
-        return orderid;
+    public Integer getOrderdetailid() {
+        return orderdetailid;
     }
 
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
+    public void setOrderdetailid(Integer orderdetailid) {
+        this.orderdetailid = orderdetailid;
     }
 
     public int getProductquantity() {
@@ -91,12 +90,12 @@ public class Historyorderdetail implements Serializable {
         this.productprice = productprice;
     }
 
-    public Historyorder getHistoryorder() {
-        return historyorder;
+    public Historyorder getOrderid() {
+        return orderid;
     }
 
-    public void setHistoryorder(Historyorder historyorder) {
-        this.historyorder = historyorder;
+    public void setOrderid(Historyorder orderid) {
+        this.orderid = orderid;
     }
 
     public Product getProductcode() {
@@ -110,7 +109,7 @@ public class Historyorderdetail implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (orderid != null ? orderid.hashCode() : 0);
+        hash += (orderdetailid != null ? orderdetailid.hashCode() : 0);
         return hash;
     }
 
@@ -121,7 +120,7 @@ public class Historyorderdetail implements Serializable {
             return false;
         }
         Historyorderdetail other = (Historyorderdetail) object;
-        if ((this.orderid == null && other.orderid != null) || (this.orderid != null && !this.orderid.equals(other.orderid))) {
+        if ((this.orderdetailid == null && other.orderdetailid != null) || (this.orderdetailid != null && !this.orderdetailid.equals(other.orderdetailid))) {
             return false;
         }
         return true;
@@ -129,7 +128,7 @@ public class Historyorderdetail implements Serializable {
 
     @Override
     public String toString() {
-        return "project.jpa.model.Historyorderdetail[ orderid=" + orderid + " ]";
+        return "project.jpa.model.Historyorderdetail[ orderdetailid=" + orderdetailid + " ]";
     }
     
 }

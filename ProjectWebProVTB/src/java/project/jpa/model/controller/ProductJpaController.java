@@ -61,7 +61,7 @@ public class ProductJpaController implements Serializable {
             }
             List<Historyorderdetail> attachedHistoryorderdetailList = new ArrayList<Historyorderdetail>();
             for (Historyorderdetail historyorderdetailListHistoryorderdetailToAttach : product.getHistoryorderdetailList()) {
-                historyorderdetailListHistoryorderdetailToAttach = em.getReference(historyorderdetailListHistoryorderdetailToAttach.getClass(), historyorderdetailListHistoryorderdetailToAttach.getOrderid());
+                historyorderdetailListHistoryorderdetailToAttach = em.getReference(historyorderdetailListHistoryorderdetailToAttach.getClass(), historyorderdetailListHistoryorderdetailToAttach.getOrderdetailid());
                 attachedHistoryorderdetailList.add(historyorderdetailListHistoryorderdetailToAttach);
             }
             product.setHistoryorderdetailList(attachedHistoryorderdetailList);
@@ -135,7 +135,7 @@ public class ProductJpaController implements Serializable {
             }
             List<Historyorderdetail> attachedHistoryorderdetailListNew = new ArrayList<Historyorderdetail>();
             for (Historyorderdetail historyorderdetailListNewHistoryorderdetailToAttach : historyorderdetailListNew) {
-                historyorderdetailListNewHistoryorderdetailToAttach = em.getReference(historyorderdetailListNewHistoryorderdetailToAttach.getClass(), historyorderdetailListNewHistoryorderdetailToAttach.getOrderid());
+                historyorderdetailListNewHistoryorderdetailToAttach = em.getReference(historyorderdetailListNewHistoryorderdetailToAttach.getClass(), historyorderdetailListNewHistoryorderdetailToAttach.getOrderdetailid());
                 attachedHistoryorderdetailListNew.add(historyorderdetailListNewHistoryorderdetailToAttach);
             }
             historyorderdetailListNew = attachedHistoryorderdetailListNew;
@@ -271,7 +271,7 @@ public class ProductJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public List<Product> findByProductBrandname(String productBrandname) {
         EntityManager em = getEntityManager();
         try {
@@ -282,7 +282,7 @@ public class ProductJpaController implements Serializable {
             em.close();
         }
     }
-
+    
     public int getProductCount() {
         EntityManager em = getEntityManager();
         try {

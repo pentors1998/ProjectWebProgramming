@@ -78,39 +78,50 @@ public class CheckOutServlet extends HttpServlet {
         List<Historyorder> orderList = historyOrderJpaCtrl.findHistoryorderEntities();
         List<Historyorder> orderAccount = new ArrayList<>();
 
-        List<Historyorderdetail> orderProductDetail = new ArrayList<>();
-
-        int orderDetailId = historyOrderDetailJpaCtrl.getHistoryorderdetailCount() + 1;
-        Historyorderdetail orderDetail = new Historyorderdetail();
-        
-        for (LineItem productLineItems : cart.getLineItems()) {
-            
-            orderDetail.setHistoryorder(historyOrder);
-            orderDetail.setOrderid(orderDetailId);
-            orderDetail.setProductcode(productLineItems.getProduct());
-            orderDetail.setProductprice((int) productLineItems.getSalePrice());
-            orderDetail.setProductquantity(productLineItems.getQuantity());
-            
-            
-        }
-
         for (Historyorder order : orderList) {
             orderAccount.add(order);
         }
 
         accountObj.setHistoryorderList(orderAccount);
-        //*--- End of Order ---*
 
         try {
             accountJpaCtrl.edit(accountObj);
             historyOrderJpaCtrl.create(historyOrder);
-            historyOrderDetailJpaCtrl.create(orderDetail);
         } catch (RollbackFailureException ex) {
             Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        accountObj.setHistoryorderList(orderAccount);
+        //*--- End of Order ---*
+
+        //*--- Start of OrderDetail ---*
+        List<Historyorderdetail> orderProductDetail = new ArrayList<>();
+
+        for (LineItem productLineItems : cart.getLineItems()) {
+            int orderDetailId = historyOrderDetailJpaCtrl.getHistoryorderdetailCount() + 1;
+            Historyorderdetail orderDetail = new Historyorderdetail();
+
+            orderDetail.setOrderdetailid(orderDetailId);
+            orderDetail.setOrderid(historyOrder);
+            orderDetail.setProductcode(productLineItems.getProduct());
+
+            int price = (int) productLineItems.getSalePrice() * productLineItems.getQuantity();
+
+            orderDetail.setProductprice(price);
+            orderDetail.setProductquantity(productLineItems.getQuantity());
+
+            orderProductDetail.add(orderDetail);
+            historyOrder.setHistoryorderdetailList(orderProductDetail);
+
+            try {
+                historyOrderDetailJpaCtrl.create(orderDetail);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(CheckOutServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        //*--- End of OrderDetail ---*
 
         for (LineItem productLineItems : cart.getLineItems()) {
             cart.remove(productLineItems.getProduct());

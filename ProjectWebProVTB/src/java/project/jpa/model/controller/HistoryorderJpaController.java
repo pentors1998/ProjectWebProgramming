@@ -41,6 +41,9 @@ public class HistoryorderJpaController implements Serializable {
     }
 
     public void create(Historyorder historyorder) throws PreexistingEntityException, RollbackFailureException, Exception {
+        if (historyorder.getHistoryorderdetailList() == null) {
+            historyorder.setHistoryorderdetailList(new ArrayList<Historyorderdetail>());
+        }
         EntityManager em = null;
         try {
             utx.begin();
@@ -50,24 +53,25 @@ public class HistoryorderJpaController implements Serializable {
                 email = em.getReference(email.getClass(), email.getEmail());
                 historyorder.setEmail(email);
             }
-            Historyorderdetail historyorderdetail = historyorder.getHistoryorderdetail();
-            if (historyorderdetail != null) {
-                historyorderdetail = em.getReference(historyorderdetail.getClass(), historyorderdetail.getOrderid());
-                historyorder.setHistoryorderdetail(historyorderdetail);
+            List<Historyorderdetail> attachedHistoryorderdetailList = new ArrayList<Historyorderdetail>();
+            for (Historyorderdetail historyorderdetailListHistoryorderdetailToAttach : historyorder.getHistoryorderdetailList()) {
+                historyorderdetailListHistoryorderdetailToAttach = em.getReference(historyorderdetailListHistoryorderdetailToAttach.getClass(), historyorderdetailListHistoryorderdetailToAttach.getOrderdetailid());
+                attachedHistoryorderdetailList.add(historyorderdetailListHistoryorderdetailToAttach);
             }
+            historyorder.setHistoryorderdetailList(attachedHistoryorderdetailList);
             em.persist(historyorder);
             if (email != null) {
                 email.getHistoryorderList().add(historyorder);
                 email = em.merge(email);
             }
-            if (historyorderdetail != null) {
-                Historyorder oldHistoryorderOfHistoryorderdetail = historyorderdetail.getHistoryorder();
-                if (oldHistoryorderOfHistoryorderdetail != null) {
-                    oldHistoryorderOfHistoryorderdetail.setHistoryorderdetail(null);
-                    oldHistoryorderOfHistoryorderdetail = em.merge(oldHistoryorderOfHistoryorderdetail);
+            for (Historyorderdetail historyorderdetailListHistoryorderdetail : historyorder.getHistoryorderdetailList()) {
+                Historyorder oldOrderidOfHistoryorderdetailListHistoryorderdetail = historyorderdetailListHistoryorderdetail.getOrderid();
+                historyorderdetailListHistoryorderdetail.setOrderid(historyorder);
+                historyorderdetailListHistoryorderdetail = em.merge(historyorderdetailListHistoryorderdetail);
+                if (oldOrderidOfHistoryorderdetailListHistoryorderdetail != null) {
+                    oldOrderidOfHistoryorderdetailListHistoryorderdetail.getHistoryorderdetailList().remove(historyorderdetailListHistoryorderdetail);
+                    oldOrderidOfHistoryorderdetailListHistoryorderdetail = em.merge(oldOrderidOfHistoryorderdetailListHistoryorderdetail);
                 }
-                historyorderdetail.setHistoryorder(historyorder);
-                historyorderdetail = em.merge(historyorderdetail);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -95,14 +99,16 @@ public class HistoryorderJpaController implements Serializable {
             Historyorder persistentHistoryorder = em.find(Historyorder.class, historyorder.getOrderid());
             Account emailOld = persistentHistoryorder.getEmail();
             Account emailNew = historyorder.getEmail();
-            Historyorderdetail historyorderdetailOld = persistentHistoryorder.getHistoryorderdetail();
-            Historyorderdetail historyorderdetailNew = historyorder.getHistoryorderdetail();
+            List<Historyorderdetail> historyorderdetailListOld = persistentHistoryorder.getHistoryorderdetailList();
+            List<Historyorderdetail> historyorderdetailListNew = historyorder.getHistoryorderdetailList();
             List<String> illegalOrphanMessages = null;
-            if (historyorderdetailOld != null && !historyorderdetailOld.equals(historyorderdetailNew)) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
+            for (Historyorderdetail historyorderdetailListOldHistoryorderdetail : historyorderdetailListOld) {
+                if (!historyorderdetailListNew.contains(historyorderdetailListOldHistoryorderdetail)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Historyorderdetail " + historyorderdetailListOldHistoryorderdetail + " since its orderid field is not nullable.");
                 }
-                illegalOrphanMessages.add("You must retain Historyorderdetail " + historyorderdetailOld + " since its historyorder field is not nullable.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -111,10 +117,13 @@ public class HistoryorderJpaController implements Serializable {
                 emailNew = em.getReference(emailNew.getClass(), emailNew.getEmail());
                 historyorder.setEmail(emailNew);
             }
-            if (historyorderdetailNew != null) {
-                historyorderdetailNew = em.getReference(historyorderdetailNew.getClass(), historyorderdetailNew.getOrderid());
-                historyorder.setHistoryorderdetail(historyorderdetailNew);
+            List<Historyorderdetail> attachedHistoryorderdetailListNew = new ArrayList<Historyorderdetail>();
+            for (Historyorderdetail historyorderdetailListNewHistoryorderdetailToAttach : historyorderdetailListNew) {
+                historyorderdetailListNewHistoryorderdetailToAttach = em.getReference(historyorderdetailListNewHistoryorderdetailToAttach.getClass(), historyorderdetailListNewHistoryorderdetailToAttach.getOrderdetailid());
+                attachedHistoryorderdetailListNew.add(historyorderdetailListNewHistoryorderdetailToAttach);
             }
+            historyorderdetailListNew = attachedHistoryorderdetailListNew;
+            historyorder.setHistoryorderdetailList(historyorderdetailListNew);
             historyorder = em.merge(historyorder);
             if (emailOld != null && !emailOld.equals(emailNew)) {
                 emailOld.getHistoryorderList().remove(historyorder);
@@ -124,14 +133,16 @@ public class HistoryorderJpaController implements Serializable {
                 emailNew.getHistoryorderList().add(historyorder);
                 emailNew = em.merge(emailNew);
             }
-            if (historyorderdetailNew != null && !historyorderdetailNew.equals(historyorderdetailOld)) {
-                Historyorder oldHistoryorderOfHistoryorderdetail = historyorderdetailNew.getHistoryorder();
-                if (oldHistoryorderOfHistoryorderdetail != null) {
-                    oldHistoryorderOfHistoryorderdetail.setHistoryorderdetail(null);
-                    oldHistoryorderOfHistoryorderdetail = em.merge(oldHistoryorderOfHistoryorderdetail);
+            for (Historyorderdetail historyorderdetailListNewHistoryorderdetail : historyorderdetailListNew) {
+                if (!historyorderdetailListOld.contains(historyorderdetailListNewHistoryorderdetail)) {
+                    Historyorder oldOrderidOfHistoryorderdetailListNewHistoryorderdetail = historyorderdetailListNewHistoryorderdetail.getOrderid();
+                    historyorderdetailListNewHistoryorderdetail.setOrderid(historyorder);
+                    historyorderdetailListNewHistoryorderdetail = em.merge(historyorderdetailListNewHistoryorderdetail);
+                    if (oldOrderidOfHistoryorderdetailListNewHistoryorderdetail != null && !oldOrderidOfHistoryorderdetailListNewHistoryorderdetail.equals(historyorder)) {
+                        oldOrderidOfHistoryorderdetailListNewHistoryorderdetail.getHistoryorderdetailList().remove(historyorderdetailListNewHistoryorderdetail);
+                        oldOrderidOfHistoryorderdetailListNewHistoryorderdetail = em.merge(oldOrderidOfHistoryorderdetailListNewHistoryorderdetail);
+                    }
                 }
-                historyorderdetailNew.setHistoryorder(historyorder);
-                historyorderdetailNew = em.merge(historyorderdetailNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -168,12 +179,12 @@ public class HistoryorderJpaController implements Serializable {
                 throw new NonexistentEntityException("The historyorder with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            Historyorderdetail historyorderdetailOrphanCheck = historyorder.getHistoryorderdetail();
-            if (historyorderdetailOrphanCheck != null) {
+            List<Historyorderdetail> historyorderdetailListOrphanCheck = historyorder.getHistoryorderdetailList();
+            for (Historyorderdetail historyorderdetailListOrphanCheckHistoryorderdetail : historyorderdetailListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Historyorder (" + historyorder + ") cannot be destroyed since the Historyorderdetail " + historyorderdetailOrphanCheck + " in its historyorderdetail field has a non-nullable historyorder field.");
+                illegalOrphanMessages.add("This Historyorder (" + historyorder + ") cannot be destroyed since the Historyorderdetail " + historyorderdetailListOrphanCheckHistoryorderdetail + " in its historyorderdetailList field has a non-nullable orderid field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

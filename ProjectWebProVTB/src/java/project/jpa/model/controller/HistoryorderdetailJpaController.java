@@ -6,19 +6,17 @@
 package project.jpa.model.controller;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import project.jpa.model.Historyorder;
-import project.jpa.model.Product;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import project.jpa.model.Historyorder;
 import project.jpa.model.Historyorderdetail;
-import project.jpa.model.controller.exceptions.IllegalOrphanException;
+import project.jpa.model.Product;
 import project.jpa.model.controller.exceptions.NonexistentEntityException;
 import project.jpa.model.controller.exceptions.PreexistingEntityException;
 import project.jpa.model.controller.exceptions.RollbackFailureException;
@@ -40,29 +38,15 @@ public class HistoryorderdetailJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Historyorderdetail historyorderdetail) throws IllegalOrphanException, PreexistingEntityException, RollbackFailureException, Exception {
-        List<String> illegalOrphanMessages = null;
-        Historyorder historyorderOrphanCheck = historyorderdetail.getHistoryorder();
-        if (historyorderOrphanCheck != null) {
-            Historyorderdetail oldHistoryorderdetailOfHistoryorder = historyorderOrphanCheck.getHistoryorderdetail();
-            if (oldHistoryorderdetailOfHistoryorder != null) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("The Historyorder " + historyorderOrphanCheck + " already has an item of type Historyorderdetail whose historyorder column cannot be null. Please make another selection for the historyorder field.");
-            }
-        }
-        if (illegalOrphanMessages != null) {
-            throw new IllegalOrphanException(illegalOrphanMessages);
-        }
+    public void create(Historyorderdetail historyorderdetail) throws PreexistingEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Historyorder historyorder = historyorderdetail.getHistoryorder();
-            if (historyorder != null) {
-                historyorder = em.getReference(historyorder.getClass(), historyorder.getOrderid());
-                historyorderdetail.setHistoryorder(historyorder);
+            Historyorder orderid = historyorderdetail.getOrderid();
+            if (orderid != null) {
+                orderid = em.getReference(orderid.getClass(), orderid.getOrderid());
+                historyorderdetail.setOrderid(orderid);
             }
             Product productcode = historyorderdetail.getProductcode();
             if (productcode != null) {
@@ -70,9 +54,9 @@ public class HistoryorderdetailJpaController implements Serializable {
                 historyorderdetail.setProductcode(productcode);
             }
             em.persist(historyorderdetail);
-            if (historyorder != null) {
-                historyorder.setHistoryorderdetail(historyorderdetail);
-                historyorder = em.merge(historyorder);
+            if (orderid != null) {
+                orderid.getHistoryorderdetailList().add(historyorderdetail);
+                orderid = em.merge(orderid);
             }
             if (productcode != null) {
                 productcode.getHistoryorderdetailList().add(historyorderdetail);
@@ -85,7 +69,7 @@ public class HistoryorderdetailJpaController implements Serializable {
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findHistoryorderdetail(historyorderdetail.getOrderid()) != null) {
+            if (findHistoryorderdetail(historyorderdetail.getOrderdetailid()) != null) {
                 throw new PreexistingEntityException("Historyorderdetail " + historyorderdetail + " already exists.", ex);
             }
             throw ex;
@@ -96,45 +80,32 @@ public class HistoryorderdetailJpaController implements Serializable {
         }
     }
 
-    public void edit(Historyorderdetail historyorderdetail) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Historyorderdetail historyorderdetail) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Historyorderdetail persistentHistoryorderdetail = em.find(Historyorderdetail.class, historyorderdetail.getOrderid());
-            Historyorder historyorderOld = persistentHistoryorderdetail.getHistoryorder();
-            Historyorder historyorderNew = historyorderdetail.getHistoryorder();
+            Historyorderdetail persistentHistoryorderdetail = em.find(Historyorderdetail.class, historyorderdetail.getOrderdetailid());
+            Historyorder orderidOld = persistentHistoryorderdetail.getOrderid();
+            Historyorder orderidNew = historyorderdetail.getOrderid();
             Product productcodeOld = persistentHistoryorderdetail.getProductcode();
             Product productcodeNew = historyorderdetail.getProductcode();
-            List<String> illegalOrphanMessages = null;
-            if (historyorderNew != null && !historyorderNew.equals(historyorderOld)) {
-                Historyorderdetail oldHistoryorderdetailOfHistoryorder = historyorderNew.getHistoryorderdetail();
-                if (oldHistoryorderdetailOfHistoryorder != null) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("The Historyorder " + historyorderNew + " already has an item of type Historyorderdetail whose historyorder column cannot be null. Please make another selection for the historyorder field.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            if (historyorderNew != null) {
-                historyorderNew = em.getReference(historyorderNew.getClass(), historyorderNew.getOrderid());
-                historyorderdetail.setHistoryorder(historyorderNew);
+            if (orderidNew != null) {
+                orderidNew = em.getReference(orderidNew.getClass(), orderidNew.getOrderid());
+                historyorderdetail.setOrderid(orderidNew);
             }
             if (productcodeNew != null) {
                 productcodeNew = em.getReference(productcodeNew.getClass(), productcodeNew.getProductcode());
                 historyorderdetail.setProductcode(productcodeNew);
             }
             historyorderdetail = em.merge(historyorderdetail);
-            if (historyorderOld != null && !historyorderOld.equals(historyorderNew)) {
-                historyorderOld.setHistoryorderdetail(null);
-                historyorderOld = em.merge(historyorderOld);
+            if (orderidOld != null && !orderidOld.equals(orderidNew)) {
+                orderidOld.getHistoryorderdetailList().remove(historyorderdetail);
+                orderidOld = em.merge(orderidOld);
             }
-            if (historyorderNew != null && !historyorderNew.equals(historyorderOld)) {
-                historyorderNew.setHistoryorderdetail(historyorderdetail);
-                historyorderNew = em.merge(historyorderNew);
+            if (orderidNew != null && !orderidNew.equals(orderidOld)) {
+                orderidNew.getHistoryorderdetailList().add(historyorderdetail);
+                orderidNew = em.merge(orderidNew);
             }
             if (productcodeOld != null && !productcodeOld.equals(productcodeNew)) {
                 productcodeOld.getHistoryorderdetailList().remove(historyorderdetail);
@@ -153,7 +124,7 @@ public class HistoryorderdetailJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = historyorderdetail.getOrderid();
+                Integer id = historyorderdetail.getOrderdetailid();
                 if (findHistoryorderdetail(id) == null) {
                     throw new NonexistentEntityException("The historyorderdetail with id " + id + " no longer exists.");
                 }
@@ -174,14 +145,14 @@ public class HistoryorderdetailJpaController implements Serializable {
             Historyorderdetail historyorderdetail;
             try {
                 historyorderdetail = em.getReference(Historyorderdetail.class, id);
-                historyorderdetail.getOrderid();
+                historyorderdetail.getOrderdetailid();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The historyorderdetail with id " + id + " no longer exists.", enfe);
             }
-            Historyorder historyorder = historyorderdetail.getHistoryorder();
-            if (historyorder != null) {
-                historyorder.setHistoryorderdetail(null);
-                historyorder = em.merge(historyorder);
+            Historyorder orderid = historyorderdetail.getOrderid();
+            if (orderid != null) {
+                orderid.getHistoryorderdetailList().remove(historyorderdetail);
+                orderid = em.merge(orderid);
             }
             Product productcode = historyorderdetail.getProductcode();
             if (productcode != null) {

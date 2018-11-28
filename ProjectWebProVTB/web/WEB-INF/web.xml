@@ -92,6 +92,10 @@
         <servlet-name>CheckOutServlet</servlet-name>
         <servlet-class>project.servlet.CheckOutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>project.servlet.OrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>CheckOutServlet</servlet-name>
         <url-pattern>/CheckOutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
