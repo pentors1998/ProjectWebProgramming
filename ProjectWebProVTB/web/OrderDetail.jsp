@@ -51,10 +51,10 @@
                             </div>
                         </div>
 
-                        <c:forEach items="${orderDetail}" var="oD" varStatus="vs">
+                        <c:forEach items="${orderDetail.historyorderdetailList}" var="oD" varStatus="vs">
                             <div class="row">
                                 <div class="cell" data-title="Image">
-                                    <img src="PicProject/${oD.productcode.productcode}.jpg" alt="">
+                                    <a href="GetProductServlet?productcode=${oD.productcode.productcode}"><img src="PicProject/${oD.productcode.productcode}.jpg" alt="" style="width: 115px;"></a>
                                 </div>
                                 <div class="cell" data-title="Product Code">
                                     ${oD.productcode.productcode}
@@ -67,10 +67,12 @@
                                 </div>
                             </div>
                         </c:forEach>
+                        
                     </div>
                 </div>
             </div>
         </div>
+        
 
 
 

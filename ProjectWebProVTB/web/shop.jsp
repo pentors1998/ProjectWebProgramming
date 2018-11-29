@@ -170,6 +170,8 @@
                                 
                                 <li><input type="submit" value="Serach price" style="color: #6d6d6d ; border-radius: 8px" ></li> 
                             </form>
+                            <br>
+                            <span style="color: red">${priceWarn}.</span>
                         </ul>
                     </div>
 
@@ -250,7 +252,7 @@
                         <div class="single_widget_area">
                             <!-- Logo -->
                             <div class="footer-logo mr-50" style="margin-left: 20%">
-                                <a href="index.html"><img src="PicProject/logo.png" style="height: 120px;" alt=""></a>
+                                <a href="index.jsp"><img src="PicProject/logo.png" style="height: 120px;" alt=""></a>
                             </div>
                             <!-- Copywrite Text -->
                             <p class="copywrite" style="margin-left: 20%"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

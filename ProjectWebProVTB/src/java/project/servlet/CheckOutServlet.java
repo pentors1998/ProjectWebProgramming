@@ -128,6 +128,7 @@ public class CheckOutServlet extends HttpServlet {
             cart.remove(productLineItems.getProduct());
         }
 
+        session.setAttribute("account", accountJpaCtrl.findAccount(accountObj.getEmail()));
         getServletContext().getRequestDispatcher("/Thanks.jsp").forward(request, response);
     }
 

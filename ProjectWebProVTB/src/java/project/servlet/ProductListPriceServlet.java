@@ -44,52 +44,6 @@ public class ProductListPriceServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String priceS = request.getParameter("price");
-
-//        double price = Double.parseDouble(priceS);
-//        if (29 <= price && price <= 59) {
-//            List<Product> products = productJpaCtrl.findProductEntities();
-//            List<Product> productAdd = new ArrayList<>();
-//
-//            for (Product productSet : products) {
-//                if (29 <= productSet.getProductprice() && productSet.getProductprice() <= 59) {
-//                    productAdd.add(productSet);
-//                }
-//            }
-//
-//            request.setAttribute("topic", "$29.0 - $"+price);
-//            session.setAttribute("products", productAdd);
-//            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
-//            return;
-//        } else if (60 <= price && price <= 99) {
-//            List<Product> products = productJpaCtrl.findProductEntities();
-//            List<Product> productAdd = new ArrayList<>();
-//
-//            for (Product productSet : products) {
-//                if (60 <= productSet.getProductprice() && productSet.getProductprice() <= 99) {
-//                    productAdd.add(productSet);
-//                }
-//            }
-//
-//            request.setAttribute("topic", "$60.0 - $"+price);
-//            session.setAttribute("products", productAdd);
-//            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
-//            return;
-//        } else if (100 <= price && price <= 139) {
-//            List<Product> products = productJpaCtrl.findProductEntities();
-//            List<Product> productAdd = new ArrayList<>();
-//
-//            for (Product productSet : products) {
-//                if (100 <= productSet.getProductprice() && productSet.getProductprice() <= 139) {
-//                    productAdd.add(productSet);
-//                }
-//            }
-//
-//            request.setAttribute("topic", "$100.0 - $"+price);
-//            session.setAttribute("products", productAdd);
-//            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
-//            return;
-//        }
         //Between Price
         String minPriceS = request.getParameter("minPrice");
         String maxPriceS = request.getParameter("maxPrice");
@@ -97,21 +51,30 @@ public class ProductListPriceServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
 
-        double minPrice = Double.parseDouble(minPriceS);
-        double maxPrice = Double.parseDouble(maxPriceS);
+        if (minPriceS != null && maxPriceS != null) {
+            double minPrice = Double.parseDouble(minPriceS);
+            double maxPrice = Double.parseDouble(maxPriceS);
 
-        List<Product> products = productJpaCtrl.findProductEntities();
-        List<Product> productAdd = new ArrayList<>();
+            List<Product> products = productJpaCtrl.findProductEntities();
+            List<Product> productAdd = new ArrayList<>();
 
-        for (Product productSet : products) {
-            if (minPrice <= productSet.getProductprice() && productSet.getProductprice() <= maxPrice) {
-                productAdd.add(productSet);
+            if (minPrice <= maxPrice) {
+                for (Product productSet : products) {
+                    if (minPrice <= productSet.getProductprice() && productSet.getProductprice() <= maxPrice) {
+                        productAdd.add(productSet);
+                    }
+                }
+            } else {
+                request.setAttribute("priceWarn", "'Min' value must be less than 'Max' value");
+                getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+                return;
             }
+            request.setAttribute("topic", "$" + minPrice + " - " + "$" + maxPrice);
+            session.setAttribute("products", productAdd);
+            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+            return;
         }
-        request.setAttribute("topic", "$" + minPrice + " - " + "$" + maxPrice);
-        session.setAttribute("products", productAdd);
-        getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
-        return;
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

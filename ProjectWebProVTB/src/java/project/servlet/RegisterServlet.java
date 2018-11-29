@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
+
         String firstName = request.getParameter("fname");
         String lastName = request.getParameter("lname");
         String email = request.getParameter("email");
@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         password = cryptWithMD5(password);
         password = password.substring(0, 19);
-        
+
         String tell = request.getParameter("tell");
         String address = request.getParameter("address");
         String debit = request.getParameter("debit");
@@ -68,7 +68,6 @@ public class RegisterServlet extends HttpServlet {
         AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
 
         List<Account> accountInDb = accountJpaCtrl.findAccountEntities();
-        List<Account> account1 = new ArrayList<>();
 
         if (firstName != null && firstName.trim().length() > 0 && lastName != null && lastName.trim().length() > 0
                 && email != null && email.trim().length() > 0 && password != null && password.trim().length() > 0

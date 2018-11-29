@@ -46,12 +46,11 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
-        
         String password = request.getParameter("password");
         password = cryptWithMD5(password);
         password = password.substring(0, 19);
-        
         HttpSession session = request.getSession(true);
+        
         if (email != null && email.trim().length() > 0 && password != null && password.trim().length() > 0) {
             AccountJpaController accountJpaCtrl = new AccountJpaController(utx, emf);
             Account accountObj = accountJpaCtrl.findAccount(email);

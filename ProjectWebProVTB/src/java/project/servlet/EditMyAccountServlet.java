@@ -47,6 +47,7 @@ public class EditMyAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastname");
         String tell = request.getParameter("tell");

@@ -45,7 +45,7 @@ public class ProductListSexServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
+
         HttpSession session = request.getSession(false);
         String sex = request.getParameter("sex");
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
@@ -53,15 +53,19 @@ public class ProductListSexServlet extends HttpServlet {
         List<Product> products = productJpaCtrl.findProductEntities();
         List<Product> productAdd = new ArrayList<>();
 
-        for (Product productSet : products) {
-            if (productSet.getProductsex().getProductsex().equals(sex)) {
-                productAdd.add(productSet);
+        if (sex != null) {
+            for (Product productSet : products) {
+                if (productSet.getProductsex().getProductsex().equals(sex)) {
+                    productAdd.add(productSet);
+                }
             }
-        }
 
-        request.setAttribute("topic", sex);
-        session.setAttribute("products", productAdd);
-        getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+            request.setAttribute("topic", sex);
+            session.setAttribute("products", productAdd);
+            getServletContext().getRequestDispatcher("/shop.jsp").forward(request, response);
+        }
+        
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -44,13 +44,14 @@ public class GetProductServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         String productCode = request.getParameter("productcode");
+        
         if(productCode == null){
-           response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
+           getServletContext().getRequestDispatcher("/ProductListServlet?catagories=shop").forward(request, response);
         }else{
             ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
             Product product = productJpaCtrl.findProduct(productCode);
             request.setAttribute("product", product);
-            getServletContext().getRequestDispatcher("/product-details.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/product-details.jsp").forward(request, response);
         }
     }
 

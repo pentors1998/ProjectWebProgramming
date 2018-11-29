@@ -50,11 +50,11 @@
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
+                                <img src="images/1.jpg" alt="First slide" width="120%">
                                 <div class="carousel-caption d-none d-md-block">
                                     <div class="banner-text">
-                                        <h2>This is Heaven</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                                        <h2>CHANEL</h2>
+                                        <p>New Collection</p>
                                     </div>	
                                 </div>
                             </div>

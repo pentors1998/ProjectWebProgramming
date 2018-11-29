@@ -19,6 +19,6 @@ padding : 140px 0;
 .login-sec h2:after{content:" "; width:100px; height:5px; background:#D3D3D3; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
 .btn-login{background: #fbb710; color:#FFFFFF; font-weight:600;}
 .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
-.banner-text h2{color:#fff; font-weight:600;}
+.banner-text h2{color:#fbb710; font-weight:600;}
 .banner-text h2:after{content:" "; width:100px; height:5px; background:#fbb710; display:block; margin-top:20px; border-radius:3px;}
 .banner-text p{color:#fff;}

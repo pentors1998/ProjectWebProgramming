@@ -9,19 +9,30 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 import project.jpa.model.Historyorder;
 import project.jpa.model.Historyorderdetail;
+import project.jpa.model.controller.HistoryorderJpaController;
 
 /**
  *
  * @author Admin
  */
 public class OrderDetailServlet extends HttpServlet {
+
+    @PersistenceUnit(unitName = "ProjectWebProVTBPU")
+    EntityManagerFactory emf;
+
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,11 +46,18 @@ public class OrderDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        Historyorder order = (Historyorder) session.getAttribute("order");
-        List<Historyorderdetail> orderDetail = order.getHistoryorderdetailList();
-        
-        session.setAttribute("orderDetail", orderDetail);
-        getServletContext().getRequestDispatcher("/OrderDetail.jsp").forward(request, response);
+        String orderIdS = request.getParameter("orderId");
+
+        if (orderIdS != null) {
+            int orderId = Integer.parseInt(orderIdS);
+
+            HistoryorderJpaController historyOrderJpaCtrl = new HistoryorderJpaController(utx, emf);
+
+            session.setAttribute("orderDetail", historyOrderJpaCtrl.findHistoryorder(orderId));
+            getServletContext().getRequestDispatcher("/OrderDetail.jsp").forward(request, response);
+            return;
+        }
+        getServletContext().getRequestDispatcher("/OrderServlet").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

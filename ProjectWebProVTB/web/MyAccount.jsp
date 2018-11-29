@@ -42,16 +42,9 @@
             <div class="col-sm-3"><!--left col-->
 
 
-                <div class="text-center">
-                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                    <h6>Upload a different photo...</h6>
-                    <input type="file" class="text-center center-block file-upload">
-                </div></hr><br>
-
-
                 <div class="panel panel-default">
                     <div class="panel-heading">Order<i class="fa fa-link fa-1x"></i></div>
-                    <div class="panel-body"><a href="http://bootnipets.com">My Order</a></div>
+                    <div class="panel-body"><a href="OrderServlet">My Order</a></div>
                 </div>
 
             </div><!--/col-3-->

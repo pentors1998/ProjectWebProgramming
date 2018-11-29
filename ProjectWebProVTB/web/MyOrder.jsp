@@ -51,19 +51,21 @@
                                 <c:forEach items="${order}" var="o" varStatus="vs">
                                     <tr>
                                         <td class="column1">${o.timedate}</td>
-                                        <td class="column2"><a href="OrderDetailServlet">${o.orderid}</a></td>
+                                        <td class="column2"><a href="OrderDetailServlet?orderId=${o.orderid}">${o.orderid}</a></td>
                                         <td class="column4">${o.method}</td>
                                         <td class="column5">${o.amount}</td>
                                         <td class="column6">$${o.price}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
-
+                            <a href="index.jsp" style="color: #cccccc">Back</a>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+        
+
 
 
 
