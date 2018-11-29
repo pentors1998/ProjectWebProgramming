@@ -58,10 +58,6 @@ public class RemoveFromCart extends HttpServlet {
             ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
             Product pd = productJpaCtrl.findProduct(productCode);
 
-            if (pd.getQuantityinstock() <= cart.getTotalQuantity()) {
-                response.sendRedirect("cart.jsp");
-                return;
-            }
             cart.remove(pd);
 
             response.sendRedirect(url);

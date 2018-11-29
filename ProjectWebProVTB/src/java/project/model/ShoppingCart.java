@@ -30,6 +30,9 @@ public class ShoppingCart implements Serializable {
         if (type == null) {
             cart.put(p.getProductcode(), new LineItem(p));
         } else {
+            if (type.getQuantity() >= p.getQuantityinstock()) {
+                return;
+            }
             type.setQuantity(type.getQuantity() + 1);
         }
     }

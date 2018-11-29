@@ -63,14 +63,14 @@
 
                                 <div class="col-xs-6">
                                     <label for="first_name"><h4>First name</h4></label>
-                                    <input type="text" class="form-control" name="firstname" id="first_name" value="${account.firstname}" title="edit your first name." required>
+                                    <input type="text" class="form-control" name="firstname" id="first_name" value="${account.firstname}" pattern=".{6,}" title="Must contain at least 6 or more characters" required>
                                 </div>
                             </div>
                             <div class="form-group">
 
                                 <div class="col-xs-6">
                                     <label for="last_name"><h4>Last name</h4></label>
-                                    <input type="text" class="form-control" name="lastname" id="last_name" value="${account.lastname}" title="edit your last name." required>
+                                    <input type="text" class="form-control" name="lastname" id="last_name" value="${account.lastname}" pattern=".{6,}" title="Must contain at least 6 or more characters" required>
                                 </div>
                             </div>
 
@@ -78,14 +78,14 @@
 
                                 <div class="col-xs-6">
                                     <label for="phone"><h4>Phone</h4></label>
-                                    <input type="text" class="form-control" name="tell" id="phone" value="${account.tell}" title="edit your phone number." required>
+                                    <input type="text" class="form-control" name="tell" id="phone" value="${account.tell}" pattern="[0-9]{10}" maxlength="10"  title="Must contain 10 Numbers" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="mobile"><h4>Debit card</h4></label>
-                                    <input type="text" class="form-control" name="debit" id="debit_card" value="${account.debitcard}" title="edit your debit card." required>
+                                    <label for="debit"><h4>Debit card</h4></label>
+                                    <input type="text" class="form-control" name="debit" id="debit_card" value="${account.debitcard}" pattern="[0-9]{16}" maxlength="16"  title="Must contain 16 Numbers" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -106,7 +106,7 @@
 
                                 <div class="col-xs-6">
                                     <label for="pincode"><h4>Zip code</h4></label>
-                                    <input type="text" class="form-control" name="pincode" id="pincode" value="${account.pincode}" title="edit your zip code." required style="width: 70px;">
+                                    <input type="text" class="form-control" name="pincode" id="pincode" value="${account.pincode}" pattern="[0-9]{5}" maxlength="5" title="Must contain 5 Numbers" required style="width: 70px;">
                                 </div>
                             </div>
                             <div class="form-group">

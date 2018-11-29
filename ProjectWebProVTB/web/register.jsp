@@ -17,7 +17,7 @@
         <meta name="keywords" content="Colorlib Templates">
 
         <!-- Title Page-->
-        <title>Au Register Forms by Colorlib</title>
+        <title>LONGDOMDOSIER - Perfume E-commerce | Register</title>
 
         <!-- Icons font CSS-->
         <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -48,13 +48,13 @@
                                     <div class="row row-space">
                                         <div class="col-2">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="text" name="fname">
+                                                <input class="input--style-5" type="text" name="fname" pattern="[A-Za-z].{6,}" title="Must contain at least 6 or more characters" required="">
                                                 <label class="label--desc">first name</label>
                                             </div>
                                         </div>
                                         <div class="col-2">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="text" name="lname">
+                                                <input class="input--style-5" type="text" name="lname" pattern="[A-Za-z].{6,}" title="Must contain at least 6 or more characters" required="">
                                                 <label class="label--desc">last name</label>
                                             </div>
                                         </div>
@@ -65,7 +65,7 @@
                                 <div class="name">Email</div>
                                 <div class="value">
                                     <div class="input-group">
-                                        <input class="input--style-5" type="email" name="email">
+                                        <input class="input--style-5" type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required="" title="Must contain correct email form.">
                                         <label class="label--desc" style="color: red">${warn}</label>
                                     </div>
                                 </div>
@@ -74,7 +74,8 @@
                                 <div class="name">Password</div>
                                 <div class="value">
                                     <div class="input-group">
-                                        <input class="input--style-5" id="pwd" type="password" name="password" style="width: 444px;">
+                                        <input class="input--style-5" id="pwd" type="password" name="password" style="width: 444px;" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                                               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="">
                                         <button type="button" id="eye">
                                             <img src="https://cdn0.iconfinder.com/data/icons/feather/96/eye-16.png" alt="eye" />
                                         </button>
@@ -87,7 +88,7 @@
                                     <div class="row row-refine">
                                         <div class="col-9">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="text" name="tell" pattern="[0-9]{10}" maxlength="10"  title="Must contain 10 Numbers">
+                                                <input class="input--style-5" type="text" name="tell" pattern="[0-9]{10}" maxlength="10"  title="Must contain 10 Numbers" required="">
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +109,7 @@
                                 <div class="value">
                                     <div class="input-group">
                                         <div class="rs-select2 js-select-simple select--no-search">
-                                            <input class="input--style-5" type="number" name="pincode" style="width: 104px;">
+                                            <input class="input--style-5" type="text" name="pincode" style="width: 104px;" pattern="[0-9]{5}" maxlength="5" title="Must contain 5 Numbers" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +120,7 @@
                                     <div class="row row-space">
                                         <div class="col-2">
                                             <div class="input-group-desc">
-                                                <input class="input--style-5" type="number" name="debit">
+                                                <input class="input--style-5" type="text" name="debit" pattern="[0-9]{16}" maxlength="16"  title="Must contain 16 Numbers">
                                                 <label class="label--desc">Debit card 16 number</label>
                                             </div>
                                         </div>

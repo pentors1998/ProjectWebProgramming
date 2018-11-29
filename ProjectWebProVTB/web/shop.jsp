@@ -167,7 +167,7 @@
                                 <li><input type="number" name="minPrice" placeholder="Min" min="0" max="150" style="width: 149px;" required></li>
                                 <li><a href="#" >Maximum</a></li>
                                 <li><input type="number" name="maxPrice" placeholder="Max" min="0" max="150" style="width: 149px;" required></li><br>
-                                
+
                                 <li><input type="submit" value="Serach price" style="color: #6d6d6d ; border-radius: 8px" ></li> 
                             </form>
                             <br>
@@ -186,7 +186,7 @@
                             <div class="product-topbar d-xl-flex align-items-end justify-content-between">
                                 <!-- Total Products -->
                                 <div class="total-products">
-                                    <p>Showing : ${topic}</p>
+                                    <p>Showing : ${topic}</p> 
                                 </div>
 
                             </div>
@@ -227,9 +227,16 @@
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                             </div>
-                                            <div class="cart">
-                                                <a href="AddToCartServlet?productcode=${p.productcode}&url=CartServlet" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
-                                            </div>
+                                            <c:choose>
+                                                <c:when test="${p.quantityinstock != 0}">
+                                                    <div class="cart">
+                                                        <a href="AddToCartServlet?productcode=${p.productcode}&url=CartServlet" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span style="color: #b2b2b2">Out of stock</span>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </div>
